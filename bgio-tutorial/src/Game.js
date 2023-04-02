@@ -80,6 +80,10 @@ export const TicTacToe = {
                 numDecks: 2,
                 },
             deck: [],
+            dealerHand: [],
+            secret: {
+                dealerCard: {},
+            },
             playerHands: [],
             playerBanks: Array(ctx.numPlayers).fill(1000), // initBanks(ctx.numPlayers),
             playerBets: Array(ctx.numPlayers).fill(0),
@@ -117,6 +121,8 @@ export const TicTacToe = {
                 for (let i = 0; i< ctx.numPlayers; i++) {
                     G.playerHands[i] = [];
                     G.playerBets[i] = 0;
+                    G.dealerHand = [];
+                    G.secret.dealerCard = {};
                 }
             },
             start: true,
@@ -140,12 +146,24 @@ export const TicTacToe = {
         }, 
 
         playing: {
+            onBegin: ({G, ctx}) => {
+                // deal first card to each player, then the dealer
+                for (let i=0; i<ctx.numPlayers; i++){
+                    G.playerHands[i].push(G.deck.pop());
+                }
+                G.dealerHand.push(G.deck.pop());
+
+                // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
+                for (let i=0; i<ctx.numPlayers; i++){
+                    G.playerHands[i].push(G.deck.pop());
+                }
+                G.secret.dealerCard = G.deck.pop();
+            },
             moves: {
                 hit: ({G, playerID}) => {
                     console.log("here are the cards left in the deck before hit: ", G.deck.length);
                     console.log("here is playerID from hit move: ", playerID);
                     G.playerHands[playerID].push(G.deck.pop());
-                    // G.deck.pop();
                     console.log("here's the player's hand: ", JSON.stringify(G.playerHands[playerID]));
                     console.log("here are the cards left in the deck after hit: ", G.deck.length);
                 },
