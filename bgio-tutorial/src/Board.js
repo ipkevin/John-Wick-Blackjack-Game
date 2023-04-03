@@ -48,24 +48,51 @@ export function BlackjackBoard({ ctx, G, moves}) {
     function handleStand() {
         moves.stand();
     }
-    function displayCards(){
+    function handleOK(){
+        moves.OK();
+    }
+    function handleBuyCredits(){
+        moves.getChips();
+    }
+    // Hash table to quickly lookup name of card
+    const cardNames = {
+        "1": "Ace",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+        "10": "10",
+        "11": "Jack",
+        "12": "Queen",
+        "13": "King"
+    };
+
+    // Returns an array of the names and suits of the cards in the player's hand
+    function displayCards(playerObj){
         let hands = [];
-        // let dealerCards = "<p>Dealer cards: ${G.dealerHand[0]}, ${G.secret.dealerCard}<p>";
-        let playerCards = ctx.playOrder.map((player) => {
-            return (JSON.stringify(G.allPlayers[player]));
+        hands = playerObj.hand.map((card) => {
+            let value = cardNames[card.rank]+" of "+card.suit;
+            console.log("here is the name of the card from displayCards(): ", value);
+            return value;
         });
-        // hands.push(dealerCards);
-        hands.push(playerCards);
         return hands;
     }
 
-    console.log("here are ctx: ", JSON.stringify(ctx));
-    console.log("here are moves: ", (moves));
+    // Returns string holding bet and bank total of passed in player
+    function getBetAndBank(playerObj){
+        let moneyInfo = "Bet: "+playerObj.bet+" | " + playerObj.bank;
+        return moneyInfo;
+    }
 
+    // Displays available moves for current phase
     const insertMoves = () => {
 
         if (ctx.phase === "betting") {
-            return (<button onClick={handleBet}>Bet</button>);
+            return (<button onClick={handleBet}>Bet 100</button>);
         } else if (ctx.phase === "playing") {
             return (
                 <>
@@ -74,7 +101,12 @@ export function BlackjackBoard({ ctx, G, moves}) {
                 </>
             )
         } else if (ctx.phase === "finishing") {
-            //
+            return (
+                <>
+                    <button onClick={handleOK}>OK</button>
+                    <button onClick={handleBuyCredits}>Buy 1000 Chips</button>
+                </>
+            )
         }
     };
     return (
@@ -85,10 +117,23 @@ export function BlackjackBoard({ ctx, G, moves}) {
       {winner} */}
       <p>The current phase is: {ctx.phase}</p>
       <p>The current player is: {ctx.currentPlayer}</p>
+      {(ctx.phase === "finishing") ? <p>Result: {G.allPlayers[ctx.currentPlayer].resultMessage}</p> : ""}
+      {(ctx.phase === "finishing") ? <p>Dealer total: {G.dealer.handValue} {(G.dealer.hasBJ) ? "(blackjack)" : ""} Your total: {G.allPlayers[ctx.currentPlayer].handValue} {(G.allPlayers[ctx.currentPlayer].hasBJ) ? "(blackjack)" : ""}</p> : ""}
+      {(ctx.phase === "finishing" || ctx.phase === "playing") ? 
+      <p>Dealer cards: {displayCards(G.dealer).map(element => element + ", ")}</p>
+      : ""}
+      {(ctx.phase === "finishing") ? 
+      <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => element + ", ")}</p>
+      : ""}
       <p>Your moves:</p>
       {insertMoves()}
-      {/* {(ctx.phase === "betting") ? <button onClick={handleBet}>Bet</button> : ""} */}
-      <p></p>
+      {(ctx.phase === "playing") ?
+      <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => element + ", ")}</p>
+        : ""}
+    {ctx.playOrder.map((player) => {
+        return (<p>Player {player}: {getBetAndBank(G.allPlayers[player])}</p>)
+    })}
+      
 
       {/* {(ctx.phase === "playing") ? <p>{displayCards()}</p> : ""} */}
       

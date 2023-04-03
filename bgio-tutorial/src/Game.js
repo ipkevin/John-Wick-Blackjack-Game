@@ -75,6 +75,7 @@ function initPlayers(ctx){
             handValue: 0,
             softAce: false, // has an Ace which can be changed to 1
             resultMessage: "",
+            withdraws: 0,
         }
     }
     // console.log("this is the built up playersObj to be assigned to G.allPlayers: ", playersObj);
@@ -164,7 +165,7 @@ export const Blackjack = {
             G.quit = true;
             console.log("value of G.quit in quitGame move: ", G.quit);
 
-        }
+        },
     },
 
     phases: {
@@ -357,12 +358,20 @@ export const Blackjack = {
                         }
                     }
                 },
+                onMove: ({G, events}) => {
+                    if (G.turnsLeft === 0) events.endPhase();
+                },
             },
             moves: {
                 // For the user to click to continue on once they have reviewed the results.
-                OK: (events) => {
+                OK: ({G,events}) => {
+                    G.turnsLeft -= 1;
                     events.endTurn();
-                }
+                },
+                getChips: ({G, ctx}) => {
+                    G.allPlayers[ctx.currentPlayer].withdraws += 1;
+                    G.allPlayers[ctx.currentPlayer].bank += 1000;
+                },
             },
             next: "betting",
         }
