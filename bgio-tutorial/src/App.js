@@ -1,5 +1,7 @@
 import { Client } from 'boardgame.io/react';
 import {Blackjack} from './Game';
+import {BlackjackBoard} from './Board';
+
 // import {TicTacToeBoard} from './Board';
 
 // Initially they had a const equal to the Client class.  This is related to old style React components built by class vs built by functions
@@ -9,7 +11,7 @@ import {Blackjack} from './Game';
 
 // const App = Client({game: TicTacToe});
 
-const Game = Client({game: Blackjack, numPlayers: 2});
+const Game = Client({game: Blackjack, board: BlackjackBoard, numPlayers: 2});
 // const Game = Client({game: TicTacToe, board: TicTacToeBoard, numPlayers: 2});
 console.log("contents of Game: ", Game);
 

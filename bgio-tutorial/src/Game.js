@@ -115,17 +115,17 @@ function getAndSetValue(playerObj) {
         }
         if (total > 21 && softAce) {
             total -= 10;
-            console.log("inside the softace remover, softace before remove:", softAce);
+            // console.log("inside the softace remover, softace before remove:", softAce);
             softAce = false;
-            console.log("inside the softace remover, softace after remove:", softAce);
+            // console.log("inside the softace remover, softace after remove:", softAce);
         }
     }
-    console.log("handvalue just before getting assigned from total:", playerObj.handValue);
-    console.log('total just before assign to handvalue:',total);
+    // console.log("handvalue just before getting assigned from total:", playerObj.handValue);
+    // console.log('total just before assign to handvalue:',total);
     playerObj.handValue = total;
     playerObj.softAce = softAce;
     playerObj.hasAces = hasAces;
-    console.log("handvalue just after getting assigned from total:", playerObj.handValue);
+    // console.log("handvalue just after getting assigned from total:", playerObj.handValue);
     if (playerObj.handValue > 21) playerObj.busted = true;
     return total;
 }
@@ -146,7 +146,6 @@ export const Blackjack = {
             allPlayers: initPlayers(ctx),
         }
     ),
-
 
     moves: {
         quitGame: ({G}) => {
@@ -186,7 +185,6 @@ export const Blackjack = {
                 maxMoves: 1,
                 onEnd: ({G, events}) => {
                     if (G.turnsLeft < 1) {
-                        console.log("here's turnsLeft in betting check:", G.turnsLeft);
                         events.endPhase();
                     }
                 },
@@ -209,7 +207,7 @@ export const Blackjack = {
         playing: {
             onBegin: ({G, ctx}) => {
                 
-                // deal first card to each player, then the dealer
+                // // deal first card to each player, then the dealer
                 // for (let i=0; i<ctx.playOrder.length; i++){
                 //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
                 // }
@@ -218,7 +216,7 @@ export const Blackjack = {
                 }
                 G.dealerHand.push(G.deck.pop());
 
-                // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
+                // // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
                 // for (let i=0; i<ctx.playOrder.length; i++){
                 //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
                 // }
@@ -226,31 +224,24 @@ export const Blackjack = {
                     G.allPlayers[player].hand.push(G.deck.pop());
 
                     // calculate value of player's hand now that it has both initial cards
-                    // this also sets up 
                     if (getAndSetValue(G.allPlayers[player]) === 21) {
                         G.allPlayers[player].hasBJ = true;
+                        alert("natural blackjack for this player: ", player)
                     }
                 }
                 G.secret.dealerCard = G.deck.pop();
 
                 // Counter to determine how many turns left in this phase
                 G.turnsLeft = ctx.numPlayers;
-
-                /**************
-                // STILL NEED TO CHECK FOR NATURAL BLACKJACK. If got, set player's hasBJ to true
-                For each player: Count value of hand, set hasBJ if it's true
-
-                ****************/
-                
                 
             },
             moves: {
                 hit: ({G, playerID}) => {
-                    console.log("here are the cards left in the deck before hit: ", G.deck.length);
-                    console.log("here is playerID from hit move: ", playerID);
+                    // console.log("here are the cards left in the deck before hit: ", G.deck.length);
+                    // console.log("here is playerID from hit move: ", playerID);
                     G.allPlayers[playerID].hand.push(G.deck.pop());
-                    console.log("here's the player's hand: ", JSON.stringify(G.allPlayers[playerID].hand));
-                    console.log("here are the cards left in the deck after hit: ", G.deck.length);
+                    // console.log("here's the player's hand: ", JSON.stringify(G.allPlayers[playerID].hand));
+                    // console.log("here are the cards left in the deck after hit: ", G.deck.length);
                 },
                 stand: ({G,events}) => {
                     G.turnsLeft -= 1;
@@ -263,7 +254,6 @@ export const Blackjack = {
                     // account for a player who got blackjack (21 on first 2 cards)
                     if (G.allPlayers[ctx.currentPlayer].hasBJ) {
                         G.turnsLeft -= 1;
-                        alert("natural blackjack for player: ", ctx.currentPlayer)
                         events.endTurn();
                     }   
                 },
@@ -285,10 +275,6 @@ export const Blackjack = {
         },
     },
 
-    // turn: {
-    //     minMoves: 1,
-    //     maxMoves: 1
-    // },
 
     
     endIf: ({G, ctx}) => {
