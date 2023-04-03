@@ -9,7 +9,8 @@ import {TicTacToeBoard} from './Board';
 
 // const App = Client({game: TicTacToe});
 
-const Game = Client({game: TicTacToe, board: TicTacToeBoard, numPlayers: 2});
+const Game = Client({game: TicTacToe, numPlayers: 2});
+// const Game = Client({game: TicTacToe, board: TicTacToeBoard, numPlayers: 2});
 console.log("contents of Game: ", Game);
 
 function App() {
