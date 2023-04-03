@@ -69,35 +69,68 @@ function initPlayers(ctx){
             hand: [],
             bank: 1000,
             bet: 0,
+            busted: false,
             hasAces: false,
+            hasBJ: false,
+            handValue: 0,
+            softAce: false, // has an Ace which can be changed to 1
         }
     }
     // console.log("this is the built up playersObj to be assigned to G.allPlayers: ", playersObj);
     return playersObj;
 }
 
-// still need to account for natural blackjack 
-function getValue(handArr) {
+// Calculate value of player's hand. Returns value of hand.
+// ALSO sets player's properties (busted, handValue, hasAces, softAce) accordingly. Does not set hasBJ as does not have context to determine it.
+function getAndSetValue(playerObj) {
+    
+    /*****
+     * might want to redo Dealer so that it's an object like player. Then can reuse this function more easily. Can still store separate card in secret.
+     */
+    
+    let theHand = playerObj.hand;
     let hasAces = false;
+    let softAce = false;
     let total = 0;
-    for (let i=0; i<handArr.length; i++){
-        let theCard = handArr[i];
+    for (let i=0; i<theHand.length; i++){
+        let theCard = theHand[i];
         if (theCard.rank >= 2 && theCard.rank <= 10) {
             total += theCard.rank;
         } else if (theCard.rank >= 11 && theCard.rank <= 13) {
             total += 10;
         } else if (theCard.rank === 1){
             if (hasAces) {
-                // player already has an Ace, so this can only be 1
+                // player already has an Ace, so this can only be 1 (because 2x 11 would bust)
                 total += 1;
             } else {
-                // if (total <= 10)
+                hasAces = true;
+                if (total >= 11) {
+                    total += 1;
+                    softAce = false;
+                } else {
+                    total += 11;
+                    softAce = true;
+                }
             }
-        }  
+        }
+        if (total > 21 && softAce) {
+            total -= 10;
+            console.log("inside the softace remover, softace before remove:", softAce);
+            softAce = false;
+            console.log("inside the softace remover, softace after remove:", softAce);
+        }
     }
+    console.log("handvalue just before getting assigned from total:", playerObj.handValue);
+    console.log('total just before assign to handvalue:',total);
+    playerObj.handValue = total;
+    playerObj.softAce = softAce;
+    playerObj.hasAces = hasAces;
+    console.log("handvalue just after getting assigned from total:", playerObj.handValue);
+    if (playerObj.handValue > 21) playerObj.busted = true;
+    return total;
 }
 
-export const TicTacToe = {
+export const Blackjack = {
     setup: ({G, ctx}) => (
         {
             quit: null,
@@ -138,7 +171,10 @@ export const TicTacToe = {
                 for (const playa in G.allPlayers) {
                     G.allPlayers[playa].hand = [];
                     G.allPlayers[playa].bet = 0;
+                    G.allPlayers[playa].busted = false;
                     G.allPlayers[playa].hasAces = false;
+                    G.allPlayers[playa].hasBJ = false;
+                    G.allPlayers[playa].handValue = 0;
                 }
                 G.dealerHand = [];
                 G.secret.dealerCard = {};
@@ -172,28 +208,46 @@ export const TicTacToe = {
 
         playing: {
             onBegin: ({G, ctx}) => {
+                
                 // deal first card to each player, then the dealer
-                for (let i=0; i<ctx.playOrder.length; i++){
-                    G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
+                // for (let i=0; i<ctx.playOrder.length; i++){
+                //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
+                // }
+                for (const player in G.allPlayers) {
+                    G.allPlayers[player].hand.push(G.deck.pop());
                 }
                 G.dealerHand.push(G.deck.pop());
 
                 // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
-                for (let i=0; i<ctx.playOrder.length; i++){
-                    G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
+                // for (let i=0; i<ctx.playOrder.length; i++){
+                //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
+                // }
+                for (const player in G.allPlayers) {
+                    G.allPlayers[player].hand.push(G.deck.pop());
+
+                    // calculate value of player's hand now that it has both initial cards
+                    // this also sets up 
+                    if (getAndSetValue(G.allPlayers[player]) === 21) {
+                        G.allPlayers[player].hasBJ = true;
+                    }
                 }
                 G.secret.dealerCard = G.deck.pop();
 
                 // Counter to determine how many turns left in this phase
                 G.turnsLeft = ctx.numPlayers;
 
-                // STILL NEED TO CHECK FOR NATURAL BLACKJACK AND SET PLAYER MOVES ACCORDINGLY
+                /**************
+                // STILL NEED TO CHECK FOR NATURAL BLACKJACK. If got, set player's hasBJ to true
+                For each player: Count value of hand, set hasBJ if it's true
+
+                ****************/
+                
+                
             },
             moves: {
                 hit: ({G, playerID}) => {
                     console.log("here are the cards left in the deck before hit: ", G.deck.length);
                     console.log("here is playerID from hit move: ", playerID);
-                    // G.playerHands[playerID].push(G.deck.pop());
                     G.allPlayers[playerID].hand.push(G.deck.pop());
                     console.log("here's the player's hand: ", JSON.stringify(G.allPlayers[playerID].hand));
                     console.log("here are the cards left in the deck after hit: ", G.deck.length);
@@ -205,12 +259,26 @@ export const TicTacToe = {
             },
             turn: {
                 order: TurnOrder.RESET,
-                onMove: ({G, playerID}) => {
-                    // G.playerHands[playerID]
+                onBegin: ({G, ctx, events}) => {
+                    // account for a player who got blackjack (21 on first 2 cards)
+                    if (G.allPlayers[ctx.currentPlayer].hasBJ) {
+                        G.turnsLeft -= 1;
+                        alert("natural blackjack for player: ", ctx.currentPlayer)
+                        events.endTurn();
+                    }   
                 },
                 // If all players have done their moves, then end the phase:
+                // TO ADD: Check the player hands, calculate dealer hands and determine winner
                 onEnd: ({G, events}) => {
                     if (G.turnsLeft < 1) { events.endPhase()}
+                },
+                onMove: ({G, playerID, events}) => {
+                    // Check the player's hand value and determine if can continue, or busted
+                    getAndSetValue(G.allPlayers[playerID]);
+                    if (G.allPlayers[playerID].busted === true) {
+                        G.turnsLeft -= 1;
+                        events.endTurn();
+                    }
                 },
             },
             next: 'betting',
