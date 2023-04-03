@@ -74,6 +74,7 @@ function initPlayers(ctx){
             hasBJ: false,
             handValue: 0,
             softAce: false, // has an Ace which can be changed to 1
+            resultMessage: "",
         }
     }
     // console.log("this is the built up playersObj to be assigned to G.allPlayers: ", playersObj);
@@ -139,6 +140,13 @@ export const Blackjack = {
                 },
             deck: [],
             dealerHand: [],
+            dealer: {
+                hand: [],
+                busted: false,
+                hasAces: false,
+                hasBJ: false,
+                handValue: 0,
+            },
             secret: {
                 dealerCard: {},
             },
@@ -174,9 +182,17 @@ export const Blackjack = {
                     G.allPlayers[playa].hasAces = false;
                     G.allPlayers[playa].hasBJ = false;
                     G.allPlayers[playa].handValue = 0;
-                }
-                G.dealerHand = [];
+                    G.allPlayers[playa].resultMessage = "";
+                };
+
+                // G.dealerHand = [];
+                G.dealer.hand = [];
+                G.dealer.busted = false;
+                G.dealer.hasAces = false;
+                G.dealer.hasBJ = false;
+                G.dealer.handValue = 0;
                 G.secret.dealerCard = {};
+
                 G.turnsLeft = ctx.numPlayers;
             },
             start: true,
@@ -214,8 +230,9 @@ export const Blackjack = {
                 for (const player in G.allPlayers) {
                     G.allPlayers[player].hand.push(G.deck.pop());
                 }
-                G.dealerHand.push(G.deck.pop());
-
+                // G.dealerHand.push(G.deck.pop());
+                G.dealer.hand.push(G.deck.pop());
+                
                 // // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
                 // for (let i=0; i<ctx.playOrder.length; i++){
                 //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
@@ -271,8 +288,84 @@ export const Blackjack = {
                     }
                 },
             },
-            next: 'betting',
+            next: 'finishing',
         },
+
+        finishing: {
+            onBegin: ({G,ctx}) => {
+                
+                /* 
+                * Convert DealerHand to a Dealer object similar to player obj (so can use same functions)
+                * Move the card into hand to reveal it.
+                * Calculate the value.
+                * If blackjack, set hasBJ, then move on to win/loss
+                * If 17-20, stand and move to win/loss
+                * If under 17, hit until reach at least 17 or bust
+                * Calculate win/loss and payout.  Don't forget that if user busts then they lose even if dealer busted since user 
+                * busts first.
+                * Coudl setup a turn so that can easily access the currentPlayer. The only move is to continue on (& buy creds?)
+                */
+                G.dealer.hand.push(G.secret.dealerCard);
+                G.secret.dealerCard = {}; 
+
+                getAndSetValue(G.dealer);
+                while (G.dealer.handValue <= 16) {
+                    console.log("dealer deal while loop iteration");
+                    G.dealer.hand.push(G.deck.pop())
+                    getAndSetValue(G.dealer);
+                }
+
+                // Counter to determine how many turns left in this phase
+                G.turnsLeft = ctx.numPlayers;
+            },
+            turn: {
+                order: TurnOrder.RESET,
+                onBegin: ({G,ctx}) => {
+                    /* 
+                    * Calculate and inform player if they won, lost, pushed
+                    * (set player resultMessage after all of these)
+                    * if busted, immed lose
+                    * if BJ, then see if dealer also got BJ.  If not, get 3:2 payout (1.5 orig bet) + orig bet back (ie, 2.5x).
+                    * if didn't bust, then see if higher than dealer value or if dealer busted.  If yes, then get 2x bet back.
+                    * else, lose with msg that dealer got higher
+                    */
+                    let currPlayer = G.allPlayers[ctx.currentPlayer];
+                    if (currPlayer.busted === true) {
+                        currPlayer.resultMessage = "Bust!";
+                    } else if (currPlayer.hasBJ) { // player got BJ, but is it all it could be?
+                        if (G.dealer.hasBJ) {
+                            currPlayer.bank += currPlayer.bet;
+                            currPlayer.resultMessage = `Push. Get your bet back: ${currPlayer.bet}`;
+                        } else {
+                            currPlayer.bank += 2.5*(currPlayer.bet);
+                            currPlayer.resultMessage = `Blackjack Win! Payout 2.5x! ${2.5*currPlayer.bet}`;
+                        }
+                    } else { 
+                        // player did not bust or get BJ, so figure out performance vs dealer
+                        if (G.dealer.busted) {
+                            currPlayer.bank += 2*(currPlayer.bet);
+                            currPlayer.resultMessage = `Win! Payout 2x! ${2*currPlayer.bet}`;
+                        } else if (G.dealer.handValue === currPlayer.handValue) {
+                            currPlayer.bank += currPlayer.bet;
+                            currPlayer.resultMessage = `Push. Get your bet back: ${currPlayer.bet}`;
+                        } else if (G.dealer.handValue > currPlayer.handValue) {
+                            currPlayer.resultMessage = "Lose. Try again!";
+                        } else {
+                            // if reach here, then player hand > dealer hand and no one busted
+                            currPlayer.bank += 2*(currPlayer.bet);
+                            currPlayer.resultMessage = `Win! Payout 2x! ${2*currPlayer.bet}`;
+                        }
+                    }
+                },
+            },
+            moves: {
+                // For the user to click to continue on once they have reviewed the results.
+                OK: (events) => {
+                    events.endTurn();
+                }
+            },
+            next: "betting",
+        }
     },
 
 

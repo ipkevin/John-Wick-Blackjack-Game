@@ -61,6 +61,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
 
     console.log("here are ctx: ", JSON.stringify(ctx));
     console.log("here are moves: ", (moves));
+
     const insertMoves = () => {
 
         if (ctx.phase === "betting") {
@@ -72,6 +73,8 @@ export function BlackjackBoard({ ctx, G, moves}) {
                     <button onClick={handleStand}>Stand</button>
                 </>
             )
+        } else if (ctx.phase === "finishing") {
+            //
         }
     };
     return (
@@ -83,8 +86,8 @@ export function BlackjackBoard({ ctx, G, moves}) {
       <p>The current phase is: {ctx.phase}</p>
       <p>The current player is: {ctx.currentPlayer}</p>
       <p>Your moves:</p>
-      {/* {insertMoves()} */}
-      {(ctx.phase === "betting") ? <button onClick={handleBet}>Bet</button> : ""}
+      {insertMoves()}
+      {/* {(ctx.phase === "betting") ? <button onClick={handleBet}>Bet</button> : ""} */}
       <p></p>
 
       {/* {(ctx.phase === "playing") ? <p>{displayCards()}</p> : ""} */}
