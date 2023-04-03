@@ -198,6 +198,7 @@ export const Blackjack = {
             },
             start: true,
             turn: {
+                order: TurnOrder.RESET,
                 minMoves: 1,
                 maxMoves: 1,
                 onEnd: ({G, events}) => {
@@ -329,32 +330,42 @@ export const Blackjack = {
                     * if BJ, then see if dealer also got BJ.  If not, get 3:2 payout (1.5 orig bet) + orig bet back (ie, 2.5x).
                     * if didn't bust, then see if higher than dealer value or if dealer busted.  If yes, then get 2x bet back.
                     * else, lose with msg that dealer got higher
+                    * 
+                    * ************************
+                    * BUG BUG BUG FIX ME -- whenever 1st player gets any money back, they get it at win msg then AGAIN when bet phase starts
+                    * See if maybe it's a turnorder thing? disable the betting phase reset on turn order.
+                    * - Might be cuz Value calc is onBegin of turn, while end check is onMove (so end of prev), maybe the end is not fast enough
+                    *  --> if so, then either add a check/flag (turnsleft?) to stop another calc for same user, or try endif to end the game.
+                    **************************
                     */
-                    let currPlayer = G.allPlayers[ctx.currentPlayer];
-                    if (currPlayer.busted === true) {
-                        currPlayer.resultMessage = "Bust!";
-                    } else if (currPlayer.hasBJ) { // player got BJ, but is it all it could be?
-                        if (G.dealer.hasBJ) {
-                            currPlayer.bank += currPlayer.bet;
-                            currPlayer.resultMessage = `Push. Get your bet back: ${currPlayer.bet}`;
-                        } else {
-                            currPlayer.bank += 2.5*(currPlayer.bet);
-                            currPlayer.resultMessage = `Blackjack Win! Payout 2.5x! ${2.5*currPlayer.bet}`;
-                        }
-                    } else { 
-                        // player did not bust or get BJ, so figure out performance vs dealer
-                        if (G.dealer.busted) {
-                            currPlayer.bank += 2*(currPlayer.bet);
-                            currPlayer.resultMessage = `Win! Payout 2x! ${2*currPlayer.bet}`;
-                        } else if (G.dealer.handValue === currPlayer.handValue) {
-                            currPlayer.bank += currPlayer.bet;
-                            currPlayer.resultMessage = `Push. Get your bet back: ${currPlayer.bet}`;
-                        } else if (G.dealer.handValue > currPlayer.handValue) {
-                            currPlayer.resultMessage = "Lose. Try again!";
-                        } else {
-                            // if reach here, then player hand > dealer hand and no one busted
-                            currPlayer.bank += 2*(currPlayer.bet);
-                            currPlayer.resultMessage = `Win! Payout 2x! ${2*currPlayer.bet}`;
+                   if (G.turnsLeft !== 0) { // this check is required as there were async issues where this check onBegin check ran again before the end phase check finished from prev move
+
+                       let currPlayer = G.allPlayers[ctx.currentPlayer];
+                       if (currPlayer.busted === true) {
+                           currPlayer.resultMessage = "Bust!";
+                        } else if (currPlayer.hasBJ) { // player got BJ, but is it all it could be?
+                            if (G.dealer.hasBJ) {
+                                currPlayer.bank += currPlayer.bet;
+                                currPlayer.resultMessage = `Push. Get your bet back: ${currPlayer.bet}`;
+                            } else {
+                                currPlayer.bank += 2.5*(currPlayer.bet);
+                                currPlayer.resultMessage = `Blackjack Win! Payout 2.5x! ${2.5*currPlayer.bet}`;
+                            }
+                        } else { 
+                            // player did not bust or get BJ, so figure out performance vs dealer
+                            if (G.dealer.busted) {
+                                currPlayer.bank += 2*(currPlayer.bet);
+                                currPlayer.resultMessage = `Win! Payout 2x! ${2*currPlayer.bet}`;
+                            } else if (G.dealer.handValue === currPlayer.handValue) {
+                                currPlayer.bank += currPlayer.bet;
+                                currPlayer.resultMessage = `Push. Get your bet back: ${currPlayer.bet}`;
+                            } else if (G.dealer.handValue > currPlayer.handValue) {
+                                currPlayer.resultMessage = "Lose. Try again!";
+                            } else {
+                                // if reach here, then player hand > dealer hand and no one busted
+                                currPlayer.bank += 2*(currPlayer.bet);
+                                currPlayer.resultMessage = `Win! Payout 2x! ${2*currPlayer.bet}`;
+                            }
                         }
                     }
                 },

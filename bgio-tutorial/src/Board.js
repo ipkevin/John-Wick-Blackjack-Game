@@ -84,7 +84,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
 
     // Returns string holding bet and bank total of passed in player
     function getBetAndBank(playerObj){
-        let moneyInfo = "Bet: "+playerObj.bet+" | " + playerObj.bank;
+        let moneyInfo = "Bet: "+playerObj.bet+" | Bank: " + playerObj.bank;
         return moneyInfo;
     }
 
