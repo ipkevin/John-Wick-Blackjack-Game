@@ -2,10 +2,16 @@
     width: 6rem;
    
     &--animated {
-        top: -10rem;
+        top: -20rem;
         position: relative;
         
         animation: slide 0.3s ease-in forwards;
+    }
+    &--animated-slower {
+        top: -20rem;
+        position: relative;
+        
+        animation: 0.3s slide 0.2s ease-in forwards;
     }
 }
 

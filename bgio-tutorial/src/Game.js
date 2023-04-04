@@ -243,6 +243,8 @@ export const Blackjack = {
         playing: {
             onBegin: ({G, ctx}) => {
                 
+                
+                // dealCards(G, ctx);
                 // // deal first card to each player, then the dealer
                 // for (let i=0; i<ctx.playOrder.length; i++){
                 //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
@@ -252,6 +254,7 @@ export const Blackjack = {
                 }
                 G.dealer.hand.push(G.deck.pop());
                 
+                setTimeout(console.log("hallo"), 20000);
                 // // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
                 // for (let i=0; i<ctx.playOrder.length; i++){
                 //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());

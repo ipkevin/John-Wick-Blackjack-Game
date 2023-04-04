@@ -143,6 +143,19 @@ export function BlackjackBoard({ ctx, G, moves}) {
         console.log("This is ctx: ", ctx);
     }
 
+
+    /******************
+     * Jim provided this to show how React States could be used to draw out cards one by one when the card array is updated
+     * https://codesandbox.io/s/nice-goldstine-0r56bd?file=/src/App.js
+     * Also note how he did the setstate/draw inside the setTimeout
+     * BUT ACTUALLY, this is redrawing the entire card deck over and over.  It's just that it's one longer each time so it 
+     * looks step-by-step.  
+     * BUT NO, it is diff from yours since at least it's drawing each item with a delay betwwn based on incrementing #.
+     * 
+     * for yours, could be way easier. Get the hand array to render.
+     *  - iterate thru one by one
+     *  - each time review the array, if not arraylen=1 and if last item, then draw with animation. Else, draw immediately.
+     **********************/
     return (
     <div>
       {/* <table id="board">
@@ -168,7 +181,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
       <p>Your moves:</p>
       {insertMoves()}
         {(ctx.phase === "playing") ?
-            <p>Your cards: <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} /></p>
+            <p>Your cards: <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} phase="playing" /></p>
             // <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
             // (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
             // )}</p>
