@@ -168,9 +168,12 @@ export function BlackjackBoard({ ctx, G, moves}) {
       {(ctx.phase === "finishing") ? <p>Result: {G.allPlayers[ctx.currentPlayer].resultMessage}</p> : ""}
       {(ctx.phase === "finishing") ? <p>Dealer total: {G.dealer.handValue} {(G.dealer.hasBJ) ? "(blackjack)" : ""} Your total: {G.allPlayers[ctx.currentPlayer].handValue} {(G.allPlayers[ctx.currentPlayer].hasBJ) ? "(blackjack)" : ""}</p> : ""}
       {(ctx.phase === "finishing" || ctx.phase === "playing") ? 
-      <p>Dealer cards: {displayCards(G.dealer).map(element => 
+      <p>Dealer cards: 
+        {(ctx.phase === "dealingtodealer") ? <PlayerHand playerObj={G.dealer} phase="dealingtodealer" /> :  <PlayerHand playerObj={G.dealer} />}
+      {/* {displayCards(G.dealer).map(element => 
         (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
-        )}</p>
+        )} */}
+        </p>
       : ""}
       {(ctx.phase === "finishing") ? 
         <p>Your hand: <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} /></p>

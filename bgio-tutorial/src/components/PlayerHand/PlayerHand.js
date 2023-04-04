@@ -44,6 +44,8 @@ import './PlayerHand.scss';
                     if (index === arr.length - 1) animateClass = "card--animated"
                 }
             }
+            if (phase === "dealingtodealer" && arr.length > 1 && index === arr.length-1) animateClass = "card--animated-slower";
+            
             // if (phase === "playing" && (arr.length <= 2 || (arr.length > 2 && index === arr.length - 1)) ) {
             //     animateClass = "card--animated";
             // }

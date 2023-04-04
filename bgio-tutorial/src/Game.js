@@ -331,12 +331,11 @@ export const Blackjack = {
                     }
                 },
             },
-            next: 'finishing',
+            next: 'dealingtodealer',
         },
 
-        finishing: {
-            onBegin: ({G,ctx}) => {
-                
+        dealingtodealer: {
+            onBegin: ({G,ctx,events}) => {
                 /* 
                 * Convert DealerHand to a Dealer object similar to player obj (so can use same functions)
                 * Move the card into hand to reveal it.
@@ -357,6 +356,19 @@ export const Blackjack = {
                     G.dealer.hand.push(G.deck.pop())
                     getAndSetValue(G.dealer);
                 }
+                // events.endPhase();
+            },
+            moves: {
+                endDealerDealing: ({events}) => {
+                    events.endPhase();
+                },
+            },
+            next: "finishing",
+        },
+        finishing: {
+            onBegin: ({G,ctx}) => {
+                
+                
 
                 // Counter to determine how many turns left in this phase
                 G.turnsLeft = ctx.numPlayers;
