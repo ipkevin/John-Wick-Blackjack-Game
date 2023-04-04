@@ -160,7 +160,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
         )}</p>
       : ""}
       {(ctx.phase === "finishing") ? 
-        <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} />
+        <p>Your hand: <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} /></p>
         // <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
         // (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
         // )}</p>
@@ -168,7 +168,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
       <p>Your moves:</p>
       {insertMoves()}
         {(ctx.phase === "playing") ?
-            <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} />
+            <p>Your cards: <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} /></p>
             // <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
             // (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
             // )}</p>
