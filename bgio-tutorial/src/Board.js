@@ -4,6 +4,8 @@ import { v4 as uuid } from 'uuid';
 // import hearts_8 from './assets/images/cards/8_of_hearts.gif';
 import cardImages from './utils/CardImages';
 
+import './Board.scss';
+
 export function BlackjackBoard({ ctx, G, moves}) {
 
     // const onClick = (id) => moves.clickCell(id);
@@ -137,19 +139,19 @@ export function BlackjackBoard({ ctx, G, moves}) {
       {(ctx.phase === "finishing") ? <p>Dealer total: {G.dealer.handValue} {(G.dealer.hasBJ) ? "(blackjack)" : ""} Your total: {G.allPlayers[ctx.currentPlayer].handValue} {(G.allPlayers[ctx.currentPlayer].hasBJ) ? "(blackjack)" : ""}</p> : ""}
       {(ctx.phase === "finishing" || ctx.phase === "playing") ? 
       <p>Dealer cards: {displayCards(G.dealer).map(element => 
-        (<img src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+        (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
         )}</p>
       : ""}
       {(ctx.phase === "finishing") ? 
         <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
-        (<img src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+        (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
         )}</p>
       : ""}
       <p>Your moves:</p>
       {insertMoves()}
         {(ctx.phase === "playing") ?
             <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
-            (<img src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+            (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
             )}</p>
         : ""}
     {ctx.playOrder.map((player) => {
