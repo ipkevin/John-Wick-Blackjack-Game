@@ -59,6 +59,10 @@ export function BlackjackBoard({ ctx, G, moves}) {
     function handleBuyCredits(){
         moves.getChips();
     }
+    function handleEndTurn(){
+        console.log("current player about to be removed: ", ctx.currentPlayer);
+        moves.endTurn();
+    }
     // Hash table to quickly lookup name of card
     const cardNames = {
         "1": "ace",
@@ -111,11 +115,17 @@ export function BlackjackBoard({ ctx, G, moves}) {
 
         if (ctx.phase === "betting") {
             return (<button onClick={handleBet}>Bet 100</button>);
-        } else if (ctx.phase === "playing") {
+        } else if (ctx.phase === "playing" && G.allPlayers[ctx.currentPlayer].busted === false) {
             return (
                 <>
                     <button onClick={handleHit}>Hit</button>
                     <button onClick={handleStand}>Stand</button>
+                </>
+            )
+        } else if (ctx.phase === "playing" && G.allPlayers[ctx.currentPlayer].busted === true){
+            return (
+                <>
+                    <button onClick={handleEndTurn}>OK</button>
                 </>
             )
         } else if (ctx.phase === "finishing") {

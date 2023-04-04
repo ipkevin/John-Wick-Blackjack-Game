@@ -117,20 +117,40 @@ function getAndSetValue(playerObj) {
         }
         if (total > 21 && softAce) {
             total -= 10;
-            // console.log("inside the softace remover, softace before remove:", softAce);
             softAce = false;
-            // console.log("inside the softace remover, softace after remove:", softAce);
         }
     }
-    // console.log("handvalue just before getting assigned from total:", playerObj.handValue);
-    // console.log('total just before assign to handvalue:',total);
     playerObj.handValue = total;
     playerObj.softAce = softAce;
     playerObj.hasAces = hasAces;
-    // console.log("handvalue just after getting assigned from total:", playerObj.handValue);
     if (playerObj.handValue > 21) playerObj.busted = true;
     return total;
 }
+
+
+// // async function endPlayingTurn(G, playerID, events){
+// function endPlayingTurn(G, playerID, events){
+//     getAndSetValue(G.allPlayers[playerID]);
+//     if (G.allPlayers[playerID].busted === true) {
+//         G.turnsLeft -= 1;
+//         // let g = await setTimeout(console.log("waiting"), 2000);
+//         // setTimeout(console.log("waiting"), 2000);
+//         console.log("right after timeout");
+//         // events.endTurn();
+//         console.log("right after endTurn");
+//         setTimeout(events.endTurn(), 0);
+//         return true;
+//     }
+//     return false;
+// }
+// function endIt(events) {
+//     events.endTurn();
+//     console.log("inside endIt()");
+// }
+// async function delayMe() {
+//     setTimeout(console.log("delaying"), 2000);
+//     return true;
+// }
 
 export const Blackjack = {
     setup: ({G, ctx}) => (
@@ -140,7 +160,6 @@ export const Blackjack = {
                 numDecks: 2,
                 },
             deck: [],
-            dealerHand: [],
             dealer: {
                 hand: [],
                 busted: false,
@@ -186,7 +205,6 @@ export const Blackjack = {
                     G.allPlayers[playa].resultMessage = "";
                 };
 
-                // G.dealerHand = [];
                 G.dealer.hand = [];
                 G.dealer.busted = false;
                 G.dealer.hasAces = false;
@@ -232,7 +250,6 @@ export const Blackjack = {
                 for (const player in G.allPlayers) {
                     G.allPlayers[player].hand.push(G.deck.pop());
                 }
-                // G.dealerHand.push(G.deck.pop());
                 G.dealer.hand.push(G.deck.pop());
                 
                 // // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
@@ -266,6 +283,10 @@ export const Blackjack = {
                     G.turnsLeft -= 1;
                     events.endTurn();
                 },
+                endTurn: ({G, events}) => {
+                    G.turnsLeft -= 1;
+                    events.endTurn();
+                },
             },
             turn: {
                 order: TurnOrder.RESET,
@@ -283,10 +304,27 @@ export const Blackjack = {
                 },
                 onMove: ({G, playerID, events}) => {
                     // Check the player's hand value and determine if can continue, or busted
+                    // endPlayingTurn(G, playerID, events).then(result => {
+                    //     // console.log("result of promise: ", result)
+                    //     if (result === true) { 
+                    //         console.log("true, so end turn");
+                    //         events.endTurn();
+                    //     } else {
+                    //         console.log("not true");
+                    //     }
+                    // })
+                    
+                    // if (endPlayingTurn(G,playerID, events)) setTimeout(events.endTurn(), 3000);
+                    // (endPlayingTurn(G,playerID, events));
                     getAndSetValue(G.allPlayers[playerID]);
                     if (G.allPlayers[playerID].busted === true) {
-                        G.turnsLeft -= 1;
-                        events.endTurn();
+                        // NO LONGER USING THIS.  Cuz using endTurn here could not be delayed. If put in a promise then or
+                        // in a setTimeout anon fxn, it fires but does nothing.
+                        // SO instead will rely on a button press to move this forward.  In the button press, it
+                        // will reduce turnsLeft and fire endthis event to end turn.
+
+                        // G.turnsLeft -= 1;
+                        // events.endTurn();
                     }
                 },
             },

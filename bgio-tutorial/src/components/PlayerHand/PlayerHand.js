@@ -33,10 +33,14 @@ import './PlayerHand.scss';
     }
     
 export default function PlayerHand({playerObj}){
-
+    // <p>Your cards: {displayCards(playerObj).map(element => 
+    //     (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+    //     )}
+    // </p>
     return (
-    <p>Your cards: {displayCards(playerObj).map(element => 
-        (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+
+    <p>Your cards: {displayCards(playerObj).map((element, index, arr) => 
+        (<img className={`card ${(arr.length <= 2) ? "card--animated" : ""}`} src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
         )}
     </p>
     )

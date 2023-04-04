@@ -1,8 +1,12 @@
 .card {
     width: 6rem;
-    top: -10rem;
-    position: relative;
-    animation: slide 0.3s ease-in forwards;
+   
+    &--animated {
+        top: -10rem;
+        position: relative;
+        
+        animation: slide 0.3s ease-in forwards;
+    }
 }
 
 @keyframes slide {
