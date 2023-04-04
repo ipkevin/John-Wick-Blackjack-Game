@@ -1,6 +1,8 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
-
+// import hearts_8 from './assets/images/cards/8_of_hearts.gif';
+import cardImages from './utils/CardImages';
 
 export function BlackjackBoard({ ctx, G, moves}) {
 
@@ -56,7 +58,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
     }
     // Hash table to quickly lookup name of card
     const cardNames = {
-        "1": "Ace",
+        "1": "ace",
         "2": "2",
         "3": "3",
         "4": "4",
@@ -66,20 +68,33 @@ export function BlackjackBoard({ ctx, G, moves}) {
         "8": "8",
         "9": "9",
         "10": "10",
-        "11": "Jack",
-        "12": "Queen",
-        "13": "King"
+        "11": "jack",
+        "12": "queen",
+        "13": "king"
     };
 
     // Returns an array of the names and suits of the cards in the player's hand
     function displayCards(playerObj){
+        // let hands = [];
+        // hands = playerObj.hand.map((card) => {
+        //     let value = `${cardNames[card.rank].toLowerCase()}_of_${card.suit}.gif`; // cardNames[card.rank]+" of "+card.suit;
+        //     console.log("here is the name of the card from displayCards(): ", value);
+        //     return value;
+        // });
+        // return hands;
         let hands = [];
         hands = playerObj.hand.map((card) => {
-            let value = cardNames[card.rank]+" of "+card.suit;
+            let value = `${card.suit}_${cardNames[card.rank].toLowerCase()}`; // cardNames[card.rank]+" of "+card.suit;
             console.log("here is the name of the card from displayCards(): ", value);
             return value;
         });
         return hands;
+        // let cards = "";
+        // playerObj.hand.forEach((card) => {
+        //     cards += `<img src="./src/assets/images/cards/${cardNames[card.rank].toLowerCase()}_of_${card.suit}.gif" />`; // cardNames[card.rank]+" of "+card.suit;
+        //     console.log("here is the name of the card from displayCards(): ", cards);
+        // });
+        // return cards;
     }
 
     // Returns string holding bet and bank total of passed in player
@@ -109,6 +124,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
             )
         }
     };
+
     return (
     <div>
       {/* <table id="board">
@@ -120,23 +136,25 @@ export function BlackjackBoard({ ctx, G, moves}) {
       {(ctx.phase === "finishing") ? <p>Result: {G.allPlayers[ctx.currentPlayer].resultMessage}</p> : ""}
       {(ctx.phase === "finishing") ? <p>Dealer total: {G.dealer.handValue} {(G.dealer.hasBJ) ? "(blackjack)" : ""} Your total: {G.allPlayers[ctx.currentPlayer].handValue} {(G.allPlayers[ctx.currentPlayer].hasBJ) ? "(blackjack)" : ""}</p> : ""}
       {(ctx.phase === "finishing" || ctx.phase === "playing") ? 
-      <p>Dealer cards: {displayCards(G.dealer).map(element => element + ", ")}</p>
+      <p>Dealer cards: {displayCards(G.dealer).map(element => 
+        (<img src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+        )}</p>
       : ""}
       {(ctx.phase === "finishing") ? 
-      <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => element + ", ")}</p>
+        <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
+        (<img src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+        )}</p>
       : ""}
       <p>Your moves:</p>
       {insertMoves()}
-      {(ctx.phase === "playing") ?
-      <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => element + ", ")}</p>
+        {(ctx.phase === "playing") ?
+            <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
+            (<img src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+            )}</p>
         : ""}
     {ctx.playOrder.map((player) => {
         return (<p>Player {player}: {getBetAndBank(G.allPlayers[player])}</p>)
     })}
-      
-
-      {/* {(ctx.phase === "playing") ? <p>{displayCards()}</p> : ""} */}
-      
       
     </div>
     );

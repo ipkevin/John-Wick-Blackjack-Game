@@ -29,7 +29,7 @@ import { TurnOrder } from 'boardgame.io/core';
 
 
 // The suits of cards
-const suits = ["Clubs", "Spades", "Hearts", "Diamonds"];
+const suits = ["clubs", "spades", "hearts", "diamonds"];
 
 // Represent cards. 1 = Ace, 11-13 = jack, queen, king
 const ranks = [1,2,3,4,5,6,7,8,9,10,11,12,13];
