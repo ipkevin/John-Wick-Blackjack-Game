@@ -1,8 +1,9 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 
-// import hearts_8 from './assets/images/cards/8_of_hearts.gif';
 import cardImages from './utils/CardImages';
+
+import PlayerHand from './components/PlayerHand/PlayerHand';
 
 import './Board.scss';
 
@@ -87,7 +88,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
         let hands = [];
         hands = playerObj.hand.map((card) => {
             let value = `${card.suit}_${cardNames[card.rank].toLowerCase()}`; // cardNames[card.rank]+" of "+card.suit;
-            console.log("here is the name of the card from displayCards(): ", value);
+            // console.log("here is the name of the card from displayCards(): ", value);
             return value;
         });
         return hands;
@@ -127,12 +128,18 @@ export function BlackjackBoard({ ctx, G, moves}) {
         }
     };
 
+    function logItOut(G, ctx) {
+        console.log("This is G: ", G);
+        console.log("This is ctx: ", ctx);
+    }
+
     return (
     <div>
       {/* <table id="board">
         <tbody>{tbody}</tbody>
       </table>
       {winner} */}
+      {logItOut(G, ctx)}
       <p>The current phase is: {ctx.phase}</p>
       <p>The current player is: {ctx.currentPlayer}</p>
       {(ctx.phase === "finishing") ? <p>Result: {G.allPlayers[ctx.currentPlayer].resultMessage}</p> : ""}
@@ -143,16 +150,18 @@ export function BlackjackBoard({ ctx, G, moves}) {
         )}</p>
       : ""}
       {(ctx.phase === "finishing") ? 
-        <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
-        (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
-        )}</p>
+        <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} />
+        // <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
+        // (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+        // )}</p>
       : ""}
       <p>Your moves:</p>
       {insertMoves()}
         {(ctx.phase === "playing") ?
-            <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
-            (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
-            )}</p>
+            <PlayerHand playerObj={G.allPlayers[ctx.currentPlayer]} />
+            // <p>Your cards: {displayCards(G.allPlayers[ctx.currentPlayer]).map(element => 
+            // (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
+            // )}</p>
         : ""}
     {ctx.playOrder.map((player) => {
         return (<p>Player {player}: {getBetAndBank(G.allPlayers[player])}</p>)
