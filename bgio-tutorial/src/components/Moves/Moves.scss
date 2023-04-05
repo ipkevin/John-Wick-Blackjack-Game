@@ -1,16 +1,27 @@
-.move-button {
-    padding: 1rem 1.5rem;
-    border: none;
+.move {
 
-    font-size: 1.5rem;
-    text-transform: uppercase;
-    color: white;
-    background-color: rgb(52, 50, 139);
+    &-button {
+        padding: 1rem 1.5rem;
+        border: none;
+    
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        color: white;
+        background-color: rgb(52, 50, 139);
+    
+        border-radius: 0.25rem;
+    
+        cursor:pointer;
 
-    border-radius: 0.25rem;
+        &:hover {
+            background-color: rgb(241, 41, 74);
+        }
+    }
 
-    cursor:pointer;
-    &:hover {
-        background-color: rgb(241, 41, 74);
+    &__container {
+        width: 500px;
+
+        background-color: black;
+        
     }
 }

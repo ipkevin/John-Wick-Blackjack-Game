@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 
 import GetHand from "./components/GetHand/GetHand";
 import Moves from "./components/Moves/Moves";
+import Dealer from "./components/Dealer/Dealer";
 
 import "./Board.scss";
 
@@ -78,28 +79,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
         </table>
     {winner} */}
                 {/* {logItOut(G, ctx)} */}
-                <div className="dealer">
-                    <div className="dealer__cards">
-                        {ctx.phase === "dealingtodealer" || ctx.phase === "finishing" ? (
-                            <p>
-                                Dealer cards:<br />
-                                {ctx.phase === "dealingtodealer" ? <GetHand playerObj={G.dealer} phase="dealingtodealer" /> : <GetHand playerObj={G.dealer} />}
-                            </p>
-                        ) : (
-                            ""
-                        )}
-                        {ctx.phase === "playing" ? (
-                            <p>
-                                Dealer cards:<br />
-                                <GetHand playerObj={G.dealer} mode="dealer" />
-                            </p>
-                        ) : (
-                            ""
-                        )}
-                    </div>
-                    <div className="dealer__value"></div>
-                </div>
-
+                <Dealer dealerObj={G.dealer} ctx={ctx} />
 
                 <div className="restofpage">
                     {ctx.phase === "dealingtodealer" ? <>{endDealerAutomatic()}</> : ""}

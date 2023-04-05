@@ -7,7 +7,10 @@
     height: 100%;
     background-image: url(./assets/images/table02full.jpg);
     background-size: cover;
-
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y:top;
+    
     display: flex;
     flex-direction: column;
     justify-content: space-between;

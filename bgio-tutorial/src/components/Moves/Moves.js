@@ -17,9 +17,9 @@ export default function Moves({currPlayerObj, moves, ctx}) {
     function handleBuyCredits() {
         moves.getChips();
     }
-    function handleEndDealerDealing() {
-        moves.endDealerDealing();
-    }
+    // function handleEndDealerDealing() {
+    //     moves.endDealerDealing();
+    // }
     function handleEndTurn() {
         console.log("current player about to be removed: ", ctx.currentPlayer);
         moves.endTurn();
@@ -77,7 +77,10 @@ export default function Moves({currPlayerObj, moves, ctx}) {
     return (
         <>
              <p>Your moves:</p>
+             <div className="move__container">
              {insertMoves()}
+             </div>
+             
         </>
     )
 }
