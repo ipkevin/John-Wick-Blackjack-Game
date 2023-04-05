@@ -265,7 +265,6 @@ export const Blackjack = {
                     // calculate value of player's hand now that it has both initial cards
                     if (getAndSetValue(G.allPlayers[player]) === 21) {
                         G.allPlayers[player].hasBJ = true;
-                        alert("natural blackjack for this player: ", player)
                     }
                 }
                 G.secret.dealerCard = G.deck.pop();
@@ -295,9 +294,15 @@ export const Blackjack = {
                 order: TurnOrder.RESET,
                 onBegin: ({G, ctx, events}) => {
                     // account for a player who got blackjack (21 on first 2 cards)
+                    // ACTUALLY, can handle with button press on frontend (or automatic timeout press)
+                    /********************
+                     * 
+                     * IF THIS WORKS, ERASE THIS WHOLE TURN.ONBEGIN AS NOT NECESSARY
+                     * 
+                     ************************/
                     if (G.allPlayers[ctx.currentPlayer].hasBJ) {
-                        G.turnsLeft -= 1;
-                        events.endTurn();
+                        // G.turnsLeft -= 1;
+                        //events.endTurn();  // Rely on user acknowledge or FE auto button press
                     }   
                 },
                 // If all players have done their moves, then end the phase:
@@ -352,11 +357,9 @@ export const Blackjack = {
 
                 getAndSetValue(G.dealer);
                 while (G.dealer.handValue <= 16) {
-                    console.log("dealer deal while loop iteration");
                     G.dealer.hand.push(G.deck.pop())
                     getAndSetValue(G.dealer);
                 }
-                // events.endPhase();
             },
             moves: {
                 endDealerDealing: ({events}) => {

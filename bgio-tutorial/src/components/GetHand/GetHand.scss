@@ -1,0 +1,20 @@
+.card {
+    width: 8rem;
+   
+    &--animated {
+        top: -20rem;
+        position: relative;
+        
+        animation: slide 0.3s ease-in forwards;
+    }
+    &--animated-slower {
+        top: -20rem;
+        position: relative;
+        
+        animation: 0.3s slide 0.2s ease-in forwards;
+    }
+}
+
+@keyframes slide {
+    100% {top: 0;}
+}

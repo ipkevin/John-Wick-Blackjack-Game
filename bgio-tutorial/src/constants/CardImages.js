@@ -51,7 +51,7 @@ import diamonds_queen from '../assets/images/cards/queen_of_diamonds.gif';
 import diamonds_king from '../assets/images/cards/king_of_diamonds.gif';
 import diamonds_ace from '../assets/images/cards/ace_of_diamonds.gif';
 
-const varNames = {
+export const cardImages = {
     hearts_2,
     hearts_3,
     hearts_4,
@@ -105,5 +105,3 @@ const varNames = {
     diamonds_king,
     diamonds_ace,
 }
-
-export default varNames;

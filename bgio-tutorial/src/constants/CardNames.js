@@ -1,5 +1,5 @@
 // Hash table to quickly lookup name of card based on its rank
-const cardNames = {
+export const cardNames = {
     "1": "ace",
     "2": "2",
     "3": "3",
@@ -14,5 +14,3 @@ const cardNames = {
     "12": "queen",
     "13": "king"
 };
-
-export default cardNames;
