@@ -1,0 +1,15 @@
+.main {
+    width: 100vw;
+    height: 100vh;
+}
+.bgtable {
+    width: 100%;
+    height: 100%;
+    background-image: url(./assets/images/table02full.jpg);
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}

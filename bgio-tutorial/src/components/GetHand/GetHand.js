@@ -3,7 +3,7 @@ import {cardImages} from '../../constants/CardImages';
 import './GetHand.scss';
 import {cardNames} from '../../constants/CardNames';
     
-export default function GetHand({playerObj, phase}){
+export default function GetHand({playerObj, phase, mode}){
 
     let hands = playerObj.hand.map((card, index, arr) => {
         let animateClass = "";
@@ -23,13 +23,15 @@ export default function GetHand({playerObj, phase}){
             animateClass = "card--animated-slower";
         }
         return (
+            <>
             <img src={cardImages[`${card.suit}_${cardNames[card.rank].toLowerCase()}`]} 
             className={`card ${animateClass}`} 
             alt={`${card.rank} of ${card.suit} card`} 
             key={uuid()} />
+            { (mode === "dealer" && playerObj.hand.length === 1) ? <img className="card" src={cardImages["cardback"]} alt="back of card" /> : ""}
+            </>
         )
     })
-
     return (
         <>{hands}</>
     )

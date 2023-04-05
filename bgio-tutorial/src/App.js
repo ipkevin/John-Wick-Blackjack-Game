@@ -1,6 +1,7 @@
 import { Client } from 'boardgame.io/react';
 import {Blackjack} from './Game';
 import {BlackjackBoard} from './Board';
+import './App.scss';
 
 // import {TicTacToeBoard} from './Board';
 
@@ -13,16 +14,11 @@ import {BlackjackBoard} from './Board';
 
 const Game = Client({game: Blackjack, board: BlackjackBoard, numPlayers: 2});
 // const Game = Client({game: TicTacToe, board: TicTacToeBoard, numPlayers: 2});
-console.log("contents of Game: ", Game);
 
 function App() {
   return (
     <Game />
   )
 }
-
-// function App()  {
-//   return Client({game:TicTacToe});
-// }
 
 export default App;

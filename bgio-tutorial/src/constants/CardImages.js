@@ -50,6 +50,7 @@ import diamonds_jack from '../assets/images/cards/jack_of_diamonds.gif';
 import diamonds_queen from '../assets/images/cards/queen_of_diamonds.gif';
 import diamonds_king from '../assets/images/cards/king_of_diamonds.gif';
 import diamonds_ace from '../assets/images/cards/ace_of_diamonds.gif';
+import cardback from '../assets/images/cards/back_johnwick3.gif';
 
 export const cardImages = {
     hearts_2,
@@ -104,4 +105,5 @@ export const cardImages = {
     diamonds_queen,
     diamonds_king,
     diamonds_ace,
+    cardback,
 }
