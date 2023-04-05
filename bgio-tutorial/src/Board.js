@@ -63,6 +63,17 @@ export function BlackjackBoard({ ctx, G, moves}) {
         console.log("current player about to be removed: ", ctx.currentPlayer);
         moves.endTurn();
     }
+    function handleEndDealerDealing(){
+        moves.endDealerDealing();
+    }
+
+    // Intended to be used to end the dealer phase after a pause (otherwise use would have to press a button)
+    function endDealerAutomatic() {
+        console.log("In endDealerAutomatic");
+        setTimeout(() => {
+            moves.endDealerDealing();
+        }, 2000);
+    }
     // Hash table to quickly lookup name of card
     const cardNames = {
         "1": "ace",
@@ -104,6 +115,7 @@ export function BlackjackBoard({ ctx, G, moves}) {
         // return cards;
     }
 
+
     // Returns string holding bet and bank total of passed in player
     function getBetAndBank(playerObj){
         let moneyInfo = "Bet: "+playerObj.bet+" | Bank: " + playerObj.bank;
@@ -126,6 +138,12 @@ export function BlackjackBoard({ ctx, G, moves}) {
             return (
                 <>
                     <button onClick={handleEndTurn}>OK</button>
+                </>
+            )
+        } else if (ctx.phase === "dealingtodealer") {
+            return (
+                <>
+                    <button onClick={handleEndDealerDealing}>Continue</button>
                 </>
             )
         } else if (ctx.phase === "finishing") {
@@ -163,16 +181,14 @@ export function BlackjackBoard({ ctx, G, moves}) {
       </table>
       {winner} */}
       {logItOut(G, ctx)}
+      {(ctx.phase === "dealingtodealer") ? <>{endDealerAutomatic()}</> : ""}
       <p>The current phase is: {ctx.phase}</p>
-      <p>The current player is: {ctx.currentPlayer}</p>
+      {(ctx.phase !== "dealingtodealer") ? <p>The current player is: {ctx.currentPlayer}</p> : ""}
       {(ctx.phase === "finishing") ? <p>Result: {G.allPlayers[ctx.currentPlayer].resultMessage}</p> : ""}
       {(ctx.phase === "finishing") ? <p>Dealer total: {G.dealer.handValue} {(G.dealer.hasBJ) ? "(blackjack)" : ""} Your total: {G.allPlayers[ctx.currentPlayer].handValue} {(G.allPlayers[ctx.currentPlayer].hasBJ) ? "(blackjack)" : ""}</p> : ""}
-      {(ctx.phase === "finishing" || ctx.phase === "playing") ? 
+      {(ctx.phase === "playing" || ctx.phase === "dealingtodealer" || ctx.phase === "finishing") ? 
       <p>Dealer cards: 
         {(ctx.phase === "dealingtodealer") ? <PlayerHand playerObj={G.dealer} phase="dealingtodealer" /> :  <PlayerHand playerObj={G.dealer} />}
-      {/* {displayCards(G.dealer).map(element => 
-        (<img className="card" src={cardImages[element]} alt={`${element} card`} key={uuid()} />)
-        )} */}
         </p>
       : ""}
       {(ctx.phase === "finishing") ? 
