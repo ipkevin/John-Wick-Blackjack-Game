@@ -43,11 +43,15 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
         portraitImage = johnWick1;
     }
 
+    let iconBorder = "";
+    if (currPlayerObj.busted) {
+        iconBorder = "player__icon-image--bust";
+    } else if (currPlayerObj.hasBJ) {
+        iconBorder = "player__icon-image--blackjack";
+    }
+
+
     return (
-
-        <>
-        
-
 
         <div className={`player 
             ${(index === 0) ? "player__pos0" : ""}
@@ -55,18 +59,21 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
             ${(index === 2) ? "player__pos2" : ""}
             ${(ctx.currentPlayer === index.toString() && ctx.phase !== "dealingtodealer") ? "player--highlighted" : ""}
         `}>
-            {ctx.phase === "finishing" ? <p>Result: {currPlayerObj.resultMessage}</p> : ""}
-                    {ctx.phase === "finishing" ? (
-                        <p>
-                            Dealer total: {theDealer.handValue} {theDealer.hasBJ ? "(blackjack)" : ""} Your total: {currPlayerObj.handValue} {currPlayerObj.hasBJ ? "(blackjack)" : ""}
-                        </p>
-                    ) : (
-                        ""
-                    )}
+            {/* {ctx.phase === "finishing" ? <p>Result: {currPlayerObj.resultMessage}</p> : ""} */}
+            {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Win") ? <h3 className="player__result player__result--win">Winner</h3> : ""}
+            {ctx.phase === "finishing" && (currPlayerObj.resultMessage.includes("Lose") || currPlayerObj.resultMessage.includes("Bust")) ? <h3 className="player__result player__result--lose">Lose</h3> : ""}
+            {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Push") ? <h3 className="player__result player__result--push">Push</h3> : ""}
+            
+            {/* FINAL SCORE VS DEALER */}
+            {/* {ctx.phase === "finishing" ? (
+                <p>
+                    Dealer total: {theDealer.handValue} {theDealer.hasBJ ? "(blackjack)" : ""} Your total: {currPlayerObj.handValue} {currPlayerObj.hasBJ ? "(blackjack)" : ""}
+                </p>
+            ) : ( "" )} */}
 
             <div className="player__status">
-                {currPlayerObj.busted === true ? <p>*** BUSTED ***</p> : ""}
-                {currPlayerObj.hasBJ === true ? <p>*** BLACKJACK ***</p> : ""}
+                {currPlayerObj.busted === true ? <p className="player__status-text">*** BUST ***</p> : ""}
+                {currPlayerObj.hasBJ === true ? <p className="player__status-text">*** BLACKJACK ***</p> : ""}
             </div>
       
             <div className="player__cards">
@@ -88,13 +95,13 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 Bet ${currPlayerObj.bet}
                 </div>
                 <div className="player__icon">
-                    <img src={portraitImage} alt="portrait" className="player__icon-image" />
+                    <img src={portraitImage} alt="portrait" className={`player__icon-image ${iconBorder}`} />
                 </div>
                 <div className="player__bank">
                 Bank ${currPlayerObj.bank}
                 </div>
             </div>
         </div>
-        </>
+
     )
 }

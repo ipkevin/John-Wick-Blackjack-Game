@@ -54,9 +54,20 @@
 
         border: 3px solid rgb(207, 229, 252);
         box-shadow: 0 0 3px 2px rgb(104, 176, 253);
-        animation: glowing 3s ease-in-out infinite;
+        animation: glowing-active 3s ease-in-out infinite;
+
+        &--bust {
+            animation: none;
+            border: 3px solid rgb(185, 185, 185);
+            box-shadow: 0 0 6px 4px rgb(99, 99, 99);
+            opacity: 0.5;
+        }
+
+        &--blackjack {
+            animation: glowing-blackjack 3s ease-in-out infinite;
+        }
     }
-    @keyframes glowing {
+    @keyframes glowing-active {
         from {
             box-shadow: 0 0 3px 2px rgb(104, 176, 253);
         }
@@ -65,6 +76,20 @@
         }
         to {
             box-shadow: 0 0 3px 2px rgb(104, 176, 253);
+        }
+    }
+    @keyframes glowing-blackjack {
+        from {
+            border: 3px solid rgb(255, 202, 182); // rgb(255, 183, 154);
+            box-shadow: 0 0 3px 2px rgb(255, 141, 96); // rgb(216, 63, 3);
+        }
+        50% {
+            border: 3px solid rgb(255, 202, 182); // yellow rgb(255, 231, 199);
+            box-shadow: 0 0 10px 5px rgb(255, 141, 96);  //  rgb(255, 179, 79);
+        }
+        to {
+            border: 3px solid rgb(255, 202, 182);
+            box-shadow: 0 0 3px 2px rgb(255, 141, 96);
         }
     }
 
@@ -79,4 +104,72 @@
     // &__bank {
     //     align-self: flex-end;
     // }
+
+    &__status-text {
+        font-family: "Compacta BT", Arial, Helvetica, sans-serif;
+        font-style: italic;
+        font-size: 2rem;
+    }
+    &__result {
+        font-family: "Compacta BT", Arial, Helvetica, sans-serif;
+        font-style: italic;
+        font-size: 4rem;
+        color: rgba(0,0,0,0.4);
+        -webkit-text-stroke: 0.3px rgb(255, 183, 154);
+        // border: 2px solid rgb(255, 183, 154);
+        text-shadow: 5px 5px 5px rgb(216, 63, 3);
+        // box-shadow: 0 0 5px 3px rgb(216, 63, 3), inset 0 0 5px 3px rgb(216, 63, 3);
+        animation: textshadowmove 2s linear infinite;
+
+        &--push {
+            -webkit-text-stroke: 0.3px rgb(207, 229, 252);
+            text-shadow: 0 0 3px rgb(104, 176, 253);
+            animation: textshadowmove-push 2s linear infinite;
+        }
+        &--lose {
+            // -webkit-text-stroke: 0.3px rgb(207, 229, 252);
+            // text-shadow: 0 0 3px rgb(104, 176, 253);
+            // animation: textshadowmove-push 2s linear infinite;
+
+            color: rgb(43, 43, 43);
+            -webkit-text-stroke: 0.3px rgba(150, 150, 150, 1.0);
+        text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            animation: none;
+        }
+    }
+
+    @keyframes textshadowmove {
+        from {
+            text-shadow: 5px 5px 5px rgb(216, 63, 3);
+        }
+        25% {
+            text-shadow: 5px -5px 5px rgb(216, 63, 3);
+        }
+        50% {
+            text-shadow: -5px -5px 5px rgb(216, 63, 3);
+        }
+        75% {
+            text-shadow: -5px 5px 5px rgb(216, 63, 3);
+        }
+        to {
+            text-shadow: 5px 5px 5px rgb(216, 63, 3);
+        }
+    }
+    @keyframes textshadowmove-push {
+        from {
+            text-shadow: 5px 5px 5px rgb(104, 176, 253);
+        }
+        25% {
+            text-shadow: 5px -5px 5px rgb(104, 176, 253);
+        }
+        50% {
+            text-shadow: -5px -5px 5px rgb(104, 176, 253);
+        }
+        75% {
+            text-shadow: -5px 5px 5px rgb(104, 176, 253);
+        }
+        to {
+            text-shadow: 5px 5px 5px rgb(104, 176, 253);
+        }
+    }
 }

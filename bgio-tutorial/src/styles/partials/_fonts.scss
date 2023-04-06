@@ -27,6 +27,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Compacta BT';
+    src: url('../../assets/fonts/Compacta-BT.ttf.woff') format('woff'),
+        url('../../assets/fonts/Compacta-BT.ttf.eot') format('eot');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 @font-face {
     font-family: 'Avenir Black';
