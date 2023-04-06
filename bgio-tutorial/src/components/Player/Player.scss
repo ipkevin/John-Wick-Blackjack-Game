@@ -4,6 +4,12 @@
     flex-flow: column nowrap;
     align-items: center;
 
+    padding: 1rem;
+    border-radius: 1rem;
+
+    &--highlighted {
+        background-color: rgba(255,255,255,0.1)
+    }
     &__pos0 {
 
     }
@@ -15,5 +21,33 @@
     &__pos2 {
         position: absolute;
         left: 0;
+    }
+
+    &__info-box {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__icon-image {
+        width: 4.5rem;
+        object-fit: cover;
+        border-radius: 100%;
+
+        border: 3px solid rgb(207, 229, 252);
+        box-shadow: 0 0 3px 2px rgb(104, 176, 253);
+        animation: glowing 3s ease-in-out infinite;
+    }
+    @keyframes glowing {
+        from {
+            box-shadow: 0 0 3px 2px rgb(104, 176, 253);
+        }
+        50% {
+            box-shadow: 0 0 6px 4px rgb(104, 176, 253);
+        }
+        to {
+            box-shadow: 0 0 3px 2px rgb(104, 176, 253);
+        }
     }
 }

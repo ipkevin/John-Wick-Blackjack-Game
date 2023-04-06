@@ -2,6 +2,8 @@ import GetHand from '../GetHand/GetHand';
 // import {v4 as uuid} from 'uuid';
 import "./Player.scss";
 
+import johnWick1 from '../../assets/images/portraits/johnwick.jpg';
+
 // Returns string holding bet and bank total of passed in player
 // function getBetAndBank(playerObj) {
 //     let moneyInfo = "Bet: " + playerObj.bet + " | Bank: " + playerObj.bank;
@@ -28,6 +30,8 @@ export default function Player({currPlayerObj, ctx, index}){
     //         </p>
     //     );
     // })}
+    console.log("type of ctx.currentplayer: ", typeof(ctx.currentPlayer));
+    console.log("type of index: ", typeof(index));
     return (
 
         <>
@@ -38,6 +42,7 @@ export default function Player({currPlayerObj, ctx, index}){
             ${(index === 0) ? "player__pos0" : ""}
             ${(index === 1) ? "player__pos1" : ""}
             ${(index === 2) ? "player__pos2" : ""}
+            ${(ctx.currentPlayer === index.toString() && ctx.phase !== "dealingtodealer") ? "player--highlighted" : ""}
         `}>
             <div className="player__status">
                 {currPlayerObj.busted === true ? <p>*** BUSTED ***</p> : ""}
@@ -45,7 +50,7 @@ export default function Player({currPlayerObj, ctx, index}){
             </div>
       
             <div className="player__cards">
-                {ctx.phase === "finishing" ? (
+                {ctx.phase === "finishing" || ctx.phase === "dealingtodealer" ? (
                     <p>
                     <GetHand playerObj={currPlayerObj} />
                     </p>
@@ -63,6 +68,7 @@ export default function Player({currPlayerObj, ctx, index}){
                 Bet: {currPlayerObj.bet}
                 </div>
                 <div className="player__icon">
+                    <img src={johnWick1} alt="portrait" className="player__icon-image" />
                 </div>
                 <div className="player__bank">
                 Bank: {currPlayerObj.bank}
