@@ -86,11 +86,17 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
 
             {/* Show the BlackJack/Bust status message above the cards */}
             <div className="player__status">
-                {currPlayerObj.busted === true ? <p className="player__status-text"><img src={skull2} className="player__status-icon player__status-icon--skull" />&nbsp;BUST &nbsp;<img src={skull2} className="player__status-icon  player__status-icon--skull" /></p> : ""}
-                {currPlayerObj.hasBJ === true ? <p className="player__status-text player__status-text--blackjack"><img src={glockicon} className="player__status-icon player__status-icon--reversed" />BLACKJACK <img src={glockicon} className="player__status-icon" /></p> : ""}
+                {currPlayerObj.busted === true ? <p className="player__status-text"><img src={skull2} className="player__status-icon player__status-icon--skull" alt="" />&nbsp;BUST &nbsp;<img src={skull2} className="player__status-icon  player__status-icon--skull" alt="" /></p> : ""}
+                {currPlayerObj.hasBJ === true ? <p className="player__status-text player__status-text--blackjack"><img src={glockicon} className="player__status-icon player__status-icon--reversed" alt="" />BLACKJACK <img src={glockicon} className="player__status-icon" alt="" /></p> : ""}
             </div>
       
             <div className="player__cards">
+                {ctx.phase === "finishing" || ctx.phase === "playing" || ctx.phase === "dealingtodealer" 
+                ? 
+                <div className="player__score">
+                    {currPlayerObj.handValue}{currPlayerObj.softAce && !currPlayerObj.hasBJ ? ` / ${currPlayerObj.handValue - 10}` : ""}
+                </div>
+                : "" }
                 {ctx.phase === "finishing" || ctx.phase === "dealingtodealer" ? (
                     <p>
                     <GetHand playerObj={currPlayerObj} />

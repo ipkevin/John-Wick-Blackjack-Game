@@ -39,7 +39,21 @@
         left: 0;
         top: 25%;
     }
-
+    &__cards {
+        position: relative;
+    }
+    &__score {
+        position: absolute;
+        top: 3.7rem; // -0.5rem;
+        left: -1rem;
+        z-index: 1;
+        border-radius: 100%;
+        box-shadow: 0 0 5px 3px rgb(182, 182, 182);
+        padding: 0.5rem 0.8rem;
+        background-color: rgb(31, 31, 31);
+        font-family: "Avenir", Arial, Helvetica, sans-serif;
+        font-size: 1.3rem;
+    }
     &__info-box {
         display: flex;
         flex-flow: column nowrap;
