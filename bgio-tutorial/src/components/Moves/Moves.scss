@@ -19,8 +19,9 @@
     }
 
     &__container {
-        width: 500px;
-
+        width: 300px;
+        overflow:visible;
+        white-space:nowrap;
         background-color: black;
         
     }

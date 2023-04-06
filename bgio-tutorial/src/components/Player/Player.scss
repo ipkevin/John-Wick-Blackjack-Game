@@ -1,0 +1,19 @@
+
+.player {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    &__pos0 {
+
+    }
+    &__pos1 {
+        position: absolute;
+        right: 0;
+        top: 25%;
+    }
+    &__pos2 {
+        position: absolute;
+        left: 0;
+    }
+}

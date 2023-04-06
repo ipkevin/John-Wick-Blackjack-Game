@@ -5,6 +5,7 @@ import {useEffect, useState} from 'react';
 import GetHand from "./components/GetHand/GetHand";
 import Moves from "./components/Moves/Moves";
 import Dealer from "./components/Dealer/Dealer";
+import Player from "./components/Player/Player";
 import PhaseName from "./components/PhaseName/PhaseName";
 
 import "./Board.scss";
@@ -12,6 +13,18 @@ import "./Board.scss";
 export function BlackjackBoard({ ctx, G, moves }) {
 
     const [phaseTitle, setPhaseTitle] = useState("");
+
+    // Did this hoping I could stop the <Player> from re-rendering everytime hit button, but it didn't work
+    // So player re-rendered even though playerLIst definitely stble.
+    // The component redraws even if I don't use map and don't use any G/ctx state vars that are changing. 
+    // So basically the components always seem to redraw in this output 
+    const [playerList, setPlayerList] = useState([]);
+
+    useEffect(() => {
+        setPlayerList(ctx.playOrder);
+        console.log("first render useEffect in Board running");
+    }, []);
+
     useEffect(()=> {
         switch (ctx.phase) {
             case "betting":
@@ -38,6 +51,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
 
 
     // shorter varname as it's used throughout code
+    // Actually might not use this as much in local multiplayer since some UI items need to remain tied to certain player.
     let currPlayerObj = G.allPlayers[ctx.currentPlayer];
 
 
@@ -48,11 +62,6 @@ export function BlackjackBoard({ ctx, G, moves }) {
         }, 2300);
     }
 
-    // Returns string holding bet and bank total of passed in player
-    function getBetAndBank(playerObj) {
-        let moneyInfo = "Bet: " + playerObj.bet + " | Bank: " + playerObj.bank;
-        return moneyInfo;
-    }
 
     
 
@@ -85,34 +94,22 @@ export function BlackjackBoard({ ctx, G, moves }) {
                         ""
                     )}
 
-                    {ctx.phase === "finishing" ? (
-                        <p>
-                            Your hand: <GetHand playerObj={currPlayerObj} />
-                        </p>
-                    ) : (
-                        ""
-                    )}
-                    {currPlayerObj.busted === true ? <p>*** BUSTED ***</p> : ""}
-                    {currPlayerObj.hasBJ === true ? <p>*** BLACKJACK ***</p> : ""}
-                  
-                    {ctx.phase === "playing" ? (
-                        <p>
-                            Your cards: <GetHand playerObj={currPlayerObj} phase="playing" />
-                        </p>
-                    ) : (
-                        ""
-                    )}
-                    {ctx.playOrder.map((player) => {
-                        return (
-                            <p key={uuid()}>
-                                Player {player}: {getBetAndBank(G.allPlayers[player])}
-                            </p>
-                        );
-                    })}
-
-                    {/* {insertMoves()} */}
-                    <Moves currPlayerObj={currPlayerObj} moves={moves} ctx={ctx} />
                 </div>
+
+                {/* <Player currPlayerObj={G.allPlayers[0]}  index={0} />
+                <Player currPlayerObj={G.allPlayers[1]}  index={1} /> */}
+                {playerList.map((player, index) => {
+                    return (
+                        <Player currPlayerObj={G.allPlayers[player]} ctx={ctx} index={index} />
+                        // <p key={uuid()}>
+                        // Player {player}: {getBetAndBank(G.allPlayers[player])}
+                        // </p>
+                    );
+                })}
+
+                {/* <Player currPlayerObj={currPlayerObj} ctx={ctx} G={G} /> */}
+                {/* {insertMoves()} */}
+                <Moves currPlayerObj={currPlayerObj} moves={moves} ctx={ctx} />
             </div>
         </div>
     );

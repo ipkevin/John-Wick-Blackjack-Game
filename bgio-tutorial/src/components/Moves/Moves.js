@@ -81,7 +81,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
 
     return (
         <>
-             <p>Your moves:</p>
+             
              <div className="move__container">
              {insertMoves()}
              </div>
