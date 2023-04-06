@@ -1,0 +1,26 @@
+
+.phase-name {
+    opacity: 0;
+    font-size: 4rem;
+    text-transform: capitalize;
+    animation:  1.5s ease-in appearbriefly;
+    
+    &--animated {
+        animation:  1.5s ease-in appearbriefly;
+    }
+    &--animated-alt {
+        animation:  1.5s ease-in appearbriefly;
+    }
+}
+
+@keyframes appearbriefly {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}

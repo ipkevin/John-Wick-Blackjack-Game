@@ -1,13 +1,32 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
+import {useEffect, useState} from 'react';
 
 import GetHand from "./components/GetHand/GetHand";
 import Moves from "./components/Moves/Moves";
 import Dealer from "./components/Dealer/Dealer";
+import PhaseName from "./components/PhaseName/PhaseName";
 
 import "./Board.scss";
 
 export function BlackjackBoard({ ctx, G, moves }) {
+
+    const [phaseTitle, setPhaseTitle] = useState("");
+    useEffect(()=> {
+        switch (ctx.phase) {
+            case "betting":
+                setPhaseTitle("Place your bets");
+                break;
+            case "playing":
+                setPhaseTitle("Play");
+                break;
+            case "finishing":
+                setPhaseTitle("Results");
+                break;
+            default:
+                break;
+        };
+    }, [ctx.phase])
     // const onClick = (id) => moves.clickCell(id);
 
     // let winner = '';
@@ -17,44 +36,16 @@ export function BlackjackBoard({ ctx, G, moves }) {
     //     ) : ( <div id="winner">Draw!</div>);
     // }
 
-    // const cellStyle = {
-    //     border: '1px solid #555',
-    //     width: '50px',
-    //     height: '50px',
-    //     lineHeight: '50px',
-    //     textAlign: 'center',
-    // };
-
-    // let tbody = [];
-    // for (let i = 0; i < 3; i++) {
-    //     let cells = [];
-    //     for (let j = 0; j < 3; j++) {
-    //         const id = 3 * i + j;
-    //         cells.push(
-    //             <td key={id}>
-    //                 {G.cells[id] ? (
-    //                     <div style={cellStyle}>{G.cells[id]}</div>
-    //                 ) : (
-    //                     <button style={cellStyle} onClick={() => onClick(id)} />
-    //                 )}
-    //             </td>
-    //         );
-    //     }
-    //     tbody.push(<tr key={i}>{cells}</tr>);
-    // }
 
     // shorter varname as it's used throughout code
     let currPlayerObj = G.allPlayers[ctx.currentPlayer];
-
-
-
 
 
     // Intended to be used to end the dealer phase after a pause (otherwise use would have to press a button)
     function endDealerAutomatic() {
         setTimeout(() => {
             moves.endDealerDealing();
-        }, 3000);
+        }, 2300);
     }
 
     // Returns string holding bet and bank total of passed in player
@@ -80,7 +71,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
     {winner} */}
                 {/* {logItOut(G, ctx)} */}
                 <Dealer dealerObj={G.dealer} ctx={ctx} />
-
+                <PhaseName phaseTitle={phaseTitle} phase={ctx.phase} />
                 <div className="restofpage">
                     {ctx.phase === "dealingtodealer" ? <>{endDealerAutomatic()}</> : ""}
                     <p>The current phase is: {ctx.phase}</p>

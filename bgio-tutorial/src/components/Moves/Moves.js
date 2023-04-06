@@ -2,8 +2,8 @@
 import './Moves.scss';
 
 export default function Moves({currPlayerObj, moves, ctx}) {
-    function handleBet() {
-        moves.bet(100);
+    function handleBet(num) {
+        moves.bet(num);
     }
     function handleHit() {
         moves.hit();
@@ -28,9 +28,14 @@ export default function Moves({currPlayerObj, moves, ctx}) {
     const insertMoves = () => {
         if (ctx.phase === "betting") {
             return (
-                <button className="move-button" onClick={handleBet}>
-                    Bet 100
-                </button>
+                <>
+                    <button className="move-button" onClick={() => handleBet(100)}>
+                        Bet 100
+                    </button>
+                    <button className="move-button" onClick={() => handleBet(500)}>
+                        Bet 500
+                    </button>
+                </>
             );
         } else if (ctx.phase === "playing" && currPlayerObj.busted === false && currPlayerObj.hasBJ === false) {
             return (
