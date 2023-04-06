@@ -23,7 +23,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
     useEffect(() => {
         setPlayerList(ctx.playOrder);
         console.log("first render useEffect in Board running");
-    }, []);
+    }, [ctx.playOrder]);
 
     useEffect(()=> {
         switch (ctx.phase) {
@@ -95,9 +95,6 @@ export function BlackjackBoard({ ctx, G, moves }) {
                 {playerList.map((player, index) => {
                     return (
                         <Player currPlayerObj={G.allPlayers[player]} ctx={ctx} index={index} theDealer={G.dealer} />
-                        // <p key={uuid()}>
-                        // Player {player}: {getBetAndBank(G.allPlayers[player])}
-                        // </p>
                     );
                 })}
 

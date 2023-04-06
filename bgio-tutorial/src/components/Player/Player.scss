@@ -110,6 +110,25 @@
         font-family: "Compacta BT", Arial, Helvetica, sans-serif;
         font-style: italic;
         font-size: 2rem;
+
+        &--blackjack {
+            // text-shadow: 3px 3px 10px rgb(216, 63, 3), 3px -3px 10px rgb(216, 63, 3), -3px -3px 10px rgb(216, 63, 3),-3px 3px 10px rgb(216, 63, 3); // rgb(255, 141, 96)
+        }
+    }
+    &__status-icon {
+        width: 3rem;
+        position: relative;
+        top: 0.7rem;
+        
+        &--skull {
+            width: 1.5rem;
+            top: 0.1rem;
+            filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(21deg) brightness(97%) contrast(103%);
+            color: white;
+        }
+        &--reversed {
+            transform: scaleX(-1);  
+        }
     }
     &__result {
         font-family: "Compacta BT", Arial, Helvetica, sans-serif;
@@ -137,6 +156,12 @@
             -webkit-text-stroke: 0.3px rgba(150, 150, 150, 1.0);
         text-shadow: 0 0 10px rgba(255,255,255,0.2);
             animation: none;
+        }
+
+        &-details {
+            font-style: italic;
+            font-size: 1.3rem;
+            // text-transform: uppercase;
         }
     }
 

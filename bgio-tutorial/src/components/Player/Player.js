@@ -1,3 +1,4 @@
+import { useRef} from 'react';
 import GetHand from '../GetHand/GetHand';
 // import {v4 as uuid} from 'uuid';
 import "./Player.scss";
@@ -6,11 +7,10 @@ import johnWick1 from '../../assets/images/portraits/johnwick.jpg';
 import donnie1 from '../../assets/images/portraits/donnie.jpg';
 import ballerina1 from '../../assets/images/portraits/ballerina.jpg';
 
-// Returns string holding bet and bank total of passed in player
-// function getBetAndBank(playerObj) {
-//     let moneyInfo = "Bet: " + playerObj.bet + " | Bank: " + playerObj.bank;
-//     return moneyInfo;
-// }
+import glockicon from '../../assets/images/glockicon-edit.png';
+import skull2 from '../../assets/images/skull2.png';
+
+import coinSound from "../../assets/sounds/361346__jack126guy__slot-machine-payout.wav";
 
 /******************
  * 
@@ -23,17 +23,10 @@ import ballerina1 from '../../assets/images/portraits/ballerina.jpg';
 
 export default function Player({currPlayerObj, ctx, index, theDealer}){
 
+    const coinSoundElement = useRef();
     console.log("Player component being redrawn for player: ", index);
     
-    // {ctx.playOrder.map((player) => {
-    //     return (
-    //         <p key={uuid()}>
-    //             Player {player}: {getBetAndBank(G.allPlayers[player])}
-    //         </p>
-    //     );
-    // })}
-
-
+    // Determines which image will be used for player avatar depending on player order (0-2)
     let portraitImage;
     if (index === 1){
         portraitImage = donnie1;
@@ -43,6 +36,7 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
         portraitImage = johnWick1;
     }
 
+    // Affects player avatar's border effect if busted/blackjack by changing a class name
     let iconBorder = "";
     if (currPlayerObj.busted) {
         iconBorder = "player__icon-image--bust";
@@ -50,20 +44,39 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
         iconBorder = "player__icon-image--blackjack";
     }
 
+    // Plays the coin sound when announce win
+    // SHOUDL BE RENAMED AND ALSO PLAY EXPLOSION SOUND EFFECTS!
+    function playRef() {
+        if (ctx.currentPlayer === index.toString()) coinSoundElement.current.play();
+        console.log("in playRef fxn");
+    }
+
 
     return (
 
+     
         <div className={`player 
             ${(index === 0) ? "player__pos0" : ""}
             ${(index === 1) ? "player__pos1" : ""}
             ${(index === 2) ? "player__pos2" : ""}
             ${(ctx.currentPlayer === index.toString() && ctx.phase !== "dealingtodealer") ? "player--highlighted" : ""}
         `}>
+               {/* <button onClick={playRef}>CLICK SOUND</button> */}
+               <audio ref={coinSoundElement} className="audio-element">
+                    <source src={coinSound}></source>
+                </audio>
+
+            {/* Shows the result title (win, lose, push) above the player */}
+            {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Win") 
+                ? <>{playRef()}<h3 className="player__result player__result--win">Winner</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                : ""}
+            {ctx.phase === "finishing" && (currPlayerObj.resultMessage.includes("Lose") || currPlayerObj.resultMessage.includes("Bust")) 
+                ? <><h3 className="player__result player__result--lose">Lose</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                : ""}
+            {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Push") 
+                ? <>{playRef()}<h3 className="player__result player__result--push">Push</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                : ""}
             {/* {ctx.phase === "finishing" ? <p>Result: {currPlayerObj.resultMessage}</p> : ""} */}
-            {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Win") ? <h3 className="player__result player__result--win">Winner</h3> : ""}
-            {ctx.phase === "finishing" && (currPlayerObj.resultMessage.includes("Lose") || currPlayerObj.resultMessage.includes("Bust")) ? <h3 className="player__result player__result--lose">Lose</h3> : ""}
-            {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Push") ? <h3 className="player__result player__result--push">Push</h3> : ""}
-            
             {/* FINAL SCORE VS DEALER */}
             {/* {ctx.phase === "finishing" ? (
                 <p>
@@ -71,9 +84,10 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 </p>
             ) : ( "" )} */}
 
+            {/* Show the BlackJack/Bust status message above the cards */}
             <div className="player__status">
-                {currPlayerObj.busted === true ? <p className="player__status-text">*** BUST ***</p> : ""}
-                {currPlayerObj.hasBJ === true ? <p className="player__status-text">*** BLACKJACK ***</p> : ""}
+                {currPlayerObj.busted === true ? <p className="player__status-text"><img src={skull2} className="player__status-icon player__status-icon--skull" />&nbsp;BUST &nbsp;<img src={skull2} className="player__status-icon  player__status-icon--skull" /></p> : ""}
+                {currPlayerObj.hasBJ === true ? <p className="player__status-text player__status-text--blackjack"><img src={glockicon} className="player__status-icon player__status-icon--reversed" />BLACKJACK <img src={glockicon} className="player__status-icon" /></p> : ""}
             </div>
       
             <div className="player__cards">
