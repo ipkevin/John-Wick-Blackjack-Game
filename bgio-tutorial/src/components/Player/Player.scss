@@ -97,6 +97,7 @@
         text-transform: uppercase;
         font-style: italic;
         font-family: "Avenir", Arial, Helvetica, sans-serif;
+        font-size: 1.3rem;
     }
     // &__bet {
     //     align-self: flex-start;
@@ -114,6 +115,7 @@
         font-family: "Compacta BT", Arial, Helvetica, sans-serif;
         font-style: italic;
         font-size: 4rem;
+        // text-transform: uppercase;
         color: rgba(0,0,0,0.4);
         -webkit-text-stroke: 0.3px rgb(255, 183, 154);
         // border: 2px solid rgb(255, 183, 154);
@@ -157,19 +159,19 @@
     }
     @keyframes textshadowmove-push {
         from {
-            text-shadow: 5px 5px 5px rgb(104, 176, 253);
+            text-shadow: 4px 4px 5px rgb(104, 176, 253);
         }
         25% {
-            text-shadow: 5px -5px 5px rgb(104, 176, 253);
+            text-shadow: 4px -4px 5px rgb(104, 176, 253);
         }
         50% {
-            text-shadow: -5px -5px 5px rgb(104, 176, 253);
+            text-shadow: -4px -4px 5px rgb(104, 176, 253);
         }
         75% {
-            text-shadow: -5px 5px 5px rgb(104, 176, 253);
+            text-shadow: -4px 4px 5px rgb(104, 176, 253);
         }
         to {
-            text-shadow: 5px 5px 5px rgb(104, 176, 253);
+            text-shadow: 4px 4px 5px rgb(104, 176, 253);
         }
     }
 }
