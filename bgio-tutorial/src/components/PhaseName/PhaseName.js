@@ -12,21 +12,27 @@ export default function PhaseName({phaseTitle,phase}) {
     return (
         <>
         {(phase === "betting") ?
-            <h2 className={`phase-name`}>
-            {phaseTitle}
-            </h2>
+            <div className="phase-name__wrapper phase-name__wrapper--betting">
+                <h2 className={`phase-name`}>
+                {phaseTitle}
+                </h2>
+            </div>
             : ""
         }
         {(phase === "playing") ?
-            <h2 className={`phase-name`}>
-            {phaseTitle}
-            </h2>
+            <div className="phase-name__wrapper phase-name__wrapper--playing">
+                <h2 className={`phase-name`}>
+                {phaseTitle}
+                </h2>
+            </div>
             : ""
         }
         {(phase === "finishing") ?
-            <h2 className={`phase-name`}>
-            {phaseTitle}
-            </h2>
+            <div className="phase-name__wrapper phase-name__wrapper--finishing">
+                <h2 className={`phase-name`}>
+                {phaseTitle}
+                </h2>
+            </div>
             : ""
         }
         </>

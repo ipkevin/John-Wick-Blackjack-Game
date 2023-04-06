@@ -3,6 +3,8 @@ import GetHand from '../GetHand/GetHand';
 import "./Player.scss";
 
 import johnWick1 from '../../assets/images/portraits/johnwick.jpg';
+import donnie1 from '../../assets/images/portraits/donnie.jpg';
+import ballerina1 from '../../assets/images/portraits/ballerina.jpg';
 
 // Returns string holding bet and bank total of passed in player
 // function getBetAndBank(playerObj) {
@@ -19,7 +21,7 @@ import johnWick1 from '../../assets/images/portraits/johnwick.jpg';
  * 
  */
 
-export default function Player({currPlayerObj, ctx, index}){
+export default function Player({currPlayerObj, ctx, index, theDealer}){
 
     console.log("Player component being redrawn for player: ", index);
     
@@ -30,8 +32,17 @@ export default function Player({currPlayerObj, ctx, index}){
     //         </p>
     //     );
     // })}
-    console.log("type of ctx.currentplayer: ", typeof(ctx.currentPlayer));
-    console.log("type of index: ", typeof(index));
+
+
+    let portraitImage;
+    if (index === 1){
+        portraitImage = donnie1;
+    } else if (index === 2){
+        portraitImage = ballerina1;
+    } else {
+        portraitImage = johnWick1;
+    }
+
     return (
 
         <>
@@ -44,6 +55,15 @@ export default function Player({currPlayerObj, ctx, index}){
             ${(index === 2) ? "player__pos2" : ""}
             ${(ctx.currentPlayer === index.toString() && ctx.phase !== "dealingtodealer") ? "player--highlighted" : ""}
         `}>
+            {ctx.phase === "finishing" ? <p>Result: {currPlayerObj.resultMessage}</p> : ""}
+                    {ctx.phase === "finishing" ? (
+                        <p>
+                            Dealer total: {theDealer.handValue} {theDealer.hasBJ ? "(blackjack)" : ""} Your total: {currPlayerObj.handValue} {currPlayerObj.hasBJ ? "(blackjack)" : ""}
+                        </p>
+                    ) : (
+                        ""
+                    )}
+
             <div className="player__status">
                 {currPlayerObj.busted === true ? <p>*** BUSTED ***</p> : ""}
                 {currPlayerObj.hasBJ === true ? <p>*** BLACKJACK ***</p> : ""}
@@ -57,7 +77,7 @@ export default function Player({currPlayerObj, ctx, index}){
                 ) : "" }
                 {ctx.phase === "playing" ? (
                     <p>
-                    <GetHand playerObj={currPlayerObj} phase={ctx.currentPlayer == index ? "playing" : ""} />
+                    <GetHand playerObj={currPlayerObj} phase={ctx.currentPlayer === index.toString() ? "playing" : ""} />
                     </p>
                 ) : (
                     ""
@@ -65,13 +85,13 @@ export default function Player({currPlayerObj, ctx, index}){
             </div>
             <div className="player__info-box">
                 <div className="player__bet">
-                Bet: {currPlayerObj.bet}
+                Bet ${currPlayerObj.bet}
                 </div>
                 <div className="player__icon">
-                    <img src={johnWick1} alt="portrait" className="player__icon-image" />
+                    <img src={portraitImage} alt="portrait" className="player__icon-image" />
                 </div>
                 <div className="player__bank">
-                Bank: {currPlayerObj.bank}
+                Bank ${currPlayerObj.bank}
                 </div>
             </div>
         </div>

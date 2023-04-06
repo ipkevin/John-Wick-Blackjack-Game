@@ -1,8 +1,8 @@
 import React from "react";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
 import {useEffect, useState} from 'react';
 
-import GetHand from "./components/GetHand/GetHand";
+// import GetHand from "./components/GetHand/GetHand";
 import Moves from "./components/Moves/Moves";
 import Dealer from "./components/Dealer/Dealer";
 import Player from "./components/Player/Player";
@@ -79,20 +79,14 @@ export function BlackjackBoard({ ctx, G, moves }) {
         </table>
     {winner} */}
                 {/* {logItOut(G, ctx)} */}
+                <div className="game-info">
+                    <p>The current phase is: {ctx.phase}</p>
+                    {ctx.phase !== "dealingtodealer" ? <p>The current player is: {ctx.currentPlayer}</p> : ""}
+                </div>
                 <Dealer dealerObj={G.dealer} ctx={ctx} />
                 <PhaseName phaseTitle={phaseTitle} phase={ctx.phase} />
                 <div className="restofpage">
                     {ctx.phase === "dealingtodealer" ? <>{endDealerAutomatic()}</> : ""}
-                    <p>The current phase is: {ctx.phase}</p>
-                    {ctx.phase !== "dealingtodealer" ? <p>The current player is: {ctx.currentPlayer}</p> : ""}
-                    {ctx.phase === "finishing" ? <p>Result: {currPlayerObj.resultMessage}</p> : ""}
-                    {ctx.phase === "finishing" ? (
-                        <p>
-                            Dealer total: {G.dealer.handValue} {G.dealer.hasBJ ? "(blackjack)" : ""} Your total: {currPlayerObj.handValue} {currPlayerObj.hasBJ ? "(blackjack)" : ""}
-                        </p>
-                    ) : (
-                        ""
-                    )}
 
                 </div>
 
@@ -100,7 +94,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
                 <Player currPlayerObj={G.allPlayers[1]}  index={1} /> */}
                 {playerList.map((player, index) => {
                     return (
-                        <Player currPlayerObj={G.allPlayers[player]} ctx={ctx} index={index} />
+                        <Player currPlayerObj={G.allPlayers[player]} ctx={ctx} index={index} theDealer={G.dealer} />
                         // <p key={uuid()}>
                         // Player {player}: {getBetAndBank(G.allPlayers[player])}
                         // </p>

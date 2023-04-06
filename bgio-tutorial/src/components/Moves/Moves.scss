@@ -16,13 +16,34 @@
         &:hover {
             background-color: rgb(241, 41, 74);
         }
+
+        border: 3px solid rgb(207, 229, 252);
+        box-shadow: 0 0 3px 2px rgb(104, 176, 253);
+        animation: glowing 3s ease-in-out infinite;
     }
+
+    
 
     &__container {
         width: 300px;
         overflow:visible;
         white-space:nowrap;
         // background-color: black;
+
+        display: flex;
+        gap: 0.5rem;
         
+    }
+}
+
+@keyframes glowing {
+    from {
+        box-shadow: 0 0 3px 2px rgb(104, 176, 253);
+    }
+    50% {
+        box-shadow: 0 0 6px 4px rgb(104, 176, 253);
+    }
+    to {
+        box-shadow: 0 0 3px 2px rgb(104, 176, 253);
     }
 }

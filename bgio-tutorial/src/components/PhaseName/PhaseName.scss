@@ -1,18 +1,65 @@
 
-.phase-name {
-    opacity: 0;
-    font-size: 4rem;
-    text-transform: capitalize;
-    animation:  1.5s ease-in appearbriefly;
+// .phase-name__wrapper {
+
+//     text-align: left;
+
+//     &--betting {
+//         width: 33rem;
+
+//         & .phase-name {
+//             animation: linearwipe 1.7s ease-out forwards;
+//         }
+//     }
+//     &--playing {
+//         width: 9rem;
+
+//         & .phase-name {
+//             animation: linearwipe 1.4s ease-out forwards;
+//         }
+//     }
+//     &--finishing {
+//         width: 15rem;
+        
+//         & .phase-name {
+//             animation: linearwipe 1.5s ease-out forwards;
+//         }
+//     }
+// }
+
+// .phase-name {
+
+//     white-space: nowrap;
+//     overflow: hidden;
+//     font-size: 3rem;
+//     width: 40rem;
+//     text-transform: uppercase;
+//     font-style: italic;
     
-    &--animated {
-        animation:  1.5s ease-in appearbriefly;
-    }
-    &--animated-alt {
-        animation:  1.5s ease-in appearbriefly;
-    }
+// }
+
+
+.phase-name {
+
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    // font-family: "Compacta", sans-serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-style: italic;
+    animation: 1.5s ease appearbriefly;
+    
 }
 
+@keyframes linearwipe {
+    from { 
+        opacity: 0;
+        width: 0;
+    }
+    30% { opacity: 1;}
+    70% { opacity: 1;}
+    100% { opacity: 0;}
+}
 @keyframes appearbriefly {
     0% {
         opacity: 0;

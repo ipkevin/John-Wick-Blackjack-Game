@@ -1,3 +1,6 @@
+
+@use './styles/partials/fonts' as *;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,5 +9,5 @@
 
 body {
   color: white;
-  font-family: Verdana, Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Avenir", Verdana, Tahoma, sans-serif;
 }

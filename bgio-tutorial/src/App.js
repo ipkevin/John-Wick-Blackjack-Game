@@ -12,7 +12,7 @@ import './App.scss';
 
 // const App = Client({game: TicTacToe});
 
-const Game = Client({game: Blackjack, board: BlackjackBoard, numPlayers: 2});
+const Game = Client({game: Blackjack, board: BlackjackBoard, numPlayers: 3});
 // const Game = Client({game: TicTacToe, board: TicTacToeBoard, numPlayers: 2});
 
 function App() {
