@@ -17,6 +17,7 @@ import coinBigSound from "../../assets/sounds/coin_big.ogg";
 import coinMediumSound from "../../assets/sounds/coin_medium.ogg";
 import clapBigSound from "../../assets/sounds/clap_big.ogg";
 import loseSound from "../../assets/sounds/lose_quiet.ogg";
+import ledSpiralsClip from "../../assets/sounds/led_spirals_clip.mp3";
 
 /******************
  * 
@@ -34,6 +35,7 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
     const [playClapBig] = useSound(clapBigSound);
     const [playCoinSmall] = useSound(coinSmallSound);
     const [playLose] = useSound(loseSound);
+    const [playLedSpirals] = useSound(ledSpiralsClip);
     
     // Determines which image will be used for player avatar depending on player order (0-2)
     let portraitImage;
@@ -53,23 +55,19 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
         iconBorder = "player__icon-image--blackjack";
     }
 
-    // Plays the coin sound when announce win
-    // SHOUDL BE RENAMED AND ALSO PLAY EXPLOSION SOUND EFFECTS!
+    // Plays the coin & other sounds when announce win
     function playSound(mode) {
         // These 2 conditions ensure effect only plays once during start of this player's turn
         if (ctx.currentPlayer === index.toString() && ctx.numMoves === 0) {
             if (mode === "bjwin") {
+                playLedSpirals();
                 playCoinBig();
                 playClapBig();
-                // coinBigSoundElement.current.play();
-                // clapBigSoundElement.current.play();
-                // setTimeout(() => coinMediumSoundElement.current.play(), 300);
                 setTimeout(() => playCoinMedium(), 300);
             } else if (mode === "win") {
+                playLedSpirals();
                 playCoinBig();
                 setTimeout(() => playCoinMedium(), 300);
-                // coinBigSoundElement.current.play();
-                // setTimeout(() => coinMediumSoundElement.current.play(), 300);
             } else if (mode === "push") {
                 playCoinSmall();
             } else if (mode === "lose") {
@@ -112,6 +110,7 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 {currPlayerObj.hasBJ === true ? <p className="player__status-text player__status-text--blackjack"><img src={glockicon} className="player__status-icon player__status-icon--reversed" alt="" />BLACKJACK <img src={glockicon} className="player__status-icon" alt="" /></p> : ""}
             </div>
       
+            {/* Show the player's cards and value/score of hand */}
             <div className="player__cards">
                 {ctx.phase === "finishing" || ctx.phase === "playing" || ctx.phase === "dealingtodealer" 
                 ? 

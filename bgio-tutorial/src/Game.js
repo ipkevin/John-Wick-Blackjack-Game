@@ -412,11 +412,12 @@ export const Blackjack = {
                             if (G.dealer.busted) {
                                 currPlayer.bank += 2*(currPlayer.bet);
                                 currPlayer.resultMessage = `Win! Payout 2x! ${2*currPlayer.bet}`;
+                            } else if ((G.dealer.hasBJ && !currPlayer.hasBJ) || (G.dealer.handValue > currPlayer.handValue)) {
+                                // 1st condition accounts for dealer having BJ while player has a non-BJ 21
+                                currPlayer.resultMessage = "Lose. Try again!";
                             } else if (G.dealer.handValue === currPlayer.handValue) {
                                 currPlayer.bank += currPlayer.bet;
                                 currPlayer.resultMessage = `Push. Get your bet back: ${currPlayer.bet}`;
-                            } else if (G.dealer.handValue > currPlayer.handValue) {
-                                currPlayer.resultMessage = "Lose. Try again!";
                             } else {
                                 // if reach here, then player hand > dealer hand and no one busted
                                 currPlayer.bank += 2*(currPlayer.bet);
