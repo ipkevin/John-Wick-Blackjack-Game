@@ -6,6 +6,11 @@ Play a stylish game of blackjack locally or online with friends in a gambling ga
 
 This is WIP! Eventually, Blackjack Builder will allow anyone to easily create and deploy their own Blackjack games with minimal new development needed.
 
+### Current State
+
+* Single player and local "round-robin" multiplayer are functional
+* Styling and sound are 50% complete
+
 ### Packages Used
 
 React, Node, Boardgame.io, Sockets.io
