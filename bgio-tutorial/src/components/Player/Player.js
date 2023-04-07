@@ -12,9 +12,11 @@ import ballerina1 from '../../assets/images/portraits/ballerina.jpg';
 import glockicon from '../../assets/images/glockicon-edit.png';
 import skull2 from '../../assets/images/skull2.png';
 
+import coinSmallSound from "../../assets/sounds/coin_small.ogg"; 
 import coinBigSound from "../../assets/sounds/coin_big.ogg";
 import coinMediumSound from "../../assets/sounds/coin_medium.ogg";
 import clapBigSound from "../../assets/sounds/clap_big.ogg";
+import loseSound from "../../assets/sounds/lose_quiet.ogg";
 
 /******************
  * 
@@ -30,11 +32,8 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
     const [playCoinBig] = useSound(coinBigSound);
     const [playCoinMedium] = useSound(coinMediumSound);
     const [playClapBig] = useSound(clapBigSound);
-
-    const coinBigSoundElement = useRef();
-    const coinMediumSoundElement = useRef();
-    const clapBigSoundElement = useRef();
-
+    const [playCoinSmall] = useSound(coinSmallSound);
+    const [playLose] = useSound(loseSound);
     
     // Determines which image will be used for player avatar depending on player order (0-2)
     let portraitImage;
@@ -56,8 +55,9 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
 
     // Plays the coin sound when announce win
     // SHOUDL BE RENAMED AND ALSO PLAY EXPLOSION SOUND EFFECTS!
-    function playRef(mode) {
-        if (ctx.currentPlayer === index.toString()) {
+    function playSound(mode) {
+        // These 2 conditions ensure effect only plays once during start of this player's turn
+        if (ctx.currentPlayer === index.toString() && ctx.numMoves === 0) {
             if (mode === "bjwin") {
                 playCoinBig();
                 playClapBig();
@@ -71,9 +71,9 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 // coinBigSoundElement.current.play();
                 // setTimeout(() => coinMediumSoundElement.current.play(), 300);
             } else if (mode === "push") {
-                // 
+                playCoinSmall();
             } else if (mode === "lose") {
-                //
+                playLose();
             }
         }
     }
@@ -87,25 +87,16 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
             ${(index === 2) ? "player__pos2" : ""}
             ${(ctx.currentPlayer === index.toString() && ctx.phase !== "dealingtodealer") ? "player--highlighted" : ""}
         `}>
-               <audio ref={coinBigSoundElement} className="audio-element">
-                    <source src={coinBigSound}></source>
-                </audio>
-                <audio ref={coinMediumSoundElement} className="audio-element">
-                    <source src={coinMediumSound}></source>
-                </audio>
-               <audio ref={clapBigSoundElement} className="audio-element">
-                    <source src={clapBigSound}></source>
-                </audio>
 
             {/* Shows the result title (win, lose, push) above the player */}
             {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Win") 
-                ? <>{(currPlayerObj.hasBJ) ? playRef("bjwin") : playRef("win")}<h3 className="player__result player__result--win">Winner</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                ? <>{(currPlayerObj.hasBJ) ? playSound("bjwin") : playSound("win")}<h3 className="player__result player__result--win">Winner</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
                 : ""}
             {ctx.phase === "finishing" && (currPlayerObj.resultMessage.includes("Lose") || currPlayerObj.resultMessage.includes("Bust")) 
-                ? <><h3 className="player__result player__result--lose">Lose</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                ? <>{playSound("lose")}<h3 className="player__result player__result--lose">Lose</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
                 : ""}
             {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Push") 
-                ? <>{playRef()}<h3 className="player__result player__result--push">Push</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                ? <>{playSound("push")}<h3 className="player__result player__result--push">Push</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
                 : ""}
             {/* {ctx.phase === "finishing" ? <p>Result: {currPlayerObj.resultMessage}</p> : ""} */}
             {/* FINAL SCORE VS DEALER */}
