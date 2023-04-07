@@ -1,27 +1,46 @@
+import useSound from 'use-sound';
 
 import './Moves.scss';
 
+import betSound from "../../assets/sounds/bet.ogg";
+
+import takeCardSound from "../../assets/sounds/take_card.ogg";
+import creditsSound from "../../assets/sounds/buy_credits.ogg";
+import standSound from "../../assets/sounds/stand.ogg";
+import btnSound from "../../assets/sounds/btn_click_quiet.ogg";
+
+
 export default function Moves({currPlayerObj, moves, ctx}) {
+
+    const [playBet] = useSound(betSound);
+    
+    const [playTakeCard] = useSound(takeCardSound);
+    const [playBuyCredits] = useSound(creditsSound);
+    const [playStand] = useSound(standSound);
+    const [playBtnClick] = useSound(btnSound);
+
     function handleBet(num) {
+        playBet();
         moves.bet(num);
     }
     function handleHit() {
+        playTakeCard();
         moves.hit();
     }
     function handleStand() {
+        playStand();
         moves.stand();
     }
     function handleOK() {
+        playBtnClick();
         moves.OK();
     }
     function handleBuyCredits() {
+        playBuyCredits();
         moves.getChips();
     }
-    // function handleEndDealerDealing() {
-    //     moves.endDealerDealing();
-    // }
     function handleEndTurn() {
-        console.log("current player about to be removed: ", ctx.currentPlayer);
+        playBtnClick();
         moves.endTurn();
     }
     // Displays available moves for current phase
@@ -49,7 +68,6 @@ export default function Moves({currPlayerObj, moves, ctx}) {
                 </>
             );
         } else if (ctx.phase === "playing" && (currPlayerObj.busted === true || currPlayerObj.hasBJ === true)) {
-            console.log("in the insertMoves fxn, playing and busted/blackjack");
             return (
                 <>
                     <button className="move-button" onClick={handleEndTurn}>
@@ -81,11 +99,9 @@ export default function Moves({currPlayerObj, moves, ctx}) {
 
     return (
         <>
-             
-             <div className="move__container">
-             {insertMoves()}
-             </div>
-             
+            <div className="move__container">
+            {insertMoves()}
+            </div>
         </>
     )
 }

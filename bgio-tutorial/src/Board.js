@@ -1,6 +1,10 @@
 import React from "react";
 // import { v4 as uuid } from "uuid";
 import {useEffect, useState} from 'react';
+import {useSound} from 'use-sound';
+
+import shuffleSound from "./assets/sounds/shuffling.ogg"
+import flipCardSound from "./assets/sounds/flip_card.ogg";
 
 // import GetHand from "./components/GetHand/GetHand";
 import Moves from "./components/Moves/Moves";
@@ -12,6 +16,8 @@ import "./Board.scss";
 
 export function BlackjackBoard({ ctx, G, moves }) {
 
+    const [playShuffle] = useSound(shuffleSound);
+    const [playFlipCard] = useSound(flipCardSound);
     const [phaseTitle, setPhaseTitle] = useState("");
 
     // Did this hoping I could stop the <Player> from re-rendering everytime hit button, but it didn't work
@@ -57,6 +63,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
 
     // Intended to be used to end the dealer phase after a pause (otherwise use would have to press a button)
     function endDealerAutomatic() {
+        playFlipCard(); // play the shuffle sound
         setTimeout(() => {
             moves.endDealerDealing();
         }, 2300);
@@ -70,7 +77,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
     //     console.log("This is ctx: ", ctx);
     // }
 
-
+console.log("type of playorderpos then numMoves", typeof(ctx.playOrderPos), typeof(ctx.numMoves));
     return (
         <div className="main">
             <div className="bgtable">
@@ -86,6 +93,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
                 <Dealer dealerObj={G.dealer} ctx={ctx} />
                 <PhaseName phaseTitle={phaseTitle} phase={ctx.phase} />
                 <div className="restofpage">
+                    {ctx.phase === "playing" && ctx.playOrderPos === 0 && ctx.numMoves === 0 ? <>{playShuffle()}</> : ""}
                     {ctx.phase === "dealingtodealer" ? <>{endDealerAutomatic()}</> : ""}
 
                 </div>
@@ -94,7 +102,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
                 <Player currPlayerObj={G.allPlayers[1]}  index={1} /> */}
                 {playerList.map((player, index) => {
                     return (
-                        <Player currPlayerObj={G.allPlayers[player]} ctx={ctx} index={index} theDealer={G.dealer} />
+                        <Player key={index} currPlayerObj={G.allPlayers[player]} ctx={ctx} index={index} theDealer={G.dealer} />
                     );
                 })}
 
