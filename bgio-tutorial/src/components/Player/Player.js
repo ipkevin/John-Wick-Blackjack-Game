@@ -1,10 +1,11 @@
-import {useRef} from 'react';
+// import {useRef} from 'react';
 import useSound from 'use-sound';
 
 import GetHand from '../GetHand/GetHand';
 // import {v4 as uuid} from 'uuid';
 import "./Player.scss";
 
+// Media asset imports
 import johnWick1 from '../../assets/images/portraits/johnwick.jpg';
 import donnie1 from '../../assets/images/portraits/donnie.jpg';
 import ballerina1 from '../../assets/images/portraits/ballerina.jpg';
@@ -19,14 +20,6 @@ import clapBigSound from "../../assets/sounds/clap_big.ogg";
 import loseSound from "../../assets/sounds/lose_quiet.ogg";
 import ledSpiralsClip from "../../assets/sounds/led_spirals_clip.mp3";
 
-/******************
- * 
- * ERROR: The cards for all players do the sweep in animation even when it's another player getting cards
- * Try to fix why that is.  Differences are that 1) I now show all hands on the screen instead of just current player's, and 
- * 2) I used to pass a currPlayerObj to Player that actually used the ctx.currentPlayer to determine. Now i pass a currPlayerObj that is actually
- * tied to a specific player
- * 
- */
 
 export default function Player({currPlayerObj, ctx, index, theDealer}){
 
@@ -78,7 +71,6 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
 
     return (
 
-     
         <div className={`player 
             ${(index === 0) ? "player__pos0" : ""}
             ${(index === 1) ? "player__pos1" : ""}
@@ -96,13 +88,6 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
             {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Push") 
                 ? <>{playSound("push")}<h3 className="player__result player__result--push">Push</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
                 : ""}
-            {/* {ctx.phase === "finishing" ? <p>Result: {currPlayerObj.resultMessage}</p> : ""} */}
-            {/* FINAL SCORE VS DEALER */}
-            {/* {ctx.phase === "finishing" ? (
-                <p>
-                    Dealer total: {theDealer.handValue} {theDealer.hasBJ ? "(blackjack)" : ""} Your total: {currPlayerObj.handValue} {currPlayerObj.hasBJ ? "(blackjack)" : ""}
-                </p>
-            ) : ( "" )} */}
 
             {/* Show the BlackJack/Bust status message above the cards */}
             <div className="player__status">

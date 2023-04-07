@@ -3,7 +3,6 @@ import useSound from 'use-sound';
 import './Moves.scss';
 
 import betSound from "../../assets/sounds/bet.ogg";
-
 import takeCardSound from "../../assets/sounds/take_card.ogg";
 import creditsSound from "../../assets/sounds/buy_credits.ogg";
 import standSound from "../../assets/sounds/stand.ogg";
@@ -13,7 +12,6 @@ import btnSound from "../../assets/sounds/btn_click_quiet.ogg";
 export default function Moves({currPlayerObj, moves, ctx}) {
 
     const [playBet] = useSound(betSound);
-    
     const [playTakeCard] = useSound(takeCardSound);
     const [playBuyCredits] = useSound(creditsSound);
     const [playStand] = useSound(standSound);
