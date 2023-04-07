@@ -99,9 +99,9 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
             <div className="player__cards">
                 {ctx.phase === "finishing" || ctx.phase === "playing" || ctx.phase === "dealingtodealer" 
                 ? 
-                <div className="player__score">
-                    {currPlayerObj.handValue}{currPlayerObj.softAce && !currPlayerObj.hasBJ ? ` / ${currPlayerObj.handValue - 10}` : ""}
-                </div>
+                    <div className="player__score">
+                        {currPlayerObj.handValue}{currPlayerObj.softAce && !currPlayerObj.hasBJ ? ` / ${currPlayerObj.handValue - 10}` : ""}
+                    </div>
                 : "" }
                 {ctx.phase === "finishing" || ctx.phase === "dealingtodealer" ? (
                     <p>
