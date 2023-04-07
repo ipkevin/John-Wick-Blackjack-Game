@@ -1,12 +1,9 @@
 import React from "react";
-// import { v4 as uuid } from "uuid";
-import {useEffect, useState} from 'react';
 import {useSound} from 'use-sound';
 
 import shuffleSound from "./assets/sounds/shuffling.ogg"
 import flipCardSound from "./assets/sounds/flip_card.ogg";
 
-// import GetHand from "./components/GetHand/GetHand";
 import Moves from "./components/Moves/Moves";
 import Dealer from "./components/Dealer/Dealer";
 import Player from "./components/Player/Player";
@@ -18,37 +15,28 @@ export function BlackjackBoard({ ctx, G, moves }) {
 
     const [playShuffle] = useSound(shuffleSound);
     const [playFlipCard] = useSound(flipCardSound);
-    const [phaseTitle, setPhaseTitle] = useState("");
 
-    // Did this hoping I could stop the <Player> from re-rendering everytime hit button, but it didn't work
-    // So player re-rendered even though playerLIst definitely stble.
-    // The component redraws even if I don't use map and don't use any G/ctx state vars that are changing. 
-    // So basically the components always seem to redraw in this output 
-    const [playerList, setPlayerList] = useState([]);
+    let phaseTitle = "";
+    console.log("running phase title section in board.js, Here's phasetitle before switch: ", phaseTitle);
+    switch (ctx.phase) {
+        case "betting":
+            phaseTitle = "Place your bets";
+            break;
+        case "playing":
+            phaseTitle = "Play";
+            break;
+        case "finishing":
+            phaseTitle = "Results";
+            break;
+        default:
+            break;
+   };
+   console.log("running phase title section in board.js, Here's phasetitle after switch: ", phaseTitle);
 
-    useEffect(() => {
-        setPlayerList(ctx.playOrder);
-        console.log("first render useEffect in Board running");
-    }, [ctx.playOrder]);
-
-    useEffect(()=> {
-        switch (ctx.phase) {
-            case "betting":
-                setPhaseTitle("Place your bets");
-                break;
-            case "playing":
-                setPhaseTitle("Play");
-                break;
-            case "finishing":
-                setPhaseTitle("Results");
-                break;
-            default:
-                break;
-        };
-    }, [ctx.phase])
     // const onClick = (id) => moves.clickCell(id);
 
     // let winner = '';
+ 
     // if (ctx.gameover) {
     //     winner = ctx.gameover.winner !== undefined ? (
     //         <div id="winner">Winner: {ctx.gameover.winner}</div>
@@ -69,15 +57,8 @@ export function BlackjackBoard({ ctx, G, moves }) {
             }, 2000);
     }
 
-
-    
-
-    // function logItOut(G, ctx) {
-    //     console.log("This is G: ", G);
-    //     console.log("This is ctx: ", ctx);
-    // }
-
 console.log("type of playorderpos then numMoves", typeof(ctx.playOrderPos), typeof(ctx.numMoves));
+
     return (
         <div className="main">
             <div className="bgtable">
@@ -97,16 +78,11 @@ console.log("type of playorderpos then numMoves", typeof(ctx.playOrderPos), type
                     {ctx.phase === "dealingtodealer" ? <>{endDealerAutomatic()}</> : ""}
                 </div>
 
-                {/* <Player currPlayerObj={G.allPlayers[0]}  index={0} />
-                <Player currPlayerObj={G.allPlayers[1]}  index={1} /> */}
-                {playerList.map((player, index) => {
+                {ctx.playOrder.map((player, index) => {
                     return (
                         <Player key={index} currPlayerObj={G.allPlayers[player]} ctx={ctx} index={index} theDealer={G.dealer} />
                     );
                 })}
-
-                {/* <Player currPlayerObj={currPlayerObj} ctx={ctx} G={G} /> */}
-                {/* {insertMoves()} */}
                 <Moves currPlayerObj={currPlayerObj} moves={moves} ctx={ctx} />
             </div>
         </div>
