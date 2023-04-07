@@ -23,13 +23,10 @@ export default function GetHand({playerObj, phase, mode}){
             animateClass = "card--animated-slower";
         }
         return (
-            <>
             <img src={cardImages[`${card.suit}_${cardNames[card.rank].toLowerCase()}`]} 
             className={`card ${animateClass}`} 
             alt={`${card.rank} of ${card.suit} card`} 
             key={uuid()} />
-            { (mode === "dealer" && playerObj.hand.length === 1) ? <img className="card" src={cardImages["cardback"]} alt="back of card" /> : ""}
-            </>
         )
     })
     return (

@@ -1,4 +1,5 @@
 import GetHand from '../GetHand/GetHand';
+import {cardImages} from '../../constants/CardImages';
 import "./Dealer.scss";
 
 export default function Dealer({dealerObj, ctx}) {
@@ -19,8 +20,9 @@ export default function Dealer({dealerObj, ctx}) {
                 ) : ( "" )}
                 {ctx.phase === "playing" ? (
                     <p>
-                        {/* Dealer cards:<br /> */}
+                        {/* Dealer cards along with img representing hidden card */}
                         <GetHand playerObj={dealerObj} mode="dealer" />
+                        <img className="card" src={cardImages["cardback"]} alt="back of card" />
                     </p>
                 ) : ( "" )}
             </div>

@@ -17,7 +17,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
     const [playFlipCard] = useSound(flipCardSound);
 
     let phaseTitle = "";
-    console.log("running phase title section in board.js, Here's phasetitle before switch: ", phaseTitle);
+    // console.log("running phase title section in board.js, Here's phasetitle before switch: ", phaseTitle);
     switch (ctx.phase) {
         case "betting":
             phaseTitle = "Place your bets";
@@ -31,7 +31,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
         default:
             break;
    };
-   console.log("running phase title section in board.js, Here's phasetitle after switch: ", phaseTitle);
+    // console.log("running phase title section in board.js, Here's phasetitle after switch: ", phaseTitle);
 
     // const onClick = (id) => moves.clickCell(id);
 
@@ -57,7 +57,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
             }, 2000);
     }
 
-console.log("type of playorderpos then numMoves", typeof(ctx.playOrderPos), typeof(ctx.numMoves));
+// console.log("type of playorderpos then numMoves", typeof(ctx.playOrderPos), typeof(ctx.numMoves));
 
     return (
         <div className="main">
