@@ -1,4 +1,3 @@
-// import {useRef} from 'react';
 import useSound from 'use-sound';
 
 import GetHand from '../GetHand/GetHand';
@@ -19,6 +18,8 @@ import coinMediumSound from "../../assets/sounds/coin_medium.ogg";
 import clapBigSound from "../../assets/sounds/clap_big.ogg";
 import loseSound from "../../assets/sounds/lose_quiet.ogg";
 import ledSpiralsClip from "../../assets/sounds/led_spirals_clip.mp3";
+import maybeimwrongClip from "../../assets/sounds/maybeimwrong.ogg";
+import maybenotClip from "../../assets/sounds/maybenot.ogg";
 
 
 export default function Player({currPlayerObj, ctx, index, theDealer}){
@@ -29,6 +30,8 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
     const [playCoinSmall] = useSound(coinSmallSound);
     const [playLose] = useSound(loseSound);
     const [playLedSpirals] = useSound(ledSpiralsClip);
+    const [playMaybeImWrong] = useSound(maybeimwrongClip);
+    const [playMaybeNot] = useSound(maybenotClip);
     
     // Determines which image will be used for player avatar depending on player order (0-2)
     let portraitImage;
@@ -65,6 +68,15 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 playCoinSmall();
             } else if (mode === "lose") {
                 playLose();
+                if (ctx.currentPlayer.hasBJ) {
+                    playMaybeNot(); 
+                    console.log('inmaynot');
+                } else {
+                    if (Math.random() > 0.5) {
+                        playMaybeImWrong(); 
+                        console.log('inmaybwrong')
+                    }
+                }
             }
         }
     }
@@ -83,7 +95,7 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 ? <>{(currPlayerObj.hasBJ) ? playSound("bjwin") : playSound("win")}<h3 className="player__result player__result--win">Winner</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
                 : ""}
             {ctx.phase === "finishing" && (currPlayerObj.resultMessage.includes("Lose") || currPlayerObj.resultMessage.includes("Bust")) 
-                ? <>{playSound("lose")}<h3 className="player__result player__result--lose">Lose</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                ? <>{currPlayerObj.resultMessage.includes("Bust") ? playSound("lose") : ""}<h3 className="player__result player__result--lose">Lose</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
                 : ""}
             {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Push") 
                 ? <>{playSound("push")}<h3 className="player__result player__result--push">Push</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 

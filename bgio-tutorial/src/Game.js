@@ -127,6 +127,10 @@ function getAndSetValue(playerObj) {
     return total;
 }
 
+function getChips({G, ctx}){
+    G.allPlayers[ctx.currentPlayer].withdraws += 1;
+    G.allPlayers[ctx.currentPlayer].bank += 1000;
+}
 
 // // async function endPlayingTurn(G, playerID, events){
 // function endPlayingTurn(G, playerID, events){
@@ -234,7 +238,11 @@ export const Blackjack = {
                     G.allPlayers[playerID].bet = betAmt;
                     G.allPlayers[playerID].bank -= betAmt;
                     G.turnsLeft -= 1;
-                }
+                },
+                getChips: {
+                    move: getChips,
+                    noLimit: true, // required as this phase has 1 limit move limit normally
+                },
             },
             
             next: 'playing',
@@ -289,6 +297,7 @@ export const Blackjack = {
                     G.turnsLeft -= 1;
                     events.endTurn();
                 },
+                getChips: {getChips},
             },
             turn: {
                 order: TurnOrder.RESET,
@@ -365,6 +374,7 @@ export const Blackjack = {
                 endDealerDealing: ({events}) => {
                     events.endPhase();
                 },
+                getChips: {getChips},
             },
             next: "finishing",
         },
@@ -436,10 +446,7 @@ export const Blackjack = {
                     G.turnsLeft -= 1;
                     events.endTurn();
                 },
-                getChips: ({G, ctx}) => {
-                    G.allPlayers[ctx.currentPlayer].withdraws += 1;
-                    G.allPlayers[ctx.currentPlayer].bank += 1000;
-                },
+                getChips: {getChips},
             },
             next: "betting",
         }

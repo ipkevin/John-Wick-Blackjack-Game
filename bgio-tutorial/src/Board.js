@@ -63,10 +63,10 @@ export function BlackjackBoard({ ctx, G, moves }) {
 
     // Intended to be used to end the dealer phase after a pause (otherwise use would have to press a button)
     function endDealerAutomatic() {
-        playFlipCard(); // play the shuffle sound
-        setTimeout(() => {
-            moves.endDealerDealing();
-        }, 2300);
+            playFlipCard(); // play the shuffle sound
+            setTimeout(() => {
+                moves.endDealerDealing();
+            }, 2000);
     }
 
 
@@ -95,7 +95,6 @@ console.log("type of playorderpos then numMoves", typeof(ctx.playOrderPos), type
                 <div className="restofpage">
                     {ctx.phase === "playing" && ctx.playOrderPos === 0 && ctx.numMoves === 0 ? <>{playShuffle()}</> : ""}
                     {ctx.phase === "dealingtodealer" ? <>{endDealerAutomatic()}</> : ""}
-
                 </div>
 
                 {/* <Player currPlayerObj={G.allPlayers[0]}  index={0} />

@@ -52,6 +52,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
                     <button className="move-button" onClick={() => handleBet(500)}>
                         Bet 500
                     </button>
+                    {currPlayerObj.bank < 500 ? <button className="move-button" onClick={handleBuyCredits}>Buy 1000 Chips</button> : "" }
                 </>
             );
         } else if (ctx.phase === "playing" && currPlayerObj.busted === false && currPlayerObj.hasBJ === false) {
