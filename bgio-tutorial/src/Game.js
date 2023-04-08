@@ -127,7 +127,7 @@ function getAndSetValue(playerObj) {
     return total;
 }
 
-function getChips({G, ctx}){
+function withdrawFromBank({G, ctx}){
     G.allPlayers[ctx.currentPlayer].withdraws += 1;
     G.allPlayers[ctx.currentPlayer].bank += 1000;
 }
@@ -240,7 +240,7 @@ export const Blackjack = {
                     G.turnsLeft -= 1;
                 },
                 getChips: {
-                    move: getChips,
+                    move: withdrawFromBank,
                     noLimit: true, // required as this phase has 1 limit move limit normally
                 },
             },
@@ -262,11 +262,7 @@ export const Blackjack = {
                 }
                 G.dealer.hand.push(G.deck.pop());
                 
-                setTimeout(console.log("hallo"), 20000);
-                // // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
-                // for (let i=0; i<ctx.playOrder.length; i++){
-                //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
-                // }
+                // deal 2nd card to each player, then the dealer. Dealer's 2nd card is secret so that clients cannot see it.
                 for (const player in G.allPlayers) {
                     G.allPlayers[player].hand.push(G.deck.pop());
 
@@ -275,7 +271,7 @@ export const Blackjack = {
                         G.allPlayers[player].hasBJ = true;
                     }
                 }
-                G.secret.dealerCard = G.deck.pop();
+                G.secret.dealerCard = G.deck.pop(); // move 2nd card from secret area to dealer's publicly visible hand
 
                 // Counter to determine how many turns left in this phase
                 G.turnsLeft = ctx.numPlayers;
@@ -297,7 +293,7 @@ export const Blackjack = {
                     G.turnsLeft -= 1;
                     events.endTurn();
                 },
-                getChips: {getChips},
+                getChips: {withdrawFromBank},
             },
             turn: {
                 order: TurnOrder.RESET,
@@ -374,7 +370,7 @@ export const Blackjack = {
                 endDealerDealing: ({events}) => {
                     events.endPhase();
                 },
-                getChips: {getChips},
+                getChips: {withdrawFromBank},
             },
             next: "finishing",
         },
@@ -446,7 +442,9 @@ export const Blackjack = {
                     G.turnsLeft -= 1;
                     events.endTurn();
                 },
-                getChips: {getChips},
+                getChips: {
+                    move: withdrawFromBank,
+                },
             },
             next: "betting",
         }
