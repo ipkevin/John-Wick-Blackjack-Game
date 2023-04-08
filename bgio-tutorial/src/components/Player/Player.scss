@@ -166,7 +166,7 @@
         // letter-spacing: 0.18rem;
         // text-transform: uppercase;
         color: rgba(0,0,0,0.4);
-        -webkit-text-stroke: 0.3px rgb(255, 192, 167); // rgb(255, 183, 154);
+        -webkit-text-stroke: 0.008rem rgb(255, 192, 167); // rgb(255, 183, 154);
         // -webkit-text-stroke: 0.3px rgba(255, 254, 225, 0.9); // yellow
         // -webkit-text-stroke: 0.3px rgba(255, 217, 217, 0.9); // red
         // border: 2px solid rgb(255, 183, 154);
@@ -175,7 +175,7 @@
         animation: textshadowmove 2s linear infinite;
 
         &--push {
-            -webkit-text-stroke: 0.3px rgb(207, 229, 252);
+            -webkit-text-stroke: 0.03px rgb(207, 229, 252);
             text-shadow: 0 0 3px rgb(104, 176, 253);
             animation: textshadowmove-push 2s linear infinite;
         }
@@ -185,7 +185,7 @@
             // animation: textshadowmove-push 2s linear infinite;
 
             color: rgb(43, 43, 43);
-            -webkit-text-stroke: 0.3px rgba(150, 150, 150, 1.0);
+            -webkit-text-stroke: 0.01px rgba(150, 150, 150, 1.0);
             text-shadow: 0 0 10px rgba(255,255,255,0.2);
             animation: none;
         }

@@ -61,6 +61,9 @@ export function BlackjackBoard({ ctx, G, moves }) {
         <div className="main">
             <div className="bgtable">
 
+            <div className="stacked__wrapper">
+                <h3 className="stacked">R</h3>
+            </div>
 
             <div className="result__wrapper-outer">
                 <div className="result__wrapper result__wrapper-w">

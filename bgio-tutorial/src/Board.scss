@@ -23,6 +23,61 @@
     left: 0;
 }
 
+.stacked {
+    font-family: "Compacta BT", Arial, Helvetica, sans-serif;
+    // font-style: italic;
+    font-size: 72px;
+    // -webkit-text-stroke: 0.01rem red;
+    position: relative;
+    top: 10px;
+    color: rgba(0,0,0,0.85);
+    // outline: 1px solid yellow;
+    z-index:3;
+    
+
+    &::after {
+        // outline: 1px solid green;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: scaleX(1.2) scaleY(1.1);
+        z-index: -1;
+        content: "R";
+        color: rgb(253, 25, 25);
+        animation: stackscaleinner 1s linear infinite;
+        // text-shadow: 4px 4px 4px green;
+    }
+    &::before {
+        // outline: 1px solid green;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: scaleX(1.236) scaleY(1.133);
+        z-index: -2;
+        content: "R";
+        color: rgb(255, 227, 227);
+        text-shadow: 0 0 9px rgb(253, 25, 25);
+        animation: stackscaleouter 1s linear infinite;
+    }
+}
+@keyframes stackscaleouter {
+    from { transform: scale(1.236, 1.133) ;}
+    25% {  transform: scale(1.1742, 1.076);}
+    50% {  transform: scale(1.1549, 1.022);}
+    75% {  transform: scale(1.0297, 0.971);}
+    to {  transform: scale(0.88, 0.922);}
+    // 75% {  transform: scale(1.0597, 0.971);}
+    // to {  transform: scale(1.0067, 0.922);}
+}
+@keyframes stackscaleinner {
+    from { transform: scale(1.2, 1.1);}
+    25% {  transform: scale(1.14, 1.045);}
+    50% {  transform: scale(1.083, 0.993);}
+    75% {  transform: scale(0.99, 0.943);}
+    // 75% {  transform: scale(1.0288, 0.943);}
+    to {  transform: scale(0.8, 0.896);}
+    // to {  transform: scale(0.9774, 0.896);}
+}
 .result {
     font-family: "Compacta BT", Arial, Helvetica, sans-serif;
     font-style: italic;
