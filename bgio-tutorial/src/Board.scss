@@ -40,12 +40,11 @@
         position: absolute;
         top: 0;
         left: 0;
-        transform: scaleX(1.2) scaleY(1.1);
+        transform: scaleX(1.16) scaleY(1.09);
         z-index: -1;
         content: "R";
         color: rgb(253, 25, 25);
         animation: stackscaleinner 1s linear infinite;
-        // text-shadow: 4px 4px 4px green;
     }
     &::before {
         // outline: 1px solid green;
@@ -56,7 +55,8 @@
         z-index: -2;
         content: "R";
         color: rgb(255, 227, 227);
-        text-shadow: 0 0 9px rgb(253, 25, 25);
+        text-shadow: 0 0 4px rgb(253, 25, 25), 0 0 4px rgb(253, 25, 25), 0 0 4px rgb(253, 25, 25), 0 0 4px rgb(253, 25, 25),  0 0 13px rgb(253, 25, 25); 
+        //  0 0 10px rgb(253, 25, 25),0 0 10px rgb(253, 25, 25),0 0 10px rgb(253, 25, 25),
         animation: stackscaleouter 1s linear infinite;
     }
 }
@@ -70,7 +70,7 @@
     // to {  transform: scale(1.0067, 0.922);}
 }
 @keyframes stackscaleinner {
-    from { transform: scale(1.2, 1.1);}
+    from { transform: scale(1.16, 1.09);}
     25% {  transform: scale(1.14, 1.045);}
     50% {  transform: scale(1.083, 0.993);}
     75% {  transform: scale(0.99, 0.943);}
