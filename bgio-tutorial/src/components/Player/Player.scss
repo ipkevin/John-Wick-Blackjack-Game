@@ -1,3 +1,4 @@
+@use '../../styles/partials/variables' as *;
 
 .player {
     display: flex;
@@ -8,6 +9,10 @@
     margin: 2rem;
     padding: 1rem;
     border-radius: 1rem;
+
+    @include tablet-query {
+        margin: 1rem;
+    }
 
     &--highlighted {
         background-color: rgba(255,255,255,0.1);
@@ -33,12 +38,12 @@
     &__pos1 {
         position: absolute;
         right: 0;
-        top: 25%;
+        bottom: 25%;
     }
     &__pos2 {
         position: absolute;
         left: 0;
-        top: 25%;
+        bottom: 25%;
     }
     &__cards {
         position: relative;
@@ -150,10 +155,12 @@
     &__result {
         font-family: "Compacta BT", Arial, Helvetica, sans-serif;
         font-style: italic;
-        font-size: 4rem;
+        font-size: 4.5rem;
+        // letter-spacing: 0.18rem;
         // text-transform: uppercase;
         color: rgba(0,0,0,0.4);
-        -webkit-text-stroke: 0.3px rgb(255, 183, 154);
+        // -webkit-text-stroke: 0.3px rgb(255, 183, 154);
+        -webkit-text-stroke: 0.3px rgba(255, 217, 217, 0.9);
         // border: 2px solid rgb(255, 183, 154);
         text-shadow: 5px 5px 5px rgb(216, 63, 3);
         // box-shadow: 0 0 5px 3px rgb(216, 63, 3), inset 0 0 5px 3px rgb(216, 63, 3);
@@ -171,7 +178,7 @@
 
             color: rgb(43, 43, 43);
             -webkit-text-stroke: 0.3px rgba(150, 150, 150, 1.0);
-        text-shadow: 0 0 10px rgba(255,255,255,0.2);
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
             animation: none;
         }
 
@@ -184,21 +191,39 @@
 
     @keyframes textshadowmove {
         from {
-            text-shadow: 5px 5px 5px rgb(216, 63, 3);
+            text-shadow: 5px 5px 4px rgb(255, 59, 59);
         }
         25% {
-            text-shadow: 5px -5px 5px rgb(216, 63, 3);
+            text-shadow: 5px -5px 4px rgb(255, 59, 59);
         }
         50% {
-            text-shadow: -5px -5px 5px rgb(216, 63, 3);
+            text-shadow: -5px -5px 4px rgb(255, 59, 59);
         }
         75% {
-            text-shadow: -5px 5px 5px rgb(216, 63, 3);
+            text-shadow: -5px 5px 4px rgb(255, 59, 59);
         }
         to {
-            text-shadow: 5px 5px 5px rgb(216, 63, 3);
+            text-shadow: 5px 5px 4px rgb(255, 95, 8);;
         }
     }
+    // // Original orange-y red
+    // @keyframes textshadowmove {
+    //     from {
+    //         text-shadow: 5px 5px 5px rgb(216, 63, 3);
+    //     }
+    //     25% {
+    //         text-shadow: 5px -5px 5px rgb(216, 63, 3);
+    //     }
+    //     50% {
+    //         text-shadow: -5px -5px 5px rgb(216, 63, 3);
+    //     }
+    //     75% {
+    //         text-shadow: -5px 5px 5px rgb(216, 63, 3);
+    //     }
+    //     to {
+    //         text-shadow: 5px 5px 5px rgb(216, 63, 3);
+    //     }
+    // }
     @keyframes textshadowmove-push {
         from {
             text-shadow: 4px 4px 5px rgb(104, 176, 253);

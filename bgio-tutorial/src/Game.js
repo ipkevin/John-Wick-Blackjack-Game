@@ -85,11 +85,7 @@ function initPlayers(ctx){
 // Calculate value of player's hand. Returns value of hand.
 // ALSO sets player's properties (busted, handValue, hasAces, softAce) accordingly. Does not set hasBJ as does not have context to determine it.
 function getAndSetValue(playerObj) {
-    
-    /*****
-     * might want to redo Dealer so that it's an object like player. Then can reuse this function more easily. Can still store separate card in secret.
-     */
-    
+        
     let theHand = playerObj.hand;
     let hasAces = false;
     let softAce = false;
@@ -231,7 +227,6 @@ export const Blackjack = {
             },
             moves: {
                 bet: ({G, playerID}, betAmt) => {
-                    console.log("this is betAmt:",betAmt)
                     if (!betAmt || Number.isNaN(betAmt) || !Number.isInteger(betAmt) || betAmt < 1 || betAmt > G.allPlayers[playerID].bank) {
                         return INVALID_MOVE;
                     }
@@ -252,11 +247,9 @@ export const Blackjack = {
             onBegin: ({G, ctx}) => {
                 
                 
-                // dealCards(G, ctx);
-                // // deal first card to each player, then the dealer
-                // for (let i=0; i<ctx.playOrder.length; i++){
-                //     G.allPlayers[ctx.playOrder[i]].hand.push(G.deck.pop());
-                // }
+                /****
+                 *  DEAL FIRST 2 CARDS TO PLAYERS AND DEALER
+                 ****/
                 for (const player in G.allPlayers) {
                     G.allPlayers[player].hand.push(G.deck.pop());
                 }
@@ -360,7 +353,8 @@ export const Blackjack = {
                 G.dealer.hand.push(G.secret.dealerCard);
                 G.secret.dealerCard = {}; 
 
-                getAndSetValue(G.dealer);
+                if (getAndSetValue(G.dealer) === 21) G.dealer.hasBJ = true; // Get dealer's hand value, plus set blackjack if 21 on first 2 cards
+                
                 while (G.dealer.handValue <= 16) {
                     G.dealer.hand.push(G.deck.pop())
                     getAndSetValue(G.dealer);

@@ -41,15 +41,12 @@
 .phase-name {
     padding: 0 2rem; // Italicized text gets cutoff on right if don't have padding
     opacity: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    // font-family: "Compacta", sans-serif;
+    // white-space: nowrap;
+    // overflow: hidden;
     font-size: 3rem;
     text-transform: uppercase;
     font-style: italic;
     animation: 2.0s ease appearbriefly;
-    
-    
 }
 
 @keyframes linearwipe {

@@ -15,11 +15,14 @@
 
         &:hover {
             background-color: rgb(241, 41, 74);
+            // animation: zoomingframe-reverseme 1s ease-out infinite reverse;
+            animation: zoomingframe 0.8s ease-out infinite;
+            box-shadow: 0 0 6px 10px rgb(253, 25, 25);
         }
 
-        border: 3px solid rgb(207, 229, 252);
-        box-shadow: 0 0 3px 2px rgb(104, 176, 253);
-        animation: glowing 3s ease-in-out infinite;
+        border: 1px solid rgb(207, 229, 252);
+        // box-shadow: 0 0 3px 2px rgb(104, 176, 253);
+        // animation: glowing 3s ease-in infinite;
     }
 
     
@@ -27,15 +30,104 @@
     &__container {
         position: absolute;
         bottom: 0;
-        left: 75%;
+        right: 0;
         // width: 300px;
         overflow:visible;
-        white-space:nowrap;
+        // white-space:nowrap;
         // background-color: black;
 
         display: flex;
         gap: 0.5rem;
         
+    }
+}
+
+@keyframes zoomingframe-reverseme {
+    from {
+        
+        outline: 3px solid rgba(255, 199, 199, 1);
+        outline-offset: 6px;
+    }
+    20% {
+        box-shadow: 0 0 6px 8px rgb(253, 25, 25);
+        outline: 3px solid rgba(255, 199, 199, 1.0);
+        outline-offset: 5px;
+    }
+    40% {
+        box-shadow: 0 0 6px 6px rgb(253, 25, 25);
+        outline: 2px solid rgb(255, 199, 199);
+        outline-offset: 4px;
+    }
+    60% {
+        box-shadow: 0 0 6px 4px rgb(253, 25, 25);
+        outline: 2px solid rgb(255, 199, 199);
+        outline-offset: 3px;
+    }
+    80% {
+        box-shadow: 0 0 6px 3px rgb(253, 25, 25);
+        outline: 1px solid rgba(255, 199, 199, 0.8);
+        outline-offset: 2px;
+    }
+    90% {
+        box-shadow: 0 0 3px 2px rgb(253, 25, 25);
+        outline: 1px solid rgba(255, 199, 199, 0.5);
+        outline: none;
+    }
+    100% {
+        // box-shadow: 0 0 6px 3px rgb(253, 25, 25);
+        outline: none;
+    }
+}
+@keyframes zoomingframe {
+    from {
+        border-color: transparent;
+        outline: 3px solid rgba(255, 199, 199, 0.4);
+        outline-offset: 6px;
+    }
+    15% {
+        border-color: transparent;
+        box-shadow: 0 0 6px 8px rgb(253, 25, 25);
+        outline: 3px solid rgba(255, 199, 199, 0.8);
+        outline-offset: 5px;
+    }
+    30% {
+        border-color: transparent;
+        box-shadow: 0 0 6px 6px rgb(253, 25, 25);
+        outline: 2px solid rgb(255, 199, 199);
+        outline-offset: 4px;
+    }
+    45% {
+        border-color: transparent;
+        box-shadow: 0 0 6px 4px rgb(253, 25, 25);
+        outline: 2px solid rgb(255, 199, 199);
+        outline-offset: 3px;
+    }
+    60% {
+        border-color: transparent;
+        box-shadow: 0 0 6px 3px rgb(253, 25, 25);
+        outline: 1px solid rgb(255, 199, 199);
+        outline-offset: 2px;
+    }
+    75% {
+        border-width: 1px;
+        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
+        outline: 1px solid rgb(255, 199, 199);
+        outline-offset: 1px;
+    }
+    85% {
+        border-width: 1px;
+        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
+        outline: none;
+    }
+    95% {
+        border-width: 1px;
+        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
+        outline: none;
+    }
+    to {
+        border-width: 1px;
+        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
+        outline: none;
     }
 }
 

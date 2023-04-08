@@ -2,10 +2,23 @@
 
 
 .card {
-    width: $card-width;
+    width: $card-width-mobile;
+
+    @include tablet-query {
+        width: $card-width-tablet;
+    }
+    @include desktop-query {
+        width: $card-width-desktop;
+    }
    
     &__not-first { // overlaps cards so they take up less space
-        margin-left: -(0.5*$card-width);
+        margin-left: -(0.5*$card-width-mobile);
+        @include tablet-query {
+            margin-left: -(0.5*$card-width-tablet);
+        }
+        @include desktop-query {
+            margin-left: -(0.5*$card-width-desktop);
+        }
     }
     &--animated {
         top: -20rem;
