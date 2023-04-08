@@ -22,3 +22,145 @@
     top: 0;
     left: 0;
 }
+
+.result {
+    font-family: "Compacta BT", Arial, Helvetica, sans-serif;
+    // font-style: italic;
+    font-size: 72px;
+    // letter-spacing: 0.18rem;
+    // text-transform: uppercase;
+    color: rgba(0,0,0,0.4);
+    // -webkit-text-stroke: 0.3px rgb(255, 192, 167); // rgb(255, 183, 154);
+
+    // -webkit-text-stroke: 0.3px rgba(255, 254, 225, 0.9); // yellow
+    // -webkit-text-stroke: 0.3px rgba(255, 217, 217, 0.9); // red
+    // border: 2px solid rgb(255, 183, 154);
+
+    // text-shadow: 5px 5px 5px rgb(216, 63, 3);
+
+    // box-shadow: 0 0 5px 3px rgb(216, 63, 3), inset 0 0 5px 3px rgb(216, 63, 3);
+
+    // animation: zoomingframe 0.8s ease-out infinite;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    &__wrapper {
+        position: relative;
+        
+        left: 0;
+        top: 200px;
+    }
+    // &-0{
+    //     position: absolute;
+    //     font-size: 88px;
+    //     color: transparent;
+    //     text-shadow: 0 0 3px rgb(253, 25, 25);
+    //     animation: shrinking-0 0.8s linear infinite;
+    // }
+    &-1{
+        position: absolute;
+        font-size: 83px;
+        color: rgb(255, 227, 227);
+        animation: shrinking-1 0.8s linear infinite;
+    }
+    &-1br{
+        text-shadow: 4px 4px 4.5px rgb(253, 25, 25);
+    }
+    &-1tr{
+        text-shadow: 4px -4px 4.5px rgb(253, 25, 25);
+    }
+    &-1tl{
+        text-shadow: -4px -4px 4.5px rgb(253, 25, 25);
+    }
+    &-1bl{
+        text-shadow: -4px 4px 4.5px rgb(253, 25, 25);
+    }
+    &-2{
+        position: absolute;
+        font-size: 78px;
+        color: red;
+        animation: shrinking-2 0.8s linear infinite;
+    }
+    &-3{
+        position: absolute;
+        font-size: 70px;
+        color: rgba(0,0,0,0.9);
+       
+    }
+}
+// @keyframes shrinking-0 {
+//     from { font-size: 97px; }
+//     25% { font-size: 91px; }
+//     50% { font-size: 85px; }
+//     75% { font-size: 77px; }
+//     to { font-size: 72px; }
+// }
+@keyframes shrinking-1 {
+    from { font-size: 97px; opacity: 0.3; }
+    25% { font-size: 91px; opacity: 0.8;}
+    50% { font-size: 85px; }
+    75% { font-size: 77px; }
+    to { font-size: 72px; }
+}
+@keyframes shrinking-2 {
+    from { font-size: 84px; }
+    25% { font-size: 81px; }
+    50% { font-size: 78px; }
+    75% { font-size: 75px; }
+    to { font-size: 72px; }
+}
+
+@keyframes zoomingframe {
+    from {
+        border-color: transparent;
+        outline: 3px solid rgba(255, 199, 199, 0.4);
+        outline-offset: 6px;
+    }
+    15% {
+        border-color: transparent;
+        box-shadow: 0 0 6px 8px rgb(253, 25, 25);
+        outline: 3px solid rgba(255, 199, 199, 0.8);
+        outline-offset: 5px;
+    }
+    30% {
+        border-color: transparent;
+        box-shadow: 0 0 6px 6px rgb(253, 25, 25);
+        outline: 2px solid rgb(255, 199, 199);
+        outline-offset: 4px;
+    }
+    45% {
+        border-color: transparent;
+        box-shadow: 0 0 6px 4px rgb(253, 25, 25);
+        outline: 2px solid rgb(255, 199, 199);
+        outline-offset: 3px;
+    }
+    60% {
+        border-color: transparent;
+        box-shadow: 0 0 6px 3px rgb(253, 25, 25);
+        outline: 1px solid rgb(255, 199, 199);
+        outline-offset: 2px;
+    }
+    75% {
+        border-width: 1px;
+        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
+        outline: 1px solid rgb(255, 199, 199);
+        outline-offset: 1px;
+    }
+    85% {
+        border-width: 1px;
+        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
+        outline: none;
+    }
+    95% {
+        border-width: 1px;
+        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
+        outline: none;
+    }
+    to {
+        border-width: 1px;
+        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
+        outline: none;
+    }
+}

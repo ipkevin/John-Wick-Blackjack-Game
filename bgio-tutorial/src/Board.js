@@ -60,6 +60,17 @@ export function BlackjackBoard({ ctx, G, moves }) {
     return (
         <div className="main">
             <div className="bgtable">
+
+            <div className="result__wrapper">
+            {/* <h3 className="result result-0">W</h3> */}
+            <h3 className="result result-1 result-1tl">W</h3>
+            <h3 className="result result-1 result-1tr">W</h3>
+            <h3 className="result result-1 result-1br">W</h3>
+            <h3 className="result result-1 result-1bl">W</h3>
+            <h3 className="result result-2">W</h3>
+            <h3 className="result result-3">W</h3>
+            </div>
+
                 {/* <table id="board">
         <tbody>{tbody}</tbody>
         </table>
