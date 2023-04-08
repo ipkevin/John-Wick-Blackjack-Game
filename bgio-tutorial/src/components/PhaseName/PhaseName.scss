@@ -39,7 +39,7 @@
 
 
 .phase-name {
-
+    padding: 0 2rem; // Italicized text gets cutoff on right if don't have padding
     opacity: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -48,6 +48,7 @@
     text-transform: uppercase;
     font-style: italic;
     animation: 2.0s ease appearbriefly;
+    
     
 }
 

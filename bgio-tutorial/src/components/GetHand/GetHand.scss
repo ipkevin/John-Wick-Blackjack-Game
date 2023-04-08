@@ -1,6 +1,12 @@
+@use "../../styles/partials/variables" as *;
+
+
 .card {
-    width: 7rem;
+    width: $card-width;
    
+    &__not-first { // overlaps cards so they take up less space
+        margin-left: -(0.5*$card-width);
+    }
     &--animated {
         top: -20rem;
         position: relative;

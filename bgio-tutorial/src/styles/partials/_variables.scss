@@ -1,0 +1,12 @@
+$card-width: 7rem;
+
+@mixin tablet-query {
+    @media screen and (min-width: 768px) {
+        @content;
+    }
+}
+@mixin desktop-query {
+    @media screen and (min-width: 1280px) {
+        @content;
+    }
+}

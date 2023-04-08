@@ -24,7 +24,7 @@ export default function GetHand({playerObj, phase, mode}){
         }
         return (
             <img src={cardImages[`${card.suit}_${cardNames[card.rank].toLowerCase()}`]} 
-            className={`card ${animateClass}`} 
+            className={`card ${animateClass} ${(index > 0) ? "card__not-first" : ""}`} 
             alt={`${card.rank} of ${card.suit} card`} 
             key={uuid()} />
         )

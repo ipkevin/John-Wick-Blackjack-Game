@@ -17,7 +17,6 @@ export function BlackjackBoard({ ctx, G, moves }) {
     const [playFlipCard] = useSound(flipCardSound);
 
     let phaseTitle = "";
-    // console.log("running phase title section in board.js, Here's phasetitle before switch: ", phaseTitle);
     switch (ctx.phase) {
         case "betting":
             phaseTitle = "Place your bets";
@@ -31,7 +30,6 @@ export function BlackjackBoard({ ctx, G, moves }) {
         default:
             break;
    };
-    // console.log("running phase title section in board.js, Here's phasetitle after switch: ", phaseTitle);
 
     // const onClick = (id) => moves.clickCell(id);
 
