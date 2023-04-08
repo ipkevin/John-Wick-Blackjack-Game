@@ -1,36 +1,51 @@
 .move {
 
     &-button {
+        cursor:pointer;
         padding: 1rem 1.5rem;
         border: none;
     
+        font-family: "Avenir", Arial, Helvetica, sans-serif;
         font-size: 1.5rem;
+        font-style: italic;
         text-transform: uppercase;
         color: white;
-        background-color: rgb(52, 50, 139);
+        // background-color: rgb(52, 50, 139);
     
-        border-radius: 0.25rem;
+        // border-radius: 0.25rem;
     
-        cursor:pointer;
+        border-radius: 0.375rem;
+        box-shadow: 0 1px 1px 2px rgb(71, 71, 71), 0 -1px 1px 2px rgb(182, 182, 182);
+        padding: 0.5rem 0.8rem;
+        background-color: rgb(31, 31, 31);
+
+
+        // border: 1px solid rgb(207, 229, 252);
+        // box-shadow: 0 0 3px 2px rgb(104, 176, 253);
+        // animation: glowing 3s ease-in infinite;
+        
 
         &:hover {
-            background-color: rgb(241, 41, 74);
+            // background-color: rgb(241, 41, 74);
             // animation: zoomingframe-reverseme 1s ease-out infinite reverse;
             animation: zoomingframe 0.8s ease-out infinite;
             box-shadow: 0 0 6px 10px rgb(253, 25, 25);
         }
 
-        border: 1px solid rgb(207, 229, 252);
-        // box-shadow: 0 0 3px 2px rgb(104, 176, 253);
-        // animation: glowing 3s ease-in infinite;
-    }
+        &--urgent {
+            animation: zoomingframe 0.8s ease-out infinite;
+            background-color:rgb(241, 41, 74);
 
-    
+            &:hover {
+                background-color: rgb(31, 31, 31);
+            }
+        }
+    }
 
     &__container {
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: 2rem;
+        left: 70%;
         // width: 300px;
         overflow:visible;
         // white-space:nowrap;
@@ -39,6 +54,11 @@
         display: flex;
         gap: 0.5rem;
         
+    }
+    &__container-buy-credits {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
     }
 }
 

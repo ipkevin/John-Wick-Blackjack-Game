@@ -286,7 +286,9 @@ export const Blackjack = {
                     G.turnsLeft -= 1;
                     events.endTurn();
                 },
-                getChips: {withdrawFromBank},
+                getChips: {
+                    move: withdrawFromBank,
+                },
             },
             turn: {
                 order: TurnOrder.RESET,
@@ -364,7 +366,9 @@ export const Blackjack = {
                 endDealerDealing: ({events}) => {
                     events.endPhase();
                 },
-                getChips: {withdrawFromBank},
+                getChips: {
+                    move: withdrawFromBank,
+                },
             },
             next: "finishing",
         },

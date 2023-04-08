@@ -10,7 +10,7 @@ import donnie1 from '../../assets/images/portraits/donnie.jpg';
 import ballerina1 from '../../assets/images/portraits/ballerina.jpg';
 
 import glockicon from '../../assets/images/glockicon-edit.png';
-import skull2 from '../../assets/images/skull2.png';
+import skull from '../../assets/images/skull.png';
 
 import coinSmallSound from "../../assets/sounds/coin_small.ogg"; 
 import coinBigSound from "../../assets/sounds/coin_big.ogg";
@@ -92,18 +92,18 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
 
             {/* Shows the result title (win, lose, push) above the player */}
             {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Win") 
-                ? <>{(currPlayerObj.hasBJ) ? playSound("bjwin") : playSound("win")}<h3 className="player__result player__result--win">Winner</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                ? <>{(currPlayerObj.hasBJ) ? playSound("bjwin") : playSound("win")}<h3 className="player__result player__result--win">Winner</h3></> 
                 : ""}
             {ctx.phase === "finishing" && (currPlayerObj.resultMessage.includes("Lose") || currPlayerObj.resultMessage.includes("Bust")) 
-                ? <>{currPlayerObj.resultMessage.includes("Bust") ? playSound("lose") : ""}<h3 className="player__result player__result--lose">Lose</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                ? <>{currPlayerObj.resultMessage.includes("Bust") ? playSound("lose") : ""}<h3 className="player__result player__result--lose">Lose</h3></> 
                 : ""}
             {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Push") 
-                ? <>{playSound("push")}<h3 className="player__result player__result--push">Push</h3><p className="player__result-details">Result: {currPlayerObj.resultMessage}</p></> 
+                ? <>{playSound("push")}<h3 className="player__result player__result--push">Push</h3></> 
                 : ""}
 
             {/* Show the BlackJack/Bust status message above the cards */}
             <div className="player__status">
-                {currPlayerObj.busted === true ? <p className="player__status-text"><img src={skull2} className="player__status-icon player__status-icon--skull" alt="" />&nbsp;BUST &nbsp;<img src={skull2} className="player__status-icon  player__status-icon--skull" alt="" /></p> : ""}
+                {currPlayerObj.busted === true ? <p className="player__status-text"><img src={skull} className="player__status-icon player__status-icon--skull player__status-icon--skull--reversed" alt="" /> BUST&nbsp;<img src={skull} className="player__status-icon  player__status-icon--skull" alt="" /></p> : ""}
                 {currPlayerObj.hasBJ === true ? <p className="player__status-text player__status-text--blackjack"><img src={glockicon} className="player__status-icon player__status-icon--reversed" alt="" />BLACKJACK <img src={glockicon} className="player__status-icon" alt="" /></p> : ""}
             </div>
       

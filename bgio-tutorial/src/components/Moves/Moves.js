@@ -52,7 +52,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
                     <button className="move-button" onClick={() => handleBet(500)}>
                         Bet 500
                     </button>
-                    {currPlayerObj.bank >= 0 ? <button className="move-button" onClick={handleBuyCredits}>Buy 1000 Chips</button> : "" }
+                    {currPlayerObj.bank < 500 ? <button className="move-button" onClick={handleBuyCredits}>Buy Chips</button> : "" }
                 </>
             );
         } else if (ctx.phase === "playing" && currPlayerObj.busted === false && currPlayerObj.hasBJ === false) {
@@ -89,7 +89,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
                         OK
                     </button>
                     <button className="move-button" onClick={handleBuyCredits}>
-                        Buy 1000 Chips
+                        Buy Chips
                     </button>
                 </>
             );
@@ -100,6 +100,11 @@ export default function Moves({currPlayerObj, moves, ctx}) {
         <>
             <div className="move__container">
             {insertMoves()}
+            </div>
+            <div className="move__container-buy-credits">
+                <button className={`move-button ${currPlayerObj.bank < 500 ? "move-button--urgent" : ""}`} onClick={handleBuyCredits}>
+                        Buy 1000 Chips
+                </button>
             </div>
         </>
     )

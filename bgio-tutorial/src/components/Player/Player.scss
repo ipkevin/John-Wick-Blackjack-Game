@@ -13,6 +13,9 @@
     @include tablet-query {
         margin: 1rem;
     }
+    @include desktop-query {
+        margin-bottom: 2rem;
+    }
 
     &--highlighted {
         background-color: rgba(255,255,255,0.1);
@@ -140,13 +143,17 @@
     &__status-icon {
         width: 3rem;
         position: relative;
-        top: 0.7rem;
+        top: 0.2rem;
         
         &--skull {
             width: 1.5rem;
             top: 0.1rem;
             filter: invert(0%) sepia(100%) saturate(0%) hue-rotate(21deg) brightness(97%) contrast(103%);
             color: white;
+
+            &--reversed {
+                transform: scaleX(-1);  
+            }
         }
         &--reversed {
             transform: scaleX(-1);  
@@ -159,8 +166,9 @@
         // letter-spacing: 0.18rem;
         // text-transform: uppercase;
         color: rgba(0,0,0,0.4);
-        // -webkit-text-stroke: 0.3px rgb(255, 183, 154);
-        -webkit-text-stroke: 0.3px rgba(255, 217, 217, 0.9);
+        -webkit-text-stroke: 0.3px rgb(255, 192, 167); // rgb(255, 183, 154);
+        // -webkit-text-stroke: 0.3px rgba(255, 254, 225, 0.9); // yellow
+        // -webkit-text-stroke: 0.3px rgba(255, 217, 217, 0.9); // red
         // border: 2px solid rgb(255, 183, 154);
         text-shadow: 5px 5px 5px rgb(216, 63, 3);
         // box-shadow: 0 0 5px 3px rgb(216, 63, 3), inset 0 0 5px 3px rgb(216, 63, 3);
@@ -189,41 +197,60 @@
         }
     }
 
-    @keyframes textshadowmove {
-        from {
-            text-shadow: 5px 5px 4px rgb(255, 59, 59);
-        }
-        25% {
-            text-shadow: 5px -5px 4px rgb(255, 59, 59);
-        }
-        50% {
-            text-shadow: -5px -5px 4px rgb(255, 59, 59);
-        }
-        75% {
-            text-shadow: -5px 5px 4px rgb(255, 59, 59);
-        }
-        to {
-            text-shadow: 5px 5px 4px rgb(255, 95, 8);;
-        }
-    }
-    // // Original orange-y red
+    // // Yellow
     // @keyframes textshadowmove {
     //     from {
-    //         text-shadow: 5px 5px 5px rgb(216, 63, 3);
+    //         text-shadow: 5px 5px 4px rgb(189, 184, 30);
     //     }
     //     25% {
-    //         text-shadow: 5px -5px 5px rgb(216, 63, 3);
+    //         text-shadow: 5px -5px 4px rgb(189, 184, 30);
     //     }
     //     50% {
-    //         text-shadow: -5px -5px 5px rgb(216, 63, 3);
+    //         text-shadow: -5px -5px 4px rgb(189, 184, 30);
     //     }
     //     75% {
-    //         text-shadow: -5px 5px 5px rgb(216, 63, 3);
+    //         text-shadow: -5px 5px 4px rgb(189, 184, 30);
     //     }
     //     to {
-    //         text-shadow: 5px 5px 5px rgb(216, 63, 3);
+    //         text-shadow: 5px 5px 4px rgb(189, 184, 30);
     //     }
     // }
+    // // Red
+    // @keyframes textshadowmove {
+    //     from {
+    //         text-shadow: 5px 5px 4px rgb(255, 59, 59);
+    //     }
+    //     25% {
+    //         text-shadow: 5px -5px 4px rgb(255, 59, 59);
+    //     }
+    //     50% {
+    //         text-shadow: -5px -5px 4px rgb(255, 59, 59);
+    //     }
+    //     75% {
+    //         text-shadow: -5px 5px 4px rgb(255, 59, 59);
+    //     }
+    //     to {
+    //         text-shadow: 5px 5px 4px rgb(255, 95, 8);;
+    //     }
+    // }
+    // Original orange-y red
+    @keyframes textshadowmove {
+        from {
+            text-shadow: 5px 5px 4px rgb(216, 63, 3);
+        }
+        25% {
+            text-shadow: 5px -5px 4px rgb(216, 63, 3);
+        }
+        50% {
+            text-shadow: -5px -5px 4px rgb(216, 63, 3);
+        }
+        75% {
+            text-shadow: -5px 5px 4px rgb(216, 63, 3);
+        }
+        to {
+            text-shadow: 5px 5px 4px rgb(216, 63, 3);
+        }
+    }
     @keyframes textshadowmove-push {
         from {
             text-shadow: 4px 4px 5px rgb(104, 176, 253);
