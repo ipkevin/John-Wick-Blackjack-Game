@@ -54,21 +54,14 @@ export function BlackjackBoard({ ctx, G, moves }) {
             }, 2000);
     }
 
-// console.log("type of playorderpos then numMoves", typeof(ctx.playOrderPos), typeof(ctx.numMoves));
-
     return (
         <div className="main">
             <div className="bgtable">
             
-                {/* <table id="board">
-        <tbody>{tbody}</tbody>
-        </table>
-    {winner} */}
-                {/* {logItOut(G, ctx)} */}
-                <div className="game-info">
+                {/* <div className="game-info">
                     <p>The current phase is: {ctx.phase}</p>
                     {ctx.phase !== "dealingtodealer" ? <p>The current player is: {ctx.currentPlayer}</p> : ""}
-                </div>
+                </div> */}
                 <Dealer dealerObj={G.dealer} ctx={ctx} />
                 <PhaseName phaseTitle={phaseTitle} phase={ctx.phase} />
                 <div className="restofpage">
