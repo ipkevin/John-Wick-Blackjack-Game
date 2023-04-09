@@ -9,11 +9,35 @@
     gap: 1rem;
 
     &__group {
-
         display: flex;
         gap: 1rem;
         &--hidden {
             display:none;
         }
+    }
+}
+
+.coming-soon {
+    position: relative;
+
+    &__message {
+        position: absolute;
+        top: -0.6rem;
+        right: -3rem;
+        // transform:translateX(-50%);
+        transform:rotate(33deg);
+
+        border: 2px solid white;
+        border-radius: 1rem;
+        box-shadow: 0 0 7px 2px rgb(49, 190, 255), inset 0 0 7px 2px rgb(49, 190, 255);
+        padding: 0.3rem 0.5rem;
+        
+
+        font-size: 1rem;
+        // text-transform:none;
+        color: white;
+        -webkit-text-stroke: 1px rgb(68, 147, 184);
+        text-shadow: 0 0 10px rgb(49, 190, 255);
+        
     }
 }

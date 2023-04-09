@@ -27,7 +27,7 @@ export default function PlayButton() {
 
             <div className="buttons__group">
                 <button className={`std-btn ${hideLocalOptions === "" && "std-btn--active"}`} onClick={toggleLocalOptions}>Play Local Game</button>
-                <button className="std-btn" disabled>Play Multiplayer Game</button>
+                <button className="std-btn std-btn--disabled coming-soon" disabled>Play Multiplayer Game<div className="coming-soon__message">Coming Soon</div></button>
             </div>
             <div className={`buttons__group ${hideLocalOptions}`}>
                 <p>Select # of Players:</p>
