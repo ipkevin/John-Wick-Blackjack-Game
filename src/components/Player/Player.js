@@ -18,8 +18,9 @@ import coinMediumSound from "../../assets/sounds/coin_medium.ogg";
 import clapBigSound from "../../assets/sounds/clap_big.ogg";
 import loseSound from "../../assets/sounds/lose_quiet.ogg";
 import ledSpiralsClip from "../../assets/sounds/led_spirals_clip.mp3";
-import maybeimwrongClip from "../../assets/sounds/maybeimwrong.ogg";
-import maybenotClip from "../../assets/sounds/maybenot.ogg";
+import maybeimwrongClip from "../../assets/sounds/maybeimwrong.mp3";
+import maybenotClip from "../../assets/sounds/maybenot.mp3";
+import yeahNotReallyClip from "../../assets/sounds/yeahnotreally.mp3"
 
 
 export default function Player({currPlayerObj, ctx, index, theDealer}){
@@ -32,6 +33,7 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
     const [playLedSpirals] = useSound(ledSpiralsClip);
     const [playMaybeImWrong] = useSound(maybeimwrongClip);
     const [playMaybeNot] = useSound(maybenotClip);
+    const [playYeahNotReally] = useSound(yeahNotReallyClip);
     
     // Determines which image will be used for player avatar depending on player order (0-2)
     let portraitImage;
@@ -66,14 +68,16 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 setTimeout(() => playCoinMedium(), 300);
             } else if (mode === "push") {
                 playCoinSmall();
+                if (ctx.currentPlayer.hasBJ) {
+                    playYeahNotReally(); 
+                }
             } else if (mode === "lose") {
                 playLose();
                 if (ctx.currentPlayer.hasBJ) {
-                    playMaybeNot(); 
-                    console.log('inmaynot');
+                    playYeahNotReally();
                 } else {
                     if (Math.random() > 0.5) {
-                        playMaybeImWrong(); 
+                        playMaybeNot(); 
                         console.log('inmaybwrong')
                     }
                 }
