@@ -2,6 +2,8 @@ import useSound from 'use-sound';
 
 import './Moves.scss';
 
+import Quit from './Quit';
+
 import betSound from "../../assets/sounds/bet.ogg";
 import takeCardSound from "../../assets/sounds/take_card.ogg";
 import creditsSound from "../../assets/sounds/buy_credits.ogg";
@@ -101,6 +103,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
             <div className="move__container">
             {insertMoves()}
             </div>
+            <Quit moves={moves} playBtnClick={playBtnClick} />
             <div className="move__container-buy-credits">
                 <button className={`move-button ${currPlayerObj.bank < 500 ? "move-button--urgent" : ""}`} onClick={handleBuyCredits}>
                         Buy 1000 Chips

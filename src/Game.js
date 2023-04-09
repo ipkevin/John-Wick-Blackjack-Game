@@ -1,33 +1,6 @@
 import {INVALID_MOVE} from 'boardgame.io/core';
 import { TurnOrder } from 'boardgame.io/core';
 
-
-// function IsVictory(cells) {
-    // So this will be passed the entire game 'board' (cells[])
-    
-    // positions are a set of 3 positions in the board that would be equal to a win
-    // const positions = [
-    //     [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6],
-    //     [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]
-    // ];
-
-    // const isRowComplete = row => {
-    //     // So row passed in will actually set of 3 positions in 
-    //     // the cells[] that would be needed to win (ie, from positions[] array)
-    //     // This creates an array (symbols) that stores what playerID is stored in those 3 positions
-    //     // If this array contains the same playerID in all 3 indices, that means a single player managed to get a winning row (got all 3 positions of winning configuration)
-    //     const symbols = row.map(i => cells[i]);
-    //     // Below checks whether every element in symbols is the same. This means a player got every spot in a winning config (ie, got a winning config)
-    //     // returns True if so
-    //     return symbols.every(i => i !== null && i === symbols[0]);
-    // }
-    // // .some just means as long as it's true once, return true
-    // // cuz the first part returns an array where each index represents whether
-    // // a winner was found for each of the winning configurations.  If any one is true, that means won (ie, was in a winning config)
-    // return positions.map(isRowComplete).some(i => i === true);
-// }
-
-
 // The suits of cards
 const suits = ["clubs", "spades", "hearts", "diamonds"];
 
@@ -128,31 +101,12 @@ function withdrawFromBank({G, ctx}){
     G.allPlayers[ctx.currentPlayer].bank += 1000;
 }
 
-// // async function endPlayingTurn(G, playerID, events){
-// function endPlayingTurn(G, playerID, events){
-//     getAndSetValue(G.allPlayers[playerID]);
-//     if (G.allPlayers[playerID].busted === true) {
-//         G.turnsLeft -= 1;
-//         // let g = await setTimeout(console.log("waiting"), 2000);
-//         // setTimeout(console.log("waiting"), 2000);
-//         console.log("right after timeout");
-//         // events.endTurn();
-//         console.log("right after endTurn");
-//         setTimeout(events.endTurn(), 0);
-//         return true;
-//     }
-//     return false;
-// }
-// function endIt(events) {
-//     events.endTurn();
-//     console.log("inside endIt()");
-// }
-// async function delayMe() {
-//     setTimeout(console.log("delaying"), 2000);
-//     return true;
-// }
+function quitGame({events}){
+    events.endGame();
+}
 
 export const Blackjack = {
+
     setup: ({G, ctx}) => (
         {
             quit: null,
@@ -238,6 +192,10 @@ export const Blackjack = {
                     move: withdrawFromBank,
                     noLimit: true, // required as this phase has 1 limit move limit normally
                 },
+                quit: {
+                    move: quitGame,
+                    noLimit: true,
+                },
             },
             
             next: 'playing',
@@ -288,6 +246,10 @@ export const Blackjack = {
                 },
                 getChips: {
                     move: withdrawFromBank,
+                },
+                quit: {
+                    move: quitGame,
+                    noLimit: true,
                 },
             },
             turn: {
@@ -369,6 +331,10 @@ export const Blackjack = {
                 getChips: {
                     move: withdrawFromBank,
                 },
+                quit: {
+                    move: quitGame,
+                    noLimit: true,
+                },
             },
             next: "finishing",
         },
@@ -442,6 +408,10 @@ export const Blackjack = {
                 },
                 getChips: {
                     move: withdrawFromBank,
+                },
+                quit: {
+                    move: quitGame,
+                    noLimit: true,
                 },
             },
             next: "betting",

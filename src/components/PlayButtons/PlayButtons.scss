@@ -37,10 +37,8 @@
         }
 
         &:hover {
-            // background-color: rgb(241, 41, 74);
-            // animation: zoomingframe-reverseme 1s ease-out infinite reverse;
             color: white; //rgb(133, 255, 143);
-            animation: zoomingframe 0.8s ease-out infinite;
+            animation: zoomingframe 0.8s ease-out infinite; // zoomingframe is in the Moves component
             box-shadow: 0 0 6px 10px rgb(253, 25, 25);
         }
 
@@ -49,59 +47,5 @@
             
             // background-color: red;
         }
-    }
-}
-
-
-@keyframes zoomingframe {
-    from {
-        border-color: transparent;
-        outline: 3px solid rgba(255, 199, 199, 0.4);
-        outline-offset: 6px;
-    }
-    15% {
-        border-color: transparent;
-        box-shadow: 0 0 6px 8px rgb(253, 25, 25);
-        outline: 3px solid rgba(255, 199, 199, 0.8);
-        outline-offset: 5px;
-    }
-    30% {
-        border-color: transparent;
-        box-shadow: 0 0 6px 6px rgb(253, 25, 25);
-        outline: 2px solid rgb(255, 199, 199);
-        outline-offset: 4px;
-    }
-    45% {
-        border-color: transparent;
-        box-shadow: 0 0 6px 4px rgb(253, 25, 25);
-        outline: 2px solid rgb(255, 199, 199);
-        outline-offset: 3px;
-    }
-    60% {
-        border-color: transparent;
-        box-shadow: 0 0 6px 3px rgb(253, 25, 25);
-        outline: 1px solid rgb(255, 199, 199);
-        outline-offset: 2px;
-    }
-    75% {
-        border-width: 1px;
-        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
-        outline: 1px solid rgb(255, 199, 199);
-        outline-offset: 1px;
-    }
-    85% {
-        border-width: 1px;
-        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
-        outline: none;
-    }
-    95% {
-        border-width: 1px;
-        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
-        outline: none;
-    }
-    to {
-        border-width: 1px;
-        box-shadow: 0 0 4px 2px rgb(253, 25, 25);
-        outline: none;
     }
 }
