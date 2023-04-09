@@ -17,15 +17,15 @@
     font-style: italic;
 }
 
-@font-face {
-    font-family: 'Compacta';
-    src: url('../../assets/fonts/Compacta.woff2') format('woff2'),
-        url('../../assets/fonts/Compacta.woff') format('woff'),
-        url('../../assets/fonts/Compacta.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
+// @font-face {
+//     font-family: 'Compacta';
+//     src: url('../../assets/fonts/Compacta.woff2') format('woff2'),
+//         url('../../assets/fonts/Compacta.woff') format('woff'),
+//         url('../../assets/fonts/Compacta.ttf') format('truetype');
+//     font-weight: normal;
+//     font-style: normal;
+//     font-display: swap;
+// }
 
 @font-face {
     font-family: 'Compacta BT';
@@ -53,5 +53,42 @@
         url('../../assets/fonts/Avenir-BlackOblique.ttf') format('truetype');
     font-weight: 900;
     font-style: italic;
+    font-display: swap;
+}
+
+/////
+/// 
+
+@font-face {
+    font-family: 'Compacta Black';
+    src: url('../../assets/fonts/compacta/compacta-black-regular.otf') format('opentype');
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Compacta';
+    src: url('../../assets/fonts/compacta/compacta-bold.otf') format('opentype');
+    font-style: normal;
+    font-weight: bold;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Compacta';
+    src: url('../../assets/fonts/compacta/compacta-bold-italic.otf') format('opentype');
+    font-style: italic;
+    font-weight: bold;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Compacta';
+    src: url('../../assets/fonts/compacta/compacta-italic.otf') format('opentype');
+    font-style: italic;
+    font-weight: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Compacta';
+    src: url('../../assets/fonts/compacta/compacta-regular.ttf') format('truetype');
+    font-weight: normal;
     font-display: swap;
 }

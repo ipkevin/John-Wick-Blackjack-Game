@@ -2,6 +2,8 @@ $card-width-mobile: 4.5rem;
 $card-width-tablet: 5.5rem;
 $card-width-desktop: 7rem;
 
+$max-content-width: 112.5rem;
+
 @mixin tablet-query {
     @media screen and (min-width: 768px) {
         @content;
