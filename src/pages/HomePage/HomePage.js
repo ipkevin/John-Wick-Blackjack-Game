@@ -1,19 +1,15 @@
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
-import {useState, useEffect} from 'react';
+// import { useParams, useLocation, useNavigate } from 'react-router-dom';
+// import {useState, useEffect} from 'react';
+
+import PlayButtons from '../../components/PlayButtons/PlayButtons';
 
 import './HomePage.scss';
 
-import videoBG from '../../assets/videos/intro.m4v';
+// import videoBG from '../../assets/videos/intro4red.mp4';
+import videoBG from '../../assets/videos/intro.mp4';
 import songBG from '../../assets/sounds/lecastlevania_ledspirals.mp3';
 
 export default function HomePage() {
-    const navigate = useNavigate();
-
-    const [buttonSet, setButtonSet] = useState("");
-
-    function startGame(){
-        navigate("/game");
-    }
 
     return (
         <div className="home__outer-wrapper">
@@ -27,12 +23,8 @@ export default function HomePage() {
                         <h1 className="home__title">John Wick</h1>
                         <h2 className="home__subtitle">Blackjack</h2>
                     </div>
-                    <div className="home__button-group">
-                        <button className="home__buttons" onClick={startGame}>Play Local Game</button>
-                        <button className="home__buttons">Play Multiplayer Game</button>
-                        <audio className="home__music-player" src={songBG} autoPlay loop controls preload="auto"></audio>
-                    </div>
-                    
+                    <PlayButtons />
+                    <audio className="home__music-player" src={songBG} loop controls preload="auto"></audio>
                 </main>
                 
             </div>

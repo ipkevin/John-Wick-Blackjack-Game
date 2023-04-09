@@ -17,24 +17,34 @@ import './PlayPage.scss';
 
 // const App = Client({game: TicTacToe});
 
-const Game = Client({game: Blackjack, board: BlackjackBoard, debug: false, numPlayers: 3});
+
 // const Game = Client({game: TicTacToe, board: TicTacToeBoard, numPlayers: 2});
 
 export default function PlayPage() {
 
-    const {matchID, numPlayers} = useParams();
+    const {numPlayers} = useParams();
     const [playGame, setPlayGame] = useState(false);
     let currLocation = useLocation();
 
     useEffect(() => {
         if (currLocation.pathname.startsWith("/game")) setPlayGame(true);
-    }, [])
+    }, [currLocation.pathname])
     
-    console.log("here is currlocation and .pathname: ", currLocation, currLocation.pathname);
-    console.log("here are the 2 url params: ", matchID, numPlayers);
-
-    // Eventually update this to take params from homepage
-
+    let theNum = null;
+    switch (numPlayers) {
+        case "1":
+            theNum = 1;
+            break;
+        case "2": 
+            theNum = 2;
+            break;
+        case "3":
+            theNum = 3;
+            break;
+        default:
+            theNum = 1;
+    }
+    const Game = Client({game: Blackjack, board: BlackjackBoard, debug: false, numPlayers: theNum});
     return (
         <>
             { playGame && <Game /> }
