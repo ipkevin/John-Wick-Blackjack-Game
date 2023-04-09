@@ -18,7 +18,7 @@ import coinMediumSound from "../../assets/sounds/coin_medium.ogg";
 import clapBigSound from "../../assets/sounds/clap_big.ogg";
 import loseSound from "../../assets/sounds/lose_quiet.ogg";
 import ledSpiralsClip from "../../assets/sounds/led_spirals_clip.mp3";
-import maybeimwrongClip from "../../assets/sounds/maybeimwrong.mp3";
+// import maybeimwrongClip from "../../assets/sounds/maybeimwrong.mp3";
 import maybenotClip from "../../assets/sounds/maybenot.mp3";
 import yeahNotReallyClip from "../../assets/sounds/yeahnotreally.mp3"
 
