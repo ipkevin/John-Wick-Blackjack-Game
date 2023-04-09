@@ -1,26 +1,17 @@
-.main {
+
+.bg {
     width: 100vw;
     height: 100vh;
-}
-.bgtable {
-    width: 100%;
-    height: 100%;
-    background-image: url(./assets/images/table02full.jpg);
+    background-image: url(../../assets/images/table02full.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y:top;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.game-info {
-    position: fixed;
-    top: 0;
-    left: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    
 }
 
 .stacked {
@@ -61,24 +52,24 @@
     }
 }
 @keyframes stackscaleouter {
-    from { transform: scale(1.236, 1.133) ;}
-    25% {  transform: scale(1.1742, 1.076);}
-    50% {  transform: scale(1.1549, 1.022);}
-    75% {  transform: scale(1.0297, 0.971);}
-    to {  transform: scale(0.88, 0.922);}
-    // 75% {  transform: scale(1.0597, 0.971);}
-    // to {  transform: scale(1.0067, 0.922);}
+    // from { transform: scale(1.236, 1.133) ;}
+    from { transform: scale(1.285, 1.178);} // 4% more. Prob a bit too  much.
+    25% {  transform: scale(1.186, 1.087);}
+    50% {  transform: scale(1.14, 1.044);}
+    75% {  transform: scale(1.00, 1.002);}
+    to {  transform: scale(0.95, 0.962);}
 }
 @keyframes stackscaleinner {
     from { transform: scale(1.16, 1.09);}
-    25% {  transform: scale(1.14, 1.045);}
-    50% {  transform: scale(1.083, 0.993);}
-    75% {  transform: scale(0.99, 0.943);}
-    // 75% {  transform: scale(1.0288, 0.943);}
-    to {  transform: scale(0.8, 0.896);}
-    // to {  transform: scale(0.9774, 0.896);}
+    25% {  transform: scale(1.11, 1.046);}
+    50% {  transform: scale(1.069, 1.0045);}
+    75% {  transform: scale(1.026, 0.964);}
+    to {  transform: scale(0.984, 0.925);}
 }
+
+
 .result {
+
     font-family: "Compacta BT", Arial, Helvetica, sans-serif;
     font-style: italic;
     font-size: 72px;
@@ -97,7 +88,7 @@
         position: relative;
         
         left: 10px;
-        top: 300px;
+        top: 100px;
 
         &-w { left: 0; }
         &-i { left: 0.2rem; }

@@ -95,7 +95,7 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 ? <>{(currPlayerObj.hasBJ) ? playSound("bjwin") : playSound("win")}<h3 className="player__result player__result--win">Winner</h3></> 
                 : ""}
             {ctx.phase === "finishing" && (currPlayerObj.resultMessage.includes("Lose") || currPlayerObj.resultMessage.includes("Bust")) 
-                ? <>{currPlayerObj.resultMessage.includes("Bust") ? playSound("lose") : ""}<h3 className="player__result player__result--lose">Lose</h3></> 
+                ? <>{playSound("lose")}<h3 className="player__result player__result--lose">Lose</h3></> 
                 : ""}
             {ctx.phase === "finishing" && currPlayerObj.resultMessage.includes("Push") 
                 ? <>{playSound("push")}<h3 className="player__result player__result--push">Push</h3></> 
