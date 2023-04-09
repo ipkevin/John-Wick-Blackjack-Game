@@ -2,12 +2,13 @@
 // import {useState, useEffect} from 'react';
 
 import PlayButtons from '../../components/PlayButtons/PlayButtons';
+import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
 
 import './HomePage.scss';
 
 // import videoBG from '../../assets/videos/intro4red.mp4';
 import videoBG from '../../assets/videos/intro.mp4';
-import songBG from '../../assets/sounds/lecastlevania_ledspirals.mp3';
+
 
 export default function HomePage() {
 
@@ -24,7 +25,7 @@ export default function HomePage() {
                         <h2 className="home__subtitle">Blackjack</h2>
                     </div>
                     <PlayButtons />
-                    <audio className="home__music-player" src={songBG} loop controls preload="auto"></audio>
+                    <MusicPlayer />
                 </main>
                 
             </div>

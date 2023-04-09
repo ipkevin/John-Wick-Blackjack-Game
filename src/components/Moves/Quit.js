@@ -15,18 +15,18 @@ export default function Quit({moves, playBtnClick}){
         moves.quit();
         navigate("/");
     }
-    console.log("Quit component rerendering");
+    
     return (
         <div className="quit__container">
-            <button className={`move-button quit__button ${hideConfirm === "" && "quit__active-button"}`} onClick={handleQuit}>
+            <button className={`std-btn quit__button ${hideConfirm === "" && "std-btn--active"}`} onClick={handleQuit}>
                     Quit
             </button>
             <div className={`quit__subcontainer ${hideConfirm}`}>
                 <p>Are you sure?</p>
-                <button className="move-button" onClick={quitNow}>
+                <button className="std-btn" onClick={quitNow}>
                         Yes, quit
                 </button>
-                <button className="move-button" onClick={handleQuit}>
+                <button className="std-btn" onClick={handleQuit}>
                         Cancel
                 </button>
             </div>

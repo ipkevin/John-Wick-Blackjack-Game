@@ -26,14 +26,14 @@ export default function PlayButton() {
         <div className="buttons">
 
             <div className="buttons__group">
-                <button className={`buttons__button ${hideLocalOptions === "" && "buttons__button--active"}`} onClick={toggleLocalOptions}>Play Local Game</button>
-                <button className="buttons__button" disabled>Play Multiplayer Game</button>
+                <button className={`std-btn ${hideLocalOptions === "" && "std-btn--active"}`} onClick={toggleLocalOptions}>Play Local Game</button>
+                <button className="std-btn" disabled>Play Multiplayer Game</button>
             </div>
             <div className={`buttons__group ${hideLocalOptions}`}>
                 <p>Select # of Players:</p>
-                <button className="buttons__button" onClick={() => startGame(1)}>1</button>
-                <button className="buttons__button" onClick={() => startGame(2)}>2</button>
-                <button className="buttons__button" onClick={() => startGame(3)}>3</button>
+                <button className="std-btn" onClick={() => startGame(1)}>1</button>
+                <button className="std-btn" onClick={() => startGame(2)}>2</button>
+                <button className="std-btn" onClick={() => startGame(3)}>3</button>
             </div>
             
         </div>

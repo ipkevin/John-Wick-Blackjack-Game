@@ -48,22 +48,22 @@ export default function Moves({currPlayerObj, moves, ctx}) {
         if (ctx.phase === "betting") {
             return (
                 <>
-                    <button className="move-button" onClick={() => handleBet(100)}>
+                    <button className="std-btn" onClick={() => handleBet(100)}>
                         Bet 100
                     </button>
-                    <button className="move-button" onClick={() => handleBet(500)}>
+                    <button className="std-btn" onClick={() => handleBet(500)}>
                         Bet 500
                     </button>
-                    {currPlayerObj.bank < 500 ? <button className="move-button" onClick={handleBuyCredits}>Buy Chips</button> : "" }
+                    {currPlayerObj.bank < 500 ? <button className="std-btn" onClick={handleBuyCredits}>Buy Chips</button> : "" }
                 </>
             );
         } else if (ctx.phase === "playing" && currPlayerObj.busted === false && currPlayerObj.hasBJ === false) {
             return (
                 <>
-                    <button className="move-button" onClick={handleHit}>
+                    <button className="std-btn" onClick={handleHit}>
                         Hit
                     </button>
-                    <button className="move-button" onClick={handleStand}>
+                    <button className="std-btn" onClick={handleStand}>
                         Stand
                     </button>
                 </>
@@ -71,7 +71,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
         } else if (ctx.phase === "playing" && (currPlayerObj.busted === true || currPlayerObj.hasBJ === true)) {
             return (
                 <>
-                    <button className="move-button" onClick={handleEndTurn}>
+                    <button className="std-btn" onClick={handleEndTurn}>
                         OK
                     </button>
                 </>
@@ -79,7 +79,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
         // } else if (ctx.phase === "dealingtodealer") {  // GOT RID OF THIS. USE AUTO END FROM AI
         //     return (
         //         <>
-        //             <button className="move-button" onClick={handleEndDealerDealing}>
+        //             <button className="std-btn" onClick={handleEndDealerDealing}>
         //                 Continue
         //             </button>
         //         </>
@@ -87,10 +87,10 @@ export default function Moves({currPlayerObj, moves, ctx}) {
         } else if (ctx.phase === "finishing") {
             return (
                 <>
-                    <button className="move-button" onClick={handleOK}>
+                    <button className="std-btn" onClick={handleOK}>
                         OK
                     </button>
-                    <button className="move-button" onClick={handleBuyCredits}>
+                    <button className="std-btn" onClick={handleBuyCredits}>
                         Buy Chips
                     </button>
                 </>
@@ -105,7 +105,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
             </div>
             <Quit moves={moves} playBtnClick={playBtnClick} />
             <div className="move__container-buy-credits">
-                <button className={`move-button ${currPlayerObj.bank < 500 ? "move-button--urgent" : ""}`} onClick={handleBuyCredits}>
+                <button className={`std-btn ${currPlayerObj.bank < 500 ? "std-btn--urgent" : ""}`} onClick={handleBuyCredits}>
                         Buy 1000 Chips
                 </button>
             </div>
