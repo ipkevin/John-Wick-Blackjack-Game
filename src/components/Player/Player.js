@@ -108,7 +108,7 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
             {/* Show the BlackJack/Bust status message above the cards */}
             <div className="player__status">
                 {currPlayerObj.busted === true ? <p className="player__status-text"><img src={skull} className="player__status-icon player__status-icon--skull player__status-icon--skull--reversed" alt="" /> BUST&nbsp;<img src={skull} className="player__status-icon  player__status-icon--skull" alt="" /></p> : ""}
-                {currPlayerObj.hasBJ === true ? <p className="player__status-text player__status-text--blackjack"><img src={glockicon} className="player__status-icon player__status-icon--reversed" alt="" />BLACKJACK <img src={glockicon} className="player__status-icon" alt="" /></p> : ""}
+                {currPlayerObj.hasBJ === true ? <p className="player__status-text player__status-text--blackjack"><img src={glockicon} className="player__status-icon player__status-icon--reversed" alt="" /> BLACKJACK <img src={glockicon} className="player__status-icon" alt="" /></p> : ""}
             </div>
       
             {/* Show the player's cards and value/score of hand */}

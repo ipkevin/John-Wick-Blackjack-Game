@@ -98,6 +98,9 @@ export default function Moves({currPlayerObj, moves, ctx}) {
         }
     };
 
+    let buyMsg = "Buy 1000 Chips";
+    if (window.innerWidth < 728) buyMsg = "Buy Chips";
+
     return (
         <>
             <div className="move__container">
@@ -106,7 +109,7 @@ export default function Moves({currPlayerObj, moves, ctx}) {
             <Quit moves={moves} playBtnClick={playBtnClick} />
             <div className="move__container-buy-credits">
                 <button className={`std-btn ${currPlayerObj.bank < 500 ? "std-btn--urgent" : ""}`} onClick={handleBuyCredits}>
-                        Buy 1000 Chips
+                    {buyMsg}
                 </button>
             </div>
         </>
