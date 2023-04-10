@@ -17,10 +17,13 @@ import coinBigSound from "../../assets/sounds/coin_big.ogg";
 import coinMediumSound from "../../assets/sounds/coin_medium.ogg";
 import clapBigSound from "../../assets/sounds/clap_big.ogg";
 import loseSound from "../../assets/sounds/lose_quiet.ogg";
-import ledSpiralsClip from "../../assets/sounds/led_spirals_clip.mp3";
-// import maybeimwrongClip from "../../assets/sounds/maybeimwrong.mp3";
+import ledSpiralsClip from "../../assets/sounds/led_spirals_clip1.mp3";
+import shotsFiredClip from "../../assets/sounds/shots_fired_clip.mp3";
+import imBackClip from "../../assets/sounds/imthinkingimback.mp3";
+import maybeimwrongClip from "../../assets/sounds/maybeimwrong.mp3";
 import maybenotClip from "../../assets/sounds/maybenot.mp3";
 import yeahNotReallyClip from "../../assets/sounds/yeahnotreally.mp3"
+import yeahClip from "../../assets/sounds/yeah.mp3"
 
 
 export default function Player({currPlayerObj, ctx, index, theDealer}){
@@ -30,10 +33,13 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
     const [playClapBig] = useSound(clapBigSound);
     const [playCoinSmall] = useSound(coinSmallSound);
     const [playLose] = useSound(loseSound);
-    const [playLedSpirals] = useSound(ledSpiralsClip);
-    // const [playMaybeImWrong] = useSound(maybeimwrongClip);
+    const [playLedSpirals] = useSound(ledSpiralsClip, 0.75);
+    const [playShotsFired] = useSound(shotsFiredClip, 0.75);
+    const [playMaybeImWrong] = useSound(maybeimwrongClip);
     const [playMaybeNot] = useSound(maybenotClip);
     const [playYeahNotReally] = useSound(yeahNotReallyClip);
+    const [playYeah] = useSound(yeahClip);
+    const [playImThinkingImBack] = useSound(imBackClip);
     
     // Determines which image will be used for player avatar depending on player order (0-2)
     let portraitImage;
@@ -58,9 +64,10 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
         // These 2 conditions ensure effect only plays once during start of this player's turn
         if (ctx.currentPlayer === index.toString() && ctx.numMoves === 0) {
             if (mode === "bjwin") {
-                playLedSpirals();
+                playShotsFired();
                 playCoinBig();
                 playClapBig();
+                setTimeout(() => playImThinkingImBack(), 600);
                 setTimeout(() => playCoinMedium(), 300);
             } else if (mode === "win") {
                 playLedSpirals();
@@ -69,16 +76,20 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
             } else if (mode === "push") {
                 playCoinSmall();
                 if (ctx.currentPlayer.hasBJ) {
-                    playYeahNotReally(); 
+                    playYeahNotReally();
+                } else {
+                    if (Math.random() < 0.55) {
+                        playYeah(); 
+                    }
                 }
             } else if (mode === "lose") {
                 playLose();
                 if (ctx.currentPlayer.hasBJ) {
-                    playYeahNotReally();
+                    playMaybeImWrong();
                 } else {
                     if (Math.random() > 0.5) {
                         playMaybeNot(); 
-                    }
+                    } 
                 }
             }
         }

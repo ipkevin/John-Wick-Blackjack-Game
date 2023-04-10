@@ -9,7 +9,7 @@ import "./App.scss";
 
 function App() {
   return (
-
+    <div class="outer-content-wrapper">
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -21,6 +21,7 @@ function App() {
       </Routes>
       <Disclaimer />
     </BrowserRouter>
+    </div>
   );
 }
 

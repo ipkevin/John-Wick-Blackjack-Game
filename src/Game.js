@@ -58,9 +58,10 @@ function initPlayers(ctx){
 }
 
 // Calculate value of player's hand. Returns value of hand.
-// ALSO sets player's properties (busted, handValue, hasAces, softAce) accordingly. Does not set hasBJ as does not have context to determine it.
+// ALSO sets player's properties (busted, handValue, hasAces, softAce) accordingly. 
+// Did not set BJ before, but now it does at the end. Not sure why I did not set it here before, but it's also set at the start of the playing phase.
 function getAndSetValue(playerObj) {
-        
+
     let theHand = playerObj.hand;
     let hasAces = false;
     let softAce = false;
@@ -95,6 +96,7 @@ function getAndSetValue(playerObj) {
     playerObj.softAce = softAce;
     playerObj.hasAces = hasAces;
     if (playerObj.handValue > 21) playerObj.busted = true;
+    if (theHand.length === 2 && playerObj.handValue === 21) playerObj.hasBJ = true;
     return total;
 }
 
@@ -416,6 +418,7 @@ export const Blackjack = {
                     }
                 },
                 onMove: ({G, events}) => {
+                    console.log(G);
                     if (G.turnsLeft === 0) events.endPhase();
                 },
             },
