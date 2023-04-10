@@ -3,7 +3,6 @@
 
 import PlayButtons from '../../components/PlayButtons/PlayButtons';
 import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
-// import Disclaimer from '../../components/Disclaimer/Disclaimer';
 
 import './HomePage.scss';
 
