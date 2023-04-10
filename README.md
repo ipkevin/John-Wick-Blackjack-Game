@@ -11,13 +11,21 @@ This is WIP! Eventually, Blackjack Builder will allow anyone to easily create an
 * Single player and local "round-robin" multiplayer are functional
 * Styling and sound are 50% complete
 
-### Packages Used
+### Technologies Used
 
 React, Node, Boardgame.io, Sockets.io
+All styling and visuals are done with native React, HTML5, and CSS3
 
 ### How to Use
 
 * Clone repo
 * npm -i to install dependencies
-* npm run start to begin a local game (edit App.js to change number of players)
+* npm run start to begin a local game
 
+### Play Online Without Compiling
+
+https://johnwickblackjack.netlify.app/
+
+### Fair Use Notice
+
+This is a non-profit app developed for a programming course. All media assets used are purely for educational, research & scholarship purposes. All rights and credit go directly to their rightful owners. No copyright infringement intended.
