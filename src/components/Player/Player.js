@@ -78,7 +78,6 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 } else {
                     if (Math.random() > 0.5) {
                         playMaybeNot(); 
-                        console.log('inmaybwrong')
                     }
                 }
             }
