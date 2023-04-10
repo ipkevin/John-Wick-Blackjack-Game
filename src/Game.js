@@ -411,7 +411,7 @@ export const Blackjack = {
                             } else {
                                 currPlayer.insuranceMessage = "(No insurance payout)"
                             }
-                            console.log("this is insurance msg from where it is set in Game.js calculate results area: ", currPlayer.insuranceMessage);
+                            // console.log("this is insurance msg from where it is set in Game.js calculate results area: ", currPlayer.insuranceMessage);
                         }
                     }
                 },
