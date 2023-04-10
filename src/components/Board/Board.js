@@ -74,7 +74,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
                         <Player key={index} currPlayerObj={G.allPlayers[player]} ctx={ctx} index={index} theDealer={G.dealer} />
                     );
                 })}
-                <Moves currPlayerObj={currPlayerObj} moves={moves} ctx={ctx} />
+                <Moves currPlayerObj={currPlayerObj} dealerObj={G.dealer} moves={moves} ctx={ctx} />
             </div>
         </div>
     );

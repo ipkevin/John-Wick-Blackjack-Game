@@ -142,6 +142,8 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 <div className="player__bank">
                 Bank ${currPlayerObj.bank}
                 </div>
+                {currPlayerObj.insuranceMessage !== "" && <p>{currPlayerObj.insuranceMessage}</p>}
+                {console.log("in Playerjs. here is the dealer: ", theDealer)}
             </div>
         </div>
 

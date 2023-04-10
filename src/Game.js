@@ -45,7 +45,9 @@ function initPlayers(ctx){
             busted: false,
             hasAces: false,
             hasBJ: false,
+            hasInsurance: false,
             handValue: 0,
+            insuranceMessage: "",
             softAce: false, // has an Ace which can be changed to 1
             resultMessage: "",
             withdraws: 0,
@@ -155,7 +157,9 @@ export const Blackjack = {
                     G.allPlayers[playa].busted = false;
                     G.allPlayers[playa].hasAces = false;
                     G.allPlayers[playa].hasBJ = false;
+                    G.allPlayers[playa].hasInsurance = false;
                     G.allPlayers[playa].handValue = 0;
+                    G.allPlayers[playa].insuranceMessage = "";
                     G.allPlayers[playa].resultMessage = "";
                 };
 
@@ -246,6 +250,20 @@ export const Blackjack = {
                 },
                 getChips: {
                     move: withdrawFromBank,
+                },
+                buyInsurance: ({G, playerID}) => {
+                    // Player can buy insurance (50% of orig bet) if dealer is showing Ace in their first card
+                    // Not allowing insurance when player has BJ themselves as that's even money & not implemented
+                    if (G.allPlayers[playerID].hasInsurance === false && G.allPlayers[playerID].hasBJ === false
+                    && G.dealer.hand[0].rank === 1 
+                    && G.allPlayers[playerID].bank >= (G.allPlayers[playerID].bet / 2)) 
+                    {
+                        G.allPlayers[playerID].bank -= G.allPlayers[playerID].bet / 2;
+                        G.allPlayers[playerID].hasInsurance = true;
+                        G.allPlayers[playerID].insuranceMessage = "(Insured)";
+                    } else {
+                        return INVALID_MOVE;
+                    }
                 },
                 quit: {
                     move: quitGame,
@@ -340,9 +358,6 @@ export const Blackjack = {
         },
         finishing: {
             onBegin: ({G,ctx}) => {
-                
-                
-
                 // Counter to determine how many turns left in this phase
                 G.turnsLeft = ctx.numPlayers;
             },
@@ -356,13 +371,6 @@ export const Blackjack = {
                     * if BJ, then see if dealer also got BJ.  If not, get 3:2 payout (1.5 orig bet) + orig bet back (ie, 2.5x).
                     * if didn't bust, then see if higher than dealer value or if dealer busted.  If yes, then get 2x bet back.
                     * else, lose with msg that dealer got higher
-                    * 
-                    * ************************
-                    * BUG BUG BUG FIX ME -- whenever 1st player gets any money back, they get it at win msg then AGAIN when bet phase starts
-                    * See if maybe it's a turnorder thing? disable the betting phase reset on turn order.
-                    * - Might be cuz Value calc is onBegin of turn, while end check is onMove (so end of prev), maybe the end is not fast enough
-                    *  --> if so, then either add a check/flag (turnsleft?) to stop another calc for same user, or try endif to end the game.
-                    **************************
                     */
                    if (G.turnsLeft !== 0) { // this check is required as there were async issues where this check onBegin check ran again before the end phase check finished from prev move
 
@@ -393,6 +401,17 @@ export const Blackjack = {
                                 currPlayer.bank += 2*(currPlayer.bet);
                                 currPlayer.resultMessage = `Win! Payout 2x! ${2*currPlayer.bet}`;
                             }
+                        }
+                        // Now do a check for insurance
+                        if (currPlayer.hasInsurance) {
+                            if (G.dealer.hasBJ) {
+                                currPlayer.bank += (currPlayer.bet + (currPlayer.bet/2)); 
+                                currPlayer.hasInsurance = false;
+                                currPlayer.insuranceMessage = `(Insurance payout: $${currPlayer.bet + currPlayer.bet/2})`;
+                            } else {
+                                currPlayer.insuranceMessage = "(No insurance payout)"
+                            }
+                            console.log("this is insurance msg from where it is set in Game.js calculate results area: ", currPlayer.insuranceMessage);
                         }
                     }
                 },

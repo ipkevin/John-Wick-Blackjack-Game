@@ -11,7 +11,7 @@ import standSound from "../../assets/sounds/stand.ogg";
 import btnSound from "../../assets/sounds/btn_click_quiet.ogg";
 
 
-export default function Moves({currPlayerObj, moves, ctx}) {
+export default function Moves({currPlayerObj, dealerObj, moves, ctx}) {
 
     const [playBet] = useSound(betSound);
     const [playTakeCard] = useSound(takeCardSound);
@@ -30,6 +30,10 @@ export default function Moves({currPlayerObj, moves, ctx}) {
     function handleStand() {
         playStand();
         moves.stand();
+    }
+    function handleInsurance() {
+        playBtnClick();
+        moves.buyInsurance();
     }
     function handleOK() {
         playBtnClick();
@@ -66,6 +70,8 @@ export default function Moves({currPlayerObj, moves, ctx}) {
                     <button className="std-btn" onClick={handleStand}>
                         Stand
                     </button>
+                    {(dealerObj.hand[0].rank === 1 && currPlayerObj.hasInsurance !== true && currPlayerObj.hasBJ !== true && currPlayerObj.bank >= (currPlayerObj.bet/2)) &&
+                       <button className="std-btn" onClick={handleInsurance}>Buy Insurance</button>}
                 </>
             );
         } else if (ctx.phase === "playing" && (currPlayerObj.busted === true || currPlayerObj.hasBJ === true)) {
