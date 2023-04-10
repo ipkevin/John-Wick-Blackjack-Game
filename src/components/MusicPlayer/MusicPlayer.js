@@ -1,10 +1,9 @@
 import './MusicPlayer.scss';
-import songBG from '../../assets/sounds/lecastlevania_ledspirals.mp3';
+import songBG from '../../assets/sounds/lecastlevania_ledspirals2.mp3';
 import audioOff from '../../assets/images/audio-icon-cross2.png';
 import audioOn from '../../assets/images/audio-icon-on.png';
 export default function MusicPlayer(){
 
-    let test = `audioOn`;
     return (
         <>
             {/* <img className="audio-icon std-btn" src={onPlaying && audioOn} alt="audio on off" /> */}
