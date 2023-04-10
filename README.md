@@ -12,11 +12,13 @@ This is WIP! Eventually, Blackjack Builder will allow anyone to easily create an
 * Current moves available are Bet, Hit, Stand, and Buy Insurance
 * Styling and sound are 50% complete
 
-### Technologies Used
+### Technologies & Apps Used
 
-React, Node, Boardgame.io, Sockets.io, Netlify, Photoshop
+React, Node, Boardgame.io, Sockets.io, Netlify
 
 All styling and visuals are done with native React, HTML5, and CSS3
+
+Images, audio, and video were edited in Photoshop, Audacity, HitFilm Express, Handbrake
 
 ### How to Use
 
