@@ -9,11 +9,12 @@ This is WIP! Eventually, Blackjack Builder will allow anyone to easily create an
 ### Current State
 
 * Single player and local "round-robin" multiplayer are functional
+* Current moves available are Bet, Hit, Stand, and Buy Insurance
 * Styling and sound are 50% complete
 
 ### Technologies Used
 
-React, Node, Boardgame.io, Sockets.io
+React, Node, Boardgame.io, Sockets.io, Netlify
 All styling and visuals are done with native React, HTML5, and CSS3
 
 ### How to Use
