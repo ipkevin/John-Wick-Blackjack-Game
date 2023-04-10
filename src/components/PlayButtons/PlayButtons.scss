@@ -3,17 +3,43 @@
 
 .buttons {
     position: absolute;
-    top: 75%;
+    top: 66%;
     display: flex;
     flex-flow: column nowrap;
     gap: 1rem;
+    
+    @include tablet-query {
+        top: 75%;
+    }
 
     &__group {
         display: flex;
+        flex-flow: column nowrap;
         gap: 1rem;
+
+        @include tablet-query {
+            flex-flow: row wrap;
+            gap: 1rem;
+        }
+
         &--hidden {
             display:none;
         }
+    }
+}
+.homebuttons {
+    
+    &-local {
+        order: 2;
+
+        @include tablet-query{
+            order: 0;
+        }
+    }
+    &__numplayers-box {
+        display: flex;
+        flex-direction: row wrap;
+        gap: 1rem;
     }
 }
 
@@ -21,23 +47,28 @@
     position: relative;
 
     &__message {
-        position: absolute;
-        top: -0.6rem;
-        right: -3rem;
-        // transform:translateX(-50%);
-        transform:rotate(33deg);
+            position: absolute;
+            font-size: 0.7rem;
+            color: white;
+            text-shadow: 0 0 10px rgb(49, 190, 255);
+            
 
-        border: 2px solid white;
-        border-radius: 1rem;
-        box-shadow: 0 0 7px 2px rgb(49, 190, 255), inset 0 0 7px 2px rgb(49, 190, 255);
-        padding: 0.3rem 0.5rem;
-        
+            top: -0.6rem;
+            right: -3rem;
+            // transform:translateX(-50%);
+            transform:rotate(33deg);
+    
+            border: 2px solid white;
+            border-radius: 1rem;
+            box-shadow: 0 0 7px 2px rgb(49, 190, 255), inset 0 0 7px 2px rgb(49, 190, 255);
+            padding: 0.3rem 0.5rem;
 
-        font-size: 1rem;
-        // text-transform:none;
-        color: white;
-        -webkit-text-stroke: 1px rgb(68, 147, 184);
-        text-shadow: 0 0 10px rgb(49, 190, 255);
-        
+            @include tablet-query {
+                
+                font-size: 1rem;
+                -webkit-text-stroke: 1px rgb(68, 147, 184);
+                text-shadow: 0 0 10px rgb(49, 190, 255);
+            }
+                
     }
 }

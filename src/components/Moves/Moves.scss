@@ -1,21 +1,32 @@
+@use '../../styles/partials/variables' as *;
+
 .move {
 
     &__container {
         position: absolute;
-        bottom: 2rem;
-        left: 70%;
-        // width: 300px;
         overflow:visible;
-        // white-space:nowrap;
-        // background-color: black;
 
         display: flex;
-        gap: 0.5rem;
+        flex-flow: column wrap;
+        top: 75%;
+        right: 2rem;
+        gap: 1rem;
+
+        @include tablet-query {
+            flex-flow: row nowrap;
+            top: auto;
+            bottom: 2rem;
+            left: 70%;
+        }
         
     }
     &__container-buy-credits {
         position: absolute;
         top: 2rem;
         right: 2rem;
+
+        @include tablet-query {
+            // max-width: none;
+        }
     }
 }
