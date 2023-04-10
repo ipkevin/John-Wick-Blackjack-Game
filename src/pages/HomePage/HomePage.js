@@ -3,6 +3,7 @@
 
 import PlayButtons from '../../components/PlayButtons/PlayButtons';
 import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
+// import Disclaimer from '../../components/Disclaimer/Disclaimer';
 
 import './HomePage.scss';
 
@@ -13,6 +14,7 @@ import videoBG from '../../assets/videos/intro.mp4';
 export default function HomePage() {
 
     return (
+        <>
         <div className="home__outer-wrapper">
             <div className="home__overlay"></div>
             <video className="home__video" src={videoBG} autoPlay muted loop />
@@ -27,8 +29,8 @@ export default function HomePage() {
                     <PlayButtons />
                     <MusicPlayer />
                 </main>
-                
-            </div>
+            </div>            
         </div>
+        </>
     );
 }

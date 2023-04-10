@@ -1,0 +1,23 @@
+@use '../../styles/partials/variables' as *;
+
+.disclaimer {
+
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.7rem;
+    color: rgb(182, 182, 182);
+
+    @include tablet-query {
+        font-size: 0.8rem;
+    }
+
+    & a {
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+        &:visited {
+            color: rgb(182, 182, 182);
+        }
+    }
+}
