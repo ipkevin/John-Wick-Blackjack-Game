@@ -26,7 +26,7 @@ export default function PlayPage() {
         default:
             theNum = 1;
     }
-    const Game = Client({game: Blackjack, board: BlackjackBoard, debug: true, numPlayers: theNum});
+    const Game = Client({game: Blackjack, board: BlackjackBoard, debug: false, numPlayers: theNum});
     // The actual component where the game UI takes place is Board.js but it's displayed by the Client component (Game) below
     return (
         <>
