@@ -26,7 +26,7 @@ import yeahNotReallyClip from "../../assets/sounds/yeahnotreally.mp3"
 import yeahClip from "../../assets/sounds/yeah.mp3"
 
 
-export default function Player({currPlayerObj, ctx, index, theDealer}){
+export default function Player({currPlayerObj, ctx, index}){
 
     const [playCoinBig] = useSound(coinBigSound);
     const [playCoinMedium] = useSound(coinMediumSound);
@@ -75,7 +75,9 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 setTimeout(() => playCoinMedium(), 300);
             } else if (mode === "push") {
                 playCoinSmall();
-                if (ctx.currentPlayer.hasBJ) {
+                console.log("ctx in push: ", ctx);
+                if (currPlayerObj.hasBJ) {
+                    console.log("in Player.js push situation & player has BJ");
                     playYeahNotReally();
                 } else {
                     if (Math.random() < 0.55) {
@@ -84,7 +86,7 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
                 }
             } else if (mode === "lose") {
                 playLose();
-                if (ctx.currentPlayer.hasBJ) {
+                if (currPlayerObj.hasBJ) {
                     playMaybeImWrong();
                 } else {
                     if (Math.random() > 0.5) {

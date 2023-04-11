@@ -6,12 +6,13 @@
     align-items: center;
     gap: 0.5rem;
 
-    margin: 2rem;
-    padding: 1rem;
+    margin: 1rem;
+    padding: 0.5rem;
     border-radius: 1rem;
 
     @include tablet-query {
-        margin: 1rem;
+        margin: 2rem;
+        padding: 1rem;
     }
     @include desktop-query {
         margin-bottom: 2rem;
@@ -23,17 +24,6 @@
         box-shadow: 0 0 10px 6px rgba(255,255,255,0.2);
         // animation: highlightedglow 2s ease-in-out infinite;
     }
-    // @keyframes highlightedglow {
-    //     from {
-    //         box-shadow: 0 0 3px 3px rgba(255,255,255,0.2);
-    //     }
-    //     50% {
-    //         box-shadow: 0 0 10px 6px rgba(255,255,255,0.2);
-    //     }
-    //     to {
-    //         box-shadow: 0 0 3px 3px rgba(255,255,255,0.2);
-    //     }
-    // }
 
     &__pos0 {
 
@@ -122,7 +112,12 @@
         text-transform: uppercase;
         font-style: italic;
         font-family: "Avenir", Arial, Helvetica, sans-serif;
-        font-size: 1.3rem;
+        font-size: 1.1rem;
+
+        @include tablet-query {
+            font-size: 1.3rem;
+        }
+
     }
     // &__bet {
     //     align-self: flex-start;

@@ -22,11 +22,12 @@
     }
     &__container-buy-credits {
         position: absolute;
-        top: 2rem;
-        right: 2rem;
+        top: 1rem;
+        right: 1rem;
 
         @include tablet-query {
-            // max-width: none;
+            top: 2rem;
+            right: 2rem;
         }
     }
 }

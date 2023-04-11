@@ -6,10 +6,12 @@ import btnSound from "../../assets/sounds/btn_click_quiet.ogg";
 
 import "./PlayButtons.scss";
 
+
 export default function PlayButton() {
 
-    const [playBtnClick] = useSound(btnSound);
     const navigate = useNavigate();
+    
+    const [playBtnClick] = useSound(btnSound);
 
     const [hideLocalOptions, setHideLocalOptions] = useState("buttons__group--hidden");
 
