@@ -5,6 +5,8 @@ import Moves from "../Moves/Moves";
 import Dealer from "../Dealer/Dealer";
 import Player from "../Player/Player";
 import PhaseName from "../PhaseName/PhaseName";
+import Fan from "../Fan/Fan";
+
 import "./Board.scss";
 
 import shuffleSound from "../../assets/sounds/shuffling.ogg"
@@ -57,10 +59,7 @@ export function BlackjackBoard({ ctx, G, moves }) {
     return (
         <div className="main">
             <div className="bgtable">
-                <div className="fan">
-                    <div className="fan__blade fan__blade-vert"></div>
-                    <div className="fan__blade fan__blade-cross"></div>
-                </div>
+                <Fan />
                 {/* <div className="game-info">
                     <p>The current phase is: {ctx.phase}</p>
                     {ctx.phase !== "dealingtodealer" ? <p>The current player is: {ctx.currentPlayer}</p> : ""}
