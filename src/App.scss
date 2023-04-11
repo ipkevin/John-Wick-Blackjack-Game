@@ -14,9 +14,17 @@ body {
   font-family: "Avenir", Verdana, Tahoma, sans-serif;
 }
 
+// necessary to ensure the background left & right images are visible but do not screw up screen width on mobile devices
 .outer-content-wrapper {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+// Sets max width on the content and adds background left & right images for users with UHD screens
+.inner-content-wrapper {
   max-width: 1900px;
-  margin: 0 auto;
   position: relative;
 
   &::before {
@@ -36,7 +44,7 @@ body {
     top: 0;
     right: 0;
     transform: translateX(100%);
-    width: 650px;
+    width: 648px;
     height: 100%;
   }
 }

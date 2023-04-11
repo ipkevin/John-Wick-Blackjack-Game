@@ -9,18 +9,20 @@ import "./App.scss";
 
 function App() {
   return (
-    <div class="outer-content-wrapper">
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/fonttests/" element={<FontEffectTests />} />
-        <Route path="/game/:numPlayers" element={<PlayPage />} />
-        <Route path="/game/" element={<PlayPage />} />
-        
-        
-      </Routes>
-      <Disclaimer />
-    </BrowserRouter>
+    <div className="outer-content-wrapper">
+      <div class="inner-content-wrapper">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/fonttests/" element={<FontEffectTests />} />
+          <Route path="/game/:numPlayers" element={<PlayPage />} />
+          <Route path="/game/" element={<PlayPage />} />
+          
+          
+        </Routes>
+        <Disclaimer />
+      </BrowserRouter>
+      </div>
     </div>
   );
 }
