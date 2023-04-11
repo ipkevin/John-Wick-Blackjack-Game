@@ -33,8 +33,8 @@ export default function Player({currPlayerObj, ctx, index, theDealer}){
     const [playClapBig] = useSound(clapBigSound);
     const [playCoinSmall] = useSound(coinSmallSound);
     const [playLose] = useSound(loseSound);
-    const [playLedSpirals] = useSound(ledSpiralsClip, 0.75);
-    const [playShotsFired] = useSound(shotsFiredClip, 0.75);
+    const [playLedSpirals] = useSound(ledSpiralsClip, {volume: 0.5});
+    const [playShotsFired] = useSound(shotsFiredClip, {volume: 0.6});
     const [playMaybeImWrong] = useSound(maybeimwrongClip);
     const [playMaybeNot] = useSound(maybenotClip);
     const [playYeahNotReally] = useSound(yeahNotReallyClip);
