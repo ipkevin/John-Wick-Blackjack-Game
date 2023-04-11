@@ -1,6 +1,3 @@
-// import { useParams, useLocation, useNavigate } from 'react-router-dom';
-// import {useState, useEffect} from 'react';
-
 import PlayButtons from '../../components/PlayButtons/PlayButtons';
 import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
 import fallbackImage from '../../assets/images/johnwickblackjack2.jpg';
@@ -17,7 +14,6 @@ export default function HomePage() {
         <>
         <div className="home__outer-wrapper">
             <div className="home__overlay"></div>
-            {/* <video className="home__video" src={videoBG} autoPlay muted loop /> */}
             <video className="home__video" autoPlay muted loop poster={fallbackImage}>
                 <source src={videoBG} type='video/mp4' />
                 <img src={fallbackImage} alt="John Wick Blackjack game" title="Your browser does not support the <video> tag" />
