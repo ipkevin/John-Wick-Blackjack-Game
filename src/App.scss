@@ -17,4 +17,26 @@ body {
 .outer-content-wrapper {
   max-width: 1900px;
   margin: 0 auto;
+  position: relative;
+
+  &::before {
+    content: "";
+    background: url(./assets/images/leftbg-jw.jpg) no-repeat top right;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    width: 678px;
+    height: 100%;
+  }
+  &::after {
+    content: "";
+    background: url(./assets/images/rightbg-jw.jpg) no-repeat top left;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    width: 650px;
+    height: 100%;
+  }
 }
