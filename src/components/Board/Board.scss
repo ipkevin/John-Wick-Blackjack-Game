@@ -24,3 +24,53 @@
     top: 0;
     left: 0;
 }
+
+.fan {
+    position: absolute;
+    top: -50rem;
+    left: 28%;
+    width: 40rem;
+    height: 40rem;
+
+    animation: spinfan 4s linear infinite;
+    
+    // transform: scale(10);
+    &__blade {
+        position: absolute;
+        background-color: rgba(0,0,0,0.2);
+        width: 2rem;
+        height: 40rem;
+    }
+    &__blade-vert {
+        // transform: rotate(90deg);
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+    &__blade-cross {
+        left: 50%;
+        transform: translateX(-50%) rotate(90deg);
+    }
+}
+
+@keyframes spinfan {
+    from {
+        
+        transform: rotate(0deg) scale(10);
+    }
+    25% {
+        
+        transform: rotate(45deg) scale(10);
+    }
+    50% {
+        transform: rotate(90deg) scale(10);
+    }
+    75% {
+        
+        transform: rotate(135deg) scale(10);
+    }
+    to {
+        transform: rotate(180deg) scale(10);
+    }
+    
+}

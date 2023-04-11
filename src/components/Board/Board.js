@@ -57,7 +57,10 @@ export function BlackjackBoard({ ctx, G, moves }) {
     return (
         <div className="main">
             <div className="bgtable">
-            
+                <div className="fan">
+                    <div className="fan__blade fan__blade-vert"></div>
+                    <div className="fan__blade fan__blade-cross"></div>
+                </div>
                 {/* <div className="game-info">
                     <p>The current phase is: {ctx.phase}</p>
                     {ctx.phase !== "dealingtodealer" ? <p>The current player is: {ctx.currentPlayer}</p> : ""}
