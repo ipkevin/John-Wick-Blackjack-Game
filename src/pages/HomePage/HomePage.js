@@ -1,10 +1,8 @@
 import PlayButtons from '../../components/PlayButtons/PlayButtons';
 import MusicPlayer from '../../components/MusicPlayer/MusicPlayer';
-import fallbackImage from '../../assets/images/johnwickblackjack2.jpg';
-
 import './HomePage.scss';
 
-// import videoBG from '../../assets/videos/intro4red.mp4';
+import fallbackImage from '../../assets/images/johnwickblackjack2.jpg';
 import videoBG from '../../assets/videos/intro.mp4';
 
 
