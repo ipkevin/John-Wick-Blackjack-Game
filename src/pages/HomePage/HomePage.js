@@ -19,8 +19,8 @@ export default function HomePage() {
             <div className="home__overlay"></div>
             {/* <video className="home__video" src={videoBG} autoPlay muted loop /> */}
             <video className="home__video" autoPlay muted loop poster={fallbackImage}>
-                <source src={videoBG} type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
-                {/* <img src={fallbackImage} alt="John Wick Blackjack game" title="Your browser does not support the <video> tag" /> */}
+                <source src={videoBG} type='video/mp4' />
+                <img src={fallbackImage} alt="John Wick Blackjack game" title="Your browser does not support the <video> tag" />
             </video>
 
             <div className="home__content-wrapper">
