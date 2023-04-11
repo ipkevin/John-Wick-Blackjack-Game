@@ -18,8 +18,6 @@ export default function HomePage() {
             </video>
 
             <div className="home__content-wrapper">
-                <nav>
-                </nav>
                 <main className="home__content">
                     <div className="home__title-group">
                         <h1 className="home__title">John Wick</h1>

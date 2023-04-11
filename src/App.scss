@@ -24,7 +24,8 @@ body {
 
 // Sets max width on the content and adds background left & right images for users with UHD screens
 .inner-content-wrapper {
-  max-width: 1900px;
+  width: 100%;
+  max-width: $max-content-width;
   position: relative;
 
   &::before {
