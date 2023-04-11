@@ -6,12 +6,19 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
+  // Makes game look better on higher resolution screens, reducing empty spaces
+  @include uhd-query {
+    font-size: 25px;
+  }
 }
 
 body {
   background-color: black;
   color: white;
   font-family: "Avenir", Verdana, Tahoma, sans-serif;
+
+
 }
 
 // necessary to ensure the background left & right images are visible but do not screw up content alignment on smaller mobile devices

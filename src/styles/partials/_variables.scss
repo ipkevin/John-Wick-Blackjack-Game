@@ -14,3 +14,9 @@ $max-content-width: 1900px; //1800px;
         @content;
     }
 }
+
+@mixin uhd-query {
+    @media screen and (min-width: 2000px) {
+        @content;
+    }
+}
