@@ -22,9 +22,9 @@ export default function MusicPlayer(){
 
     useEffect(() => {
         if (audio.current.play) {
-            musicIcon.current.innerHTML = pauseIcon;
-        } else {
             musicIcon.current.innerHTML = playIcon;
+        } else {
+            musicIcon.current.innerHTML = pauseIcon;
         }
     }, [])
 
@@ -32,11 +32,11 @@ export default function MusicPlayer(){
         console.log(e);
         if (audio.current.paused) {
             audio.current.play();
-            musicIcon.current.innerHTML = pauseIcon;
+            musicIcon.current.innerHTML = playIcon;
             // e.target.innerHTML = pauseIcon;
         } else {
             audio.current.pause();
-            musicIcon.current.innerHTML = playIcon;
+            musicIcon.current.innerHTML = pauseIcon;
             // e.target.innerHTML = playIcon;
         }
     }
