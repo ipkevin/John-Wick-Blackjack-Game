@@ -14,7 +14,7 @@ body {
   font-family: "Avenir", Verdana, Tahoma, sans-serif;
 }
 
-// necessary to ensure the background left & right images are visible but do not screw up screen width on mobile devices
+// necessary to ensure the background left & right images are visible but do not screw up content alignment on smaller mobile devices
 .outer-content-wrapper {
   width: 100%;
   overflow: hidden;
