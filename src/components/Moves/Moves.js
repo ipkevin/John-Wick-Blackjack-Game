@@ -70,6 +70,7 @@ export default function Moves({currPlayerObj, dealerObj, moves, ctx}) {
                     <button className="std-btn" onClick={handleStand}>
                         Stand
                     </button>
+                    {/* <button className="std-btn" onClick={handleInsurance}>Buy Insurance</button>   */}
                     {(dealerObj.hand[0].rank === 1 && currPlayerObj.hasInsurance !== true && currPlayerObj.hasBJ !== true && currPlayerObj.bank >= (currPlayerObj.bet/2)) &&
                        <button className="std-btn" onClick={handleInsurance}>Buy Insurance</button>}
                 </>

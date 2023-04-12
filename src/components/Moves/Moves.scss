@@ -9,14 +9,25 @@
         display: flex;
         flex-flow: column wrap;
         top: 75%;
-        right: 2rem;
+        right: 1rem;
         gap: 1.5rem;
 
         @include tablet-query {
-            flex-flow: row nowrap;
+            top: 71%;
+            right: 2rem;
+            min-width: 12rem;
+        }
+        @include desktop-query {
+            min-width: none;
+            flex-flow: row nowrap;  // used to be nowrap,but breaks when insurance is displayed on mobile
             top: auto;
+            right: 2rem;
             bottom: 2rem;
             left: 70%;
+        }
+
+        & button {
+            flex-shrink: 1;
         }
         
     }
