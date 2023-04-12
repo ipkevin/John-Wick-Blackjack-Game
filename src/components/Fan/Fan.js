@@ -1,4 +1,4 @@
-import {useState, useRef} from 'react';
+import {useState} from 'react';
 import './Fan.scss';
 
 import useSound from 'use-sound';
@@ -11,11 +11,6 @@ export default function Fan(){
     const [fanStatus, setFanStatus] = useState("");
     const [playBtnClick] = useSound(btnSound);
 
-    const fanBtnRef = useRef();
-    const fanImgOn = `<img class="fan__button-image" src=${fanIconOn} alt="fan on" />`;
-    const fanImgOff = `<img class="fan__button-image" src=${fanIconOff} alt="fan off" />`;
-
-
     // useEffect(() => {
     //     if (fanStatus === ""){
     //         fanBtnRef.current.innerHTML = fanImgOn;
@@ -24,19 +19,13 @@ export default function Fan(){
     //     }
     // }, [])
         
-    
-
-    function toggleFan(e){
+    function toggleFan(){
         playBtnClick();
-        console.log(fanBtnRef);
         if (fanStatus === ""){
             setFanStatus("fan--stopped");
-            fanBtnRef.current.innerHTML = fanImgOff;
         } else {
             setFanStatus("");
-            fanBtnRef.current.innerHTML = fanImgOn;
         }
-        console.log("fanstatus is ", fanStatus);
     }
     
     return (
@@ -47,7 +36,7 @@ export default function Fan(){
                 <div className="fan__blade fan__blade-cross"></div>
             </div>
             <div className="fan__control">
-                <button className="std-btn fan__button" onClick={toggleFan} ref={fanBtnRef}><img className="fan__button-image" src={fanIconOn} alt="fan on" /></button>
+                <button className="std-btn fan__button" onClick={toggleFan}><img className="fan__button-image" src={(fanStatus === "") ? fanIconOn : fanIconOff} alt="fan on" /></button>
             </div>
         </>
     );
