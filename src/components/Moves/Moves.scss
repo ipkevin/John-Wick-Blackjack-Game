@@ -10,7 +10,7 @@
         flex-flow: column wrap;
         top: 75%;
         right: 2rem;
-        gap: 1rem;
+        gap: 1.5rem;
 
         @include tablet-query {
             flex-flow: row nowrap;

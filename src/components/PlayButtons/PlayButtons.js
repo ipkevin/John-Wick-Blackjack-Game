@@ -13,11 +13,11 @@ export default function PlayButton() {
     
     const [playBtnClick] = useSound(btnSound);
 
-    const [hideLocalOptions, setHideLocalOptions] = useState("buttons__group--hidden");
+    const [hideLocalOptions, setHideLocalOptions] = useState("--hidden");
 
     function toggleLocalOptions(){
         playBtnClick();
-        (hideLocalOptions === "") ? setHideLocalOptions("buttons__group--hidden") : setHideLocalOptions("");
+        (hideLocalOptions === "") ? setHideLocalOptions("--hidden") : setHideLocalOptions("");
     }
     function startGame(num){
         playBtnClick();
@@ -31,7 +31,7 @@ export default function PlayButton() {
                 <button className={`std-btn ${hideLocalOptions === "" && "std-btn--active"} homebuttons-local`} onClick={toggleLocalOptions}>Play Local Game</button>
                 <button className="std-btn std-btn--disabled coming-soon homebuttons-multiplayer" disabled>Play Multiplayer Game<div className="coming-soon__message">Coming Soon</div></button>
             </div>
-            <div className={`buttons__group ${hideLocalOptions}`}>
+            <div className={`buttons__group buttons__group-suboptions${hideLocalOptions}`}>
                 <p>Select # of Players:</p>
                 <div className="homebuttons__numplayers-box">
                     <button className="std-btn" onClick={() => startGame(1)}>1</button>
