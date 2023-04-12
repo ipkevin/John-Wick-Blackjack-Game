@@ -26,8 +26,13 @@ $border-red-transparent: rgba(253, 71, 57, 0.7);
     }
 }
 
-@mixin uhd-query {
+@mixin monitor-2k-query {
     @media screen and (min-width: 2000px) {
+        @content;
+    }
+}
+@mixin monitor-4k-query {
+    @media screen and (min-width: 3000px) {
         @content;
     }
 }

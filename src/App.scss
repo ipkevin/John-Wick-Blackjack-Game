@@ -7,9 +7,17 @@
   margin: 0;
   padding: 0;
 
-  // Makes game look better on higher resolution screens, reducing empty spaces
-  @include uhd-query {
-    font-size: 25px;
+
+}
+
+html {
+  @include monitor-2k-query {
+    // Makes game look better on higher resolution screens, reducing empty spaces
+    font-size: 120%;
+  }
+  @include monitor-4k-query {
+    // Makes game look better on higher resolution screens, reducing empty spaces
+    font-size: 140%;
   }
 }
 
