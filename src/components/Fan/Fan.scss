@@ -46,12 +46,18 @@
     }
 
     &__button.std-btn {
-        border-radius: 100%;
-        padding: 0.5rem 0.8rem 0.4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 0.9rem;
+
+        @include tablet-query {
+            flex-direction: row;
+            gap: 0.5rem;
+        }
     }
     &__button-image {
-        width: 2rem;
-        height: 2rem;
+
     }
 }
 
