@@ -15,6 +15,7 @@
     &__blade {
         position: absolute;
         background-color: rgba(0,0,0,0.2);
+        box-shadow: 0 0 4px 3px rgba(0,0,0,0.2);
         width: 2rem;
         height: 40rem;
     }
@@ -42,6 +43,15 @@
             bottom: 2rem;
             left: 2rem;
         }
+    }
+
+    &__button.std-btn {
+        border-radius: 100%;
+        padding: 0.5rem 0.8rem 0.4rem;
+    }
+    &__button-image {
+        width: 2rem;
+        height: 2rem;
     }
 }
 
