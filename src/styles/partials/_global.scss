@@ -21,8 +21,17 @@
     @include tablet-query {
         padding: 1rem 1.5rem;
         font-size: 1.3rem;
+    }
 
-        
+    &-secondary {
+        border: none;
+        background-color: rgba(255,255,255,0.1);
+        box-shadow: 0 0 10px 6px rgba(255,255,255,0.2);
+
+        &.std-btn--active {
+            border: 1px solid white;
+            box-shadow: 0 0 10px 2px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        }
     }
 
     &:hover {

@@ -38,7 +38,7 @@ export default function Fan(){
                 <div className="fan__blade fan__blade-cross"></div>
             </div>
             <div className="fan__control">
-                <button className="std-btn fan__button" onClick={toggleFan}>Fan <img className="fan__button-image" src={(fanStatus === "") ? fanIconOn : fanIconOff} alt="fan on" /></button>
+                <button className="std-btn std-btn-secondary fan__button" onClick={toggleFan}>Fan <img className="fan__button-image" src={(fanStatus === "") ? fanIconOn : fanIconOff} alt="fan on" /></button>
             </div>
         </>
     );

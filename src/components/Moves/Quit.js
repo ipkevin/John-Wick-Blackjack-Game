@@ -18,7 +18,7 @@ export default function Quit({moves, playBtnClick}){
     
     return (
         <div className="quit__container">
-            <button className={`std-btn quit__button ${hideConfirm === "" && "std-btn--active"}`} onClick={handleQuit}>
+            <button className={`std-btn std-btn-secondary quit__button ${hideConfirm === "" && "std-btn--active"}`} onClick={handleQuit}>
                     Quit
             </button>
             <div className={`quit__subcontainer ${hideConfirm}`}>
