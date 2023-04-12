@@ -4,6 +4,17 @@ $card-width-desktop: 7rem;
 
 $max-content-width: 1900px; //1800px;
 
+$border-glow-blue: rgb(64, 195, 255);
+$border-glow-green: rgb(64, 255, 121);
+$border-glow-red: rgb(253, 71, 57);
+$border-glow-orange: rgb(255, 159, 49);
+
+
+$border-blue-transparent: rgba(64, 195, 255, 0.7);
+$border-red-transparent: rgba(253, 71, 57, 0.7);
+
+
+
 @mixin tablet-query {
     @media screen and (min-width: 768px) {
         @content;

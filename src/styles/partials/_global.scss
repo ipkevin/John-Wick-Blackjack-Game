@@ -10,8 +10,11 @@
     color: white;
     font-size: 1rem;
 
-    border-radius: 0.375rem; //2rem; // this is pill style
-    box-shadow: 0 1px 1px 2px rgb(71, 71, 71), 0 -1px 1px 2px rgb(182, 182, 182);
+    // border-radius: 0.375rem; // lightely rounded corners
+    // border-radius: 2rem; // this is pill style
+    // box-shadow: 0 1px 1px 2px rgb(71, 71, 71), 0 -1px 1px 2px rgb(182, 182, 182);
+    border: 1px solid white;
+    box-shadow: 0 0 10px 2px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
     padding: 0.5rem 0.8rem;
     background-color: rgba(31, 31, 31, 0.7);
 
@@ -20,34 +23,164 @@
         font-size: 1.3rem;
     }
 
+    &-secondary {
+        border: none;
+        background-color: rgba(255,255,255,0.1);
+        box-shadow: 0 0 10px 6px rgba(255,255,255,0.2);
+
+        &.std-btn--active {
+            border: 1px solid white;
+            box-shadow: 0 0 10px 2px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        }
+    }
+
     &:hover {
         color: white; //rgb(133, 255, 143);
-        animation: zoomingframe 0.8s ease-out infinite; // zoomingframe is in the Moves component
-        box-shadow: 0 0 6px 10px rgb(253, 25, 25);
+        // animation: zoomingframe 0.8s ease-out infinite; // zoomingframe is in the Moves component
+        animation: buttonglow 0.8s ease-out infinite; // zoomingframe is in the Moves component
+        // box-shadow: 0 0 6px 10px rgb(253, 25, 25);
     }
 
     &--active {
-        background-color: rgb(113, 0, 0);
+        // background-color: rgb(113, 0, 0);
+        background-color: rgb(20, 118, 156);
     }
 
     &--disabled {
         color: grey;
+
+        // from new neon style
+        border: 1px solid grey;
+        box-shadow: none;
+
         &:hover {
             color: grey;
             animation: none;
-            box-shadow: 0 1px 1px 2px rgb(71, 71, 71), 0 -1px 1px 2px rgb(182, 182, 182);
+            // box-shadow: 0 1px 1px 2px rgb(71, 71, 71), 0 -1px 1px 2px rgb(182, 182, 182);
         }
     }
     &--urgent {
-        animation: zoomingframe 0.8s ease-out infinite;
-        background-color:rgb(241, 41, 74);
+        animation: buttonglowurgent 0.8s ease-out infinite;
+        
 
         &:hover {
-            background-color: rgb(31, 31, 31);
+            // background-color: rgb(31, 31, 31);
+            background-color:rgb(241, 41, 74);
+            animation: buttonglowurgent 0.8s ease-out infinite;
         }
     }
 
 }
+
+
+@keyframes buttonglow {
+    from {
+        border-color: $border-blue-transparent;
+        outline: 3px solid white;
+        box-shadow: 0 0 10px 12px $border-glow-blue, 0 0 10px 12px $border-glow-blue, 0 0 10px 12px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline-offset: 6px;
+    }
+    15% {
+        border-color: $border-blue-transparent;
+        outline: 3px solid white;
+        box-shadow: 0 0 10px 10px $border-glow-blue, 0 0 10px 10px $border-glow-blue, 0 0 10px 10px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline-offset: 5px;
+    }
+    30% {
+        border-color: $border-blue-transparent;
+        outline: 2px solid white;
+        box-shadow: 0 0 10px 8px $border-glow-blue, 0 0 10px 8px $border-glow-blue, 0 0 10px 8px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline-offset: 4px;
+    }
+    45% {
+        border-color: $border-blue-transparent;
+        box-shadow: 0 0 10px 6px $border-glow-blue, 0 0 10px 6px $border-glow-blue, 0 0 10px 6px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline: 2px solid white;
+        outline-offset: 3px;
+    }
+    60% {
+        border-color: $border-blue-transparent;
+        box-shadow: 0 0 10px 4px $border-glow-blue, 0 0 10px 4px $border-glow-blue, 0 0 10px 4px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline: 1px solid white;
+        outline-offset: 2px;
+    }
+    75% {
+        border-color: $border-blue-transparent;
+        box-shadow: 0 0 10px 2px $border-glow-blue, 0 0 10px 2px $border-glow-blue, 0 0 10px 2px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline: 1px solid white;
+        outline-offset: 1px;
+    }
+    85% {
+        border-width: 1px;
+        box-shadow: 0 0 10px 2px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline: none;
+    }
+    95% {
+        border-width: 1px;
+        box-shadow: 0 0 10px 2px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline: none;
+    }
+    to {
+        border-width: 1px;
+        box-shadow: 0 0 10px 2px $border-glow-blue, inset 0 0 10px 2px $border-glow-blue;
+        outline: none;
+    }
+}
+
+@keyframes buttonglowurgent {
+    from {
+        border-color: $border-red-transparent;
+        outline: 3px solid white;
+        box-shadow: 0 0 10px 12px $border-glow-red, 0 0 10px 12px $border-glow-red, 0 0 10px 12px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline-offset: 6px;
+    }
+    15% {
+        border-color: $border-red-transparent;
+        outline: 3px solid white;
+        box-shadow: 0 0 10px 10px $border-glow-red, 0 0 10px 10px $border-glow-red, 0 0 10px 10px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline-offset: 5px;
+    }
+    30% {
+        border-color: $border-red-transparent;
+        outline: 2px solid white;
+        box-shadow: 0 0 10px 8px $border-glow-red, 0 0 10px 8px $border-glow-red, 0 0 10px 8px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline-offset: 4px;
+    }
+    45% {
+        border-color: $border-red-transparent;
+        box-shadow: 0 0 10px 6px $border-glow-red, 0 0 10px 6px $border-glow-red, 0 0 10px 6px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline: 2px solid white;
+        outline-offset: 3px;
+    }
+    60% {
+        border-color: $border-red-transparent;
+        box-shadow: 0 0 10px 4px $border-glow-red, 0 0 10px 4px $border-glow-red, 0 0 10px 4px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline: 1px solid white;
+        outline-offset: 2px;
+    }
+    75% {
+        border-color: $border-red-transparent;
+        box-shadow: 0 0 10px 2px $border-glow-red, 0 0 10px 2px $border-glow-red, 0 0 10px 2px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline: 1px solid white;
+        outline-offset: 1px;
+    }
+    85% {
+        border-width: 1px;
+        box-shadow: 0 0 10px 2px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline: none;
+    }
+    95% {
+        border-width: 1px;
+        box-shadow: 0 0 10px 2px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline: none;
+    }
+    to {
+        border-width: 1px;
+        box-shadow: 0 0 10px 2px $border-glow-red, inset 0 0 10px 2px $border-glow-red;
+        outline: none;
+    }
+}
+
 
 // Used with std buttons .std-btn
 @keyframes zoomingframe {

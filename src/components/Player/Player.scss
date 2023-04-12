@@ -8,7 +8,7 @@
 
     margin: 1rem;
     padding: 0.5rem;
-    border-radius: 1rem;
+    // border-radius: 1rem;
 
     @include tablet-query {
         margin: 2rem;
@@ -19,10 +19,15 @@
     }
 
     &--highlighted {
+        
+        // Initial highlight player style with light grey
         background-color: rgba(255,255,255,0.1);
-        // box-shadow: 0 0 3px 3px rgba(255,255,255,0.3);
         box-shadow: 0 0 10px 6px rgba(255,255,255,0.2);
-        // animation: highlightedglow 2s ease-in-out infinite;
+
+        // revised neon style
+        // border: 2px solid white;
+        // box-shadow: 0 0 10px 6px $border-glow-orange, inset 0 0 10px 4px $border-glow-orange;
+
     }
 
     &__pos0 {
@@ -67,9 +72,10 @@
         object-fit: cover;
         border-radius: 100%;
 
+        // initial design
         border: 3px solid rgb(207, 229, 252);
         box-shadow: 0 0 3px 2px rgb(104, 176, 253);
-        animation: glowing-active 3s ease-in-out infinite;
+        border: 2px solid white;
 
         &--bust {
             animation: none;
