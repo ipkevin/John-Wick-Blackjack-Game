@@ -50,8 +50,13 @@
         padding: 0.5rem 0.8rem 0.4rem;
     }
     &__button-image {
-        width: 2rem;
-        height: 2rem;
+        width: 1.6rem;
+        height: 1.6rem;
+        @include tablet-query {
+            width: 2rem;
+            height: 2rem;
+
+        }
     }
 }
 

@@ -64,6 +64,8 @@
         // text-shadow: 0 0 7px red, 0 0 7px red, 0 0 7px red, 0 0 7px red, 0 0 24px red, 0 0 24px red;
         color: rgba(0,0,0,0.6);
     
+        // animation: titleglow 2.5s infinite;
+
         @include tablet-query {
 
             // combos for top & bottom font sizes: 5/7, 9.6/4.6, 8.3/5
@@ -82,10 +84,39 @@
         text-transform: uppercase;
 
         // text-shadow: 2px 2px 6px rgb(46, 185, 255);
+        text-shadow: 0 0 8px rgb(46, 185, 255), 0 0 8px rgb(46, 185, 255);
+
+        animation: subtitleglow 2.5s infinite;
 
         @include tablet-query {
             font-size: 5rem; // 7rem; //4.6875rem;
             // text-shadow: 2px 2px 10px rgb(46, 185, 255);
         }
+    }
+}
+
+@keyframes titleglow {
+    from {
+        
+        text-shadow: 2px 2px 6px red;
+    }
+    50% {
+        text-shadow: 2px 2px 8px rgb(255, 204, 76), 2px 2px 16px red, 2px 2px 16px red, 2px 2px 16px red;
+    }
+    to {
+        text-shadow: 2px 2px 6px red;
+    }
+}
+
+@keyframes subtitleglow {
+    from {
+        
+        text-shadow: 0 0 3px rgb(46, 185, 255), 0 0 3px rgb(46, 185, 255);
+    }
+    50% {
+        text-shadow: 0 0 12px rgb(46, 185, 255),0 0 12px rgb(46, 185, 255),0 0 12px rgb(46, 185, 255);
+    }
+    to {
+        text-shadow: 0 0 3px rgb(46, 185, 255), 0 0 3px rgb(46, 185, 255);
     }
 }
