@@ -52,8 +52,8 @@
         padding-bottom: 0.9rem;
 
         &:hover {
-            box-shadow: 0 0 3px 2px rgb(211, 234, 255), 0 0 3px 2px rgb(211, 234, 255), 0 0 10px 4px rgb(82, 172, 255), 0 0 10px 4px rgb(82, 172, 255),0 0 10px 4px rgb(82, 172, 255), inset 0 0 10px 4px rgb(82, 172, 255);
-            animation: none;
+            // box-shadow: 0 0 3px 2px rgb(211, 234, 255), 0 0 3px 2px rgb(211, 234, 255), 0 0 10px 4px rgb(82, 172, 255), 0 0 10px 4px rgb(82, 172, 255),0 0 10px 4px rgb(82, 172, 255), inset 0 0 10px 4px rgb(82, 172, 255);
+            // animation: none;
         }
         @include tablet-query {
             flex-direction: row;
