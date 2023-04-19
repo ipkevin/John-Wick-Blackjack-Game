@@ -10,7 +10,7 @@ import "./App.scss";
 function App() {
   return (
     <div className="outer-content-wrapper">
-      <div class="inner-content-wrapper">
+      <div className="inner-content-wrapper">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
