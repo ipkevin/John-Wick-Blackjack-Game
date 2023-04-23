@@ -22,9 +22,9 @@ Images, audio, and video were edited in Photoshop, Audacity, HitFilm Express, Ha
 
 ### How to Use
 
-* Clone repo
-* npm -i to install dependencies
-* npm run start to begin a local game
+* Clone repo and browse to the folder
+* "npm i" to install dependencies
+* "npm run start" to begin a local game
 
 ### Play Online Without Compiling
 
