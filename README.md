@@ -14,7 +14,7 @@ This is WIP! Eventually, Blackjack Builder will allow anyone to easily create an
 
 ### Technologies & Apps Used
 
-React, Node, Boardgame.io, Sockets.io, Netlify
+React, Node, Boardgame.io, Socket.io, Netlify
 
 All styling and visuals are done with native React, HTML5, and CSS3
 
