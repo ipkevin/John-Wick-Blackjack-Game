@@ -10,7 +10,7 @@ This is WIP! Eventually, Blackjack Builder will allow anyone to easily create an
 
 * Single player and local "round-robin" multiplayer are functional
 * Current moves available are Bet, Hit, Stand, and Buy Insurance
-* Styling and sound are 50% complete
+* Styling and sound are 90% complete
 
 ### Technologies & Apps Used
 
