@@ -6,9 +6,9 @@ Play a stylish game of blackjack locally or online with friends in a gambling ga
 
 This is WIP! Eventually, Blackjack Builder will allow anyone to easily create and deploy their own Blackjack games with minimal new development needed.
 
-### Play Online Without Compiling
+### Play Online
 
-No need to download any code or compile anything.  Just visit the site in your browser to begin playing: https://johnwickblackjack.netlify.app/ (Works on mobile, too)
+Just visit this site in your browser to begin playing: https://johnwickblackjack.netlify.app/ (Works on mobile, too)
 
 ### Screenshots
 
