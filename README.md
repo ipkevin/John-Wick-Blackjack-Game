@@ -6,6 +6,11 @@ Play a stylish game of blackjack locally or online with friends in a gambling ga
 
 This is WIP! Eventually, Blackjack Builder will allow anyone to easily create and deploy their own Blackjack games with minimal new development needed.
 
+### Play Online
+
+No need to download code or compile anything.  Just visit the site in your browser and start playing:  (Works on mobile, too!)
+https://johnwickblackjack.netlify.app/
+
 ### Screenshots
 
 ![screenshot of John Wick Blackjack game 01](https://raw.githubusercontent.com/ipkevin/John-Wick-Blackjack/main/public/johnwickblackjack_game_screenshot01.jpg "screenshot of John Wick Blackjack game 01")
@@ -30,10 +35,6 @@ Images, audio, and video were edited in Photoshop, Audacity, HitFilm Express, Ha
 * Clone repo and browse to the folder
 * "npm i" to install dependencies
 * "npm run" to begin a local game
-
-### Play Online Without Compiling
-
-https://johnwickblackjack.netlify.app/
 
 ### Fair Use Notice
 
